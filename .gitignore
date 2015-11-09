@@ -1,0 +1,7 @@
+/.idea
+/MathJunkie.iml
+/.env.behat
+/composer.lock
+/vendor
+/readme.md
+/.env
