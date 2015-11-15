@@ -50,7 +50,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <button type="submit" class="btn waves-effect waves-light col s12 orange">Register</button>
+                        <button type="submit" name="register" class="btn waves-effect waves-light col s12 orange">Register</button>
                     </div>
                 </div>
             </form>
