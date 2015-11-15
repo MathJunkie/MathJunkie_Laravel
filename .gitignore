@@ -1,5 +1,6 @@
 /.idea
 /MathJunkie.iml
+*.iml
 /.env.behat
 /composer.lock
 /vendor
