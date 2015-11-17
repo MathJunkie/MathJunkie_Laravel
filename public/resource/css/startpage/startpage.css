@@ -1,0 +1,105 @@
+body{
+    overflow: hidden;
+}
+
+#headline{
+
+    background-color: #0059bc;
+    width: auto;
+    height: 150px;
+}
+
+.shadow-text{
+    font-style: normal;
+    font-family: Century Gothic;
+
+    color: white;
+    text-shadow: -3px 0 black, 0 1px black,
+    1px 0 black, 0 -3px black;
+}
+
+h1{
+    font-size: 60px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+h5{
+    font-size: 20px;
+}
+
+.brand-logo{
+    height: 60px;
+    width: 60px;
+}
+
+.nav-wrapper{
+    background-color: #00b8d4;
+}
+
+#nav-mobile{
+    font-family: Century Gothic;
+    text-shadow: -2px 0 black, 0 1px black,
+    1px 0 black, 0 -2px black;
+}
+
+#tutorial{
+
+    font-family: Century Gothic;
+    text-shadow: -2px 0 black, 0 1px black,
+    1px 0 black, 0 -2px black;
+}
+
+#wrapper{
+    height: calc(100vh - 235px);
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+#sidebar{
+    height: calc(100vh - 235px);
+}
+
+#output{
+    height: 80%;
+}
+
+#input{
+    padding-top: 30px;
+    height: 20%;
+
+}
+
+footer {
+    margin-top: -20px;
+    text-align: center;
+    height: 10px;
+}
+
+/* label color */
+.input-field label {
+    color: black;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: black;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 0 black;
+}
+/* valid color */
+.input-field input[type=text].valid {
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 0 black;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 0 black;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: black;
+}

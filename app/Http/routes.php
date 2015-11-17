@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('startpage', function () {
+    return view('startpage');
+});
+
 Route::get('login',function () {
     if (!Auth::check()) {
         return view('login.index');
