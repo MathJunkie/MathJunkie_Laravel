@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
 
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="resource/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="resource/css/startpage/startpage.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/materialize.min.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/startpage/startpage.css') }}"  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -25,7 +25,7 @@
 
     <nav>
         <div class="nav-wrapper">
-            <img src="resource/images/Icon.png" class="brand-logo center" alt="Logo"/>
+            <img src="{{URL::asset('images/Icon.png')}}" class="brand-logo center" alt="Logo"/>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="sass.html">Log In</a></li>
             </ul>
@@ -40,13 +40,49 @@
     <div id="sidebar" style="padding-top:100px;"  class="col s2 blue lighten-3 valign"><br/></div>
     <div id="wrapper" class="col s10 row blue lighten-4">
         <div id="content" class="col s10 row">
+@if (!isset ($data))
             <div id="input">
-                <div class="input-field">
-                    <input name="data" id="first_name2" type="text" class="validate">
-                    <label class="active" for="first_name2">Please type in your parameters</label>
+                <form action="/script" method="post" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="mdi-editor-mode-edit prefix"></i>
+                            <input id="icon_prefix" name="name" type="text" class="validate">
+                            <label for="icon_prefix">Name</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="mdi-action-perm-data-setting prefix"></i>
+                            <textarea id="data" name="data" class="materialize-textarea"></textarea>
+                            <label for="data">Data</label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input class="btn" type="submit"/>
+                </form>
+            </div>
+@else
+                <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
+                <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+                <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
+                <script>$(function () {
+                        // Make the div with id 'mycell' a Sage cell
+                        sagecell.makeSagecell({inputLocation:  '#mycell',
+                            template:       sagecell.templates.minimal,
+                            evalButtonText: 'Activate'});
+                        // Make *any* div with class 'compute' a Sage cell
+                        sagecell.makeSagecell({inputLocation: 'div.compute',
+                            evalButtonText: 'Evaluate',
+                            autoeval: true,
+                            template:       sagecell.templates.minimal,
+                            hide: ["evalButton","permalink","editor"]});
+                    });
+                </script>
+
+            <div id="output">
+                <div class="compute">
+                    <script type="text/x-sage">{{$data}}</script>
                 </div>
             </div>
-            <div id="output" name="output">OUTPUT</div>
+@endif
         </div>
     </div>
 
@@ -59,9 +95,8 @@
     </div>
 </footer>
 
-
-<script type="text/javascript" src="resource/js/jquery.min.js"></script>
-<script type="text/javascript" src="resource/js/materialize.min.js"></script>
+<script type="text/javascript" src="{{ URL::asset('js/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/materialize.min.js')}}"></script>
 
 
 

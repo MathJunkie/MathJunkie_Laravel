@@ -1,7 +1,7 @@
 Feature: In order to see the login function is working and the datas are saved in the database
 
   Scenario:  Successful Login
-    When I am on "/login"
+    Given I am on "/login"
     Then I should see "Email"
     And I should see "Password"
     And I should see "Remember me"

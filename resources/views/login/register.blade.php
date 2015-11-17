@@ -2,8 +2,8 @@
 <html lang="de">
 <head>
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="resource/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="resource/css/login/index.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/login/index.css"  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,7 +17,7 @@
                 {!! csrf_field() !!}
                 <div class="row">
                     <div class="input-field col s12 center">
-                        <img src="resource/images/Icon.png" alt class="circle responsive-img valign login-image">
+                        <img src="images/Icon.png" alt class="circle responsive-img valign login-image">
                         <p class="center login-text">Sign up</p>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="resource/js/jquery.min.js"></script>
-    <script type="text/javascript" src="resource/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 
     @if (!empty(session('status')))
         <script>Materialize.toast("{{session('status')}}",3000)</script>
