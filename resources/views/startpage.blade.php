@@ -60,6 +60,7 @@
                 </form>
             </div>
 @else
+                {{$data}}
                 <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
                 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
                 <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
