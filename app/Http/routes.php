@@ -48,10 +48,10 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('script/{id}',['uses' => 'ScriptCtrl@show']);
 
-Route::get('script', function() {
+Route::get('script','ScriptCtrl@index');
 
-    return view('startpage');
-});
-
-Route::post('script', 'ScriptCtrl@store');
+Route::post('script','ScriptCtrl@store');
+Route::post('script/{id}/edit',['uses'=>'ScriptCtrl@update']);
+Route::get('script/{id}/edit',['uses'=>'ScriptCtrl@edit']);
+Route::get('script/{id}/delete',['uses'=>'ScriptCtrl@destroy']);
 

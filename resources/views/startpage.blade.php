@@ -37,10 +37,16 @@
 </header>
 
 <main class="row">
-    <div id="sidebar" style="padding-top:100px;"  class="col s2 blue lighten-3 valign"><br/></div>
+    <div id="sidebar" style="padding-top:100px;"  class="col s2 blue lighten-3 valign">
+    @if (isset($scripts))
+        @foreach($scripts as $script)
+            <p><a href="{{Request::url()."/".$script->id}}">{{$script->name}}</a></p>
+        @endforeach
+    @endif
+    </div>
     <div id="wrapper" class="col s10 row blue lighten-4">
         <div id="content" class="col s10 row">
-@if (!isset ($data))
+@if (!isset ($data) && !isset($script))
             <div id="input">
                 <form action="/script" method="post" class="col s12">
                     <div class="row">
@@ -59,8 +65,31 @@
                     <input class="btn" type="submit"/>
                 </form>
             </div>
-@else
-                {{$data}}
+            @elseif(isset($script))
+                <div id="input">
+                    <form action="{{Request::url()}}" method="post" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="mdi-editor-mode-edit prefix"></i>
+                                <input id="icon_prefix" name="name" type="text" value="{{$script->name}}" class="validate">
+                                <label for="icon_prefix">Name</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="mdi-action-perm-data-setting prefix"></i>
+                                <textarea id="data" name="data" class="materialize-textarea">{{$script->data}}</textarea>
+                                <label for="data">Data</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <input class="btn" type="submit"/>
+                    </form>
+                </div>
+            @else
+                {{$data->data}}
+                @if (Auth::user()->email == $data->owner)
+                <p><a href="{{Request::url()}}/edit">edit</a></p>
+                <p><a href="{{Request::url()}}/delete">delete</a></p>
+                @endif
                 <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
                 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
                 <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
@@ -80,7 +109,7 @@
 
             <div id="output">
                 <div class="compute">
-                    <script type="text/x-sage">{{$data}}</script>
+                    <script type="text/x-sage">{{$data->data}}</script>
                 </div>
             </div>
 @endif
@@ -98,7 +127,6 @@
 
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js')}}"></script>
-
 
 
 </body>

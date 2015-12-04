@@ -19,9 +19,14 @@ class ScriptCtrl extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        return view('startpage',['scripts' => Script::all()]);
     }
 
     /**
@@ -51,7 +56,6 @@ class ScriptCtrl extends Controller
             $script->save();
             return Redirect::to('script/'.$script->id);
         }
-
     }
 
     /**
@@ -63,7 +67,10 @@ class ScriptCtrl extends Controller
     public function show($id)
     {
         $script = Script::where('id','=',$id)->first();
-        return View::make('startpage')->with('data',$script->data);
+        if (empty($script))
+            return Redirect::to('script');
+        else
+            return View::make('startpage')->with('data',$script);
     }
 
     /**
@@ -74,7 +81,11 @@ class ScriptCtrl extends Controller
      */
     public function edit($id)
     {
-        //
+        $script = Script::where('id','=',$id)->first();
+        if (empty($script))
+            return Redirect::to('script');
+        else
+            return View::make('startpage')->with('script' , $script);
     }
 
     /**
@@ -86,7 +97,12 @@ class ScriptCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $script = Script::where('id','=',$id)->first();
+        if ($script->owner == Auth::user()->email){
+            $script->name = $request->name;
+            $script->data = $request->data;
+        }
+        return View::make('startpage')->with('data',$script);
     }
 
     /**
@@ -97,6 +113,10 @@ class ScriptCtrl extends Controller
      */
     public function destroy($id)
     {
-        //
+        $script = Script::where('id','=',$id)->first();
+        if ($script->owner == Auth::user()->email) {
+            $script->delete();
+        }
+        return Redirect::to('script');
     }
 }
