@@ -26,9 +26,14 @@ Route::get('login',function () {
 Route::get('register',function () {
     return view('login.register');
 });
+
 Route::get('admin', ['middleware' => 'auth', function () {
     return view('admin.index');
 }]);
+
+Route::get('block', ['middleware' => 'auth', function () {
+    return view('block.builder');
+} ]);
 
 
 /*Login Routine*/
