@@ -60,8 +60,8 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
-    @if (!empty(session('status')))
-        <script>Materialize.toast("{{session('status')}}",3000)</script>
-    @endif
+    @foreach ($errors->all() as $error)
+        <script>Materialize.toast("{{$error}}",3000)</script>
+    @endforeach
 </body>
 </html>
