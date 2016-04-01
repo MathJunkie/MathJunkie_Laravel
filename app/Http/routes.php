@@ -20,11 +20,7 @@ Route::get('startpage', function () {
 });
 
 Route::get('login',function () {
-    if (!Auth::check()) {
-        return view('login.index');
-    }
-    else
-        return redirect('admin');
+    return view('login.index');
 });
 
 Route::get('register',function () {
@@ -38,7 +34,7 @@ Route::get('admin', ['middleware' => 'auth', function () {
 /*Login Routine*/
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/logout', 'Auth\AuthController@logout');
 
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
