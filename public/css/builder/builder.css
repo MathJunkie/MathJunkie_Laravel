@@ -16,6 +16,10 @@
     height: calc(100vh - 70px);
 }
 
+#blockly{
+    height: calc(100vh - 220px);
+}
+
 #blockCode{
     height: calc(50vh - 250px);
 }
@@ -38,4 +42,7 @@
 
 body{
     overflow:hidden;
+}
+#saveBtn{
+    margin-top: 20px;
 }

@@ -12,12 +12,31 @@
 </head>
 <body class="grey darken-2">
     <div class="blue darken-3 center" height="50px" width="100%">
+        <button style="position:absolute; top:5px; left: 5px" class="btn btn-flat btn-floating blue">
+            <a href="{{Request::url()}}/.."><i class="mdi-navigation-arrow-back white-text" ></i></a>
+        </button>
+        <button style="position:absolute; top:5px; right: 5px" class="btn btn-flat btn-floating red">
+            <a href="{{Request::url()}}/delete"><i class="mdi-action-delete white-text" ></i></a>
+        </button>
         <img height="50px" src="{{URL::asset('images/Icon.png')}}" style="vertical-align: middle;" class="brand-logo center" alt="Logo"/>
         <span class="center-align shadow-text">MathJunkie - Who said Math has to be difficult and ugly?</span>
     </div>
-    <div class="mainContent">
+    <form class="mainContent" action="{{Request::url()}}" method="post">
        <div class="row">
-           <div id="blockly" class="sidebar red col s6"></div>
+           <div class="sidebar red col s6">
+               <div id="blockly"></div>
+               <div class="row white">
+                   <div class="input-field col s12">
+                       <input name="description" id="desc" type="text"/>
+                       <label for="desc">Beschreibung</label>
+                   </div>
+                   <div class="input-field col s8">
+                       <input name="category" id="category" type="text"/>
+                       <label for="category">Kategorie</label>
+                   </div>
+                   <input type="submit" id="saveBtn" class="green btn col s4" value="Save"/>
+               </div>
+           </div>
            <div class="col s6">
                <div class="switch white">
                    <label>
@@ -38,7 +57,7 @@
                        <textarea readonly id="blockCode" class="yellow" ></textarea>
                        <div id="btnBlockCode" class="btn waves-effect btn-flat green">Copy to Saved</div>
                    </div>
-                   <div id="tabBlockCodeSave"><textarea id="blockCodeSave" class="yellow" ></textarea></div>
+                   <div id="tabBlockCodeSave"><textarea name="structure" id="blockCodeSave" class="yellow" >{{ $block->structure }}</textarea></div>
                    <div>
                        <ul class="tabs">
                            <li class="tab col s6"><a href="#tabSageCode">Generated</a> </li>
@@ -49,11 +68,13 @@
                        <textarea readonly id="sageCode" class="blue" ></textarea>
                        <div id="btnSageCode" class="btn waves-effect btn-flat green">Copy to Saved</div>
                    </div>
-                   <div id="tabSageCodeSave"><textarea id="sageCodeSave" class="blue" ></textarea></div>
+                   <div id="tabSageCodeSave"><textarea name="function" id="sageCodeSave" class="blue" >{{ $block->function }}</textarea></div>
            </div>
        </div>
        <div class="row"></div>
-    </div>
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $block->xml }}">
+    </form>
     <xml id="toolbox" style="display: none">
         <category name="Input">
             <block type="input_value">
@@ -108,10 +129,118 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/blockly_compressed.js') }}"></script>
+<script type="text/javascript">
+    'use strict';
+
+    Blockly.Blocks['factory_base'] = {
+        // Base of new block.
+        init: function() {
+            this.setColour(120);
+            this.appendDummyInput()
+                    .appendField('name')
+                    .appendField(new Blockly.FieldTextInput('{{ $block->name  }}'), 'NAME');
+            this.appendStatementInput('INPUTS')
+                    .setCheck('Input')
+                    .appendField('inputs');
+            var dropdown = new Blockly.FieldDropdown([
+                ['automatic inputs', 'AUTO'],
+                ['external inputs', 'EXT'],
+                ['inline inputs', 'INT']]);
+            this.appendDummyInput()
+                    .appendField(dropdown, 'INLINE');
+            dropdown = new Blockly.FieldDropdown([
+                        ['no connections', 'NONE'],
+                        ['← left output', 'LEFT'],
+                        ['↕ top+bottom connections', 'BOTH'],
+                        ['↑ top connection', 'TOP'],
+                        ['↓ bottom connection', 'BOTTOM']],
+                    function(option) {
+                        this.sourceBlock_.updateShape_(option);
+                    });
+            this.appendDummyInput()
+                    .appendField(dropdown, 'CONNECTIONS');
+            this.appendValueInput('COLOUR')
+                    .setCheck('Colour')
+                    .appendField('colour');
+            this.setTooltip('Build a custom block by plugging\n' +
+                    'fields, inputs and other blocks here.');
+            this.setHelpUrl(
+                    'https://developers.google.com/blockly/custom-blocks/block-factory');
+        },
+        mutationToDom: function() {
+            var container = document.createElement('mutation');
+            container.setAttribute('connections', this.getFieldValue('CONNECTIONS'));
+            return container;
+        },
+        domToMutation: function(xmlElement) {
+            var connections = xmlElement.getAttribute('connections');
+            this.updateShape_(connections);
+        },
+        updateShape_: function(option) {
+            var outputExists = this.getInput('OUTPUTTYPE');
+            var topExists = this.getInput('TOPTYPE');
+            var bottomExists = this.getInput('BOTTOMTYPE');
+            if (option == 'LEFT') {
+                if (!outputExists) {
+                    this.appendValueInput('OUTPUTTYPE')
+                            .setCheck('Type')
+                            .appendField('output type');
+                    this.moveInputBefore('OUTPUTTYPE', 'COLOUR');
+                }
+            } else if (outputExists) {
+                this.removeInput('OUTPUTTYPE');
+            }
+            if (option == 'TOP' || option == 'BOTH') {
+                if (!topExists) {
+                    this.appendValueInput('TOPTYPE')
+                            .setCheck('Type')
+                            .appendField('top type');
+                    this.moveInputBefore('TOPTYPE', 'COLOUR');
+                }
+            } else if (topExists) {
+                this.removeInput('TOPTYPE');
+            }
+            if (option == 'BOTTOM' || option == 'BOTH') {
+                if (!bottomExists) {
+                    this.appendValueInput('BOTTOMTYPE')
+                            .setCheck('Type')
+                            .appendField('bottom type');
+                    this.moveInputBefore('BOTTOMTYPE', 'COLOUR');
+                }
+            } else if (bottomExists) {
+                this.removeInput('BOTTOMTYPE');
+            }
+        }
+    };
+</script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/factory_blocks.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/python.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/de.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/factory.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    var toolbox = document.getElementById('toolbox');
+    var
+            mainWorkspace = Blockly.inject('blockly',
+                    {
+                        collapse: false,
+                        toolbox: toolbox,
+                        media: '../../media/'
+                    });
+
+    // Create the root block.
+        @if (empty($block->xml))
+            var xml = '<xml><block type="factory_base" deletable="false" movable="false"></block></xml>';
+        @else
+            var xml = $('#xmlhidden_input').val();
+        @endif
+
+    Blockly.Xml.domToWorkspace(mainWorkspace, Blockly.Xml.textToDom(xml));
+
+    mainWorkspace.clearUndo();
+
+    mainWorkspace.addChangeListener(updateLanguage);});
+</script>
 @foreach ($errors->all() as $error)
     <script>Materialize.toast("{{$error}}",3000)</script>
 @endforeach

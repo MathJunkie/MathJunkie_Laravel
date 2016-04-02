@@ -721,23 +721,6 @@ function disableEnableLink() {
  */
 function init() {
 
-  var toolbox = document.getElementById('toolbox');
-  var
-      mainWorkspace = Blockly.inject('blockly',
-          {
-            collapse: false,
-            toolbox: toolbox,
-            media: '../../media/'
-          });
-
-  // Create the root block.
-  var xml = '<xml><block type="factory_base" deletable="false" movable="false"></block></xml>';
-  Blockly.Xml.domToWorkspace(mainWorkspace, Blockly.Xml.textToDom(xml));
-
-  mainWorkspace.clearUndo();
-
-  mainWorkspace.addChangeListener(updateLanguage);
-
   document.getElementById('blockCode')
       .addEventListener('change', updatePreview);
   document.getElementById('blockCode')
@@ -766,6 +749,17 @@ $(document).ready(function() {
       function() {
         $('#sageCodeSave').val( $('#sageCode').val());
       }
-  )
+  );
+
+  $('form').submit(function(){
+    //$('#sageCodeSave').val(encodeURI($('#sageCodeSave').val()));
+    //$('#blockCodeSave').val(encodeURI($('#blockCodeSave').val()));
+
+    var dom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+    //$('#xmlhidden_input').val(encodeURI(Blockly.Xml.domToText(dom)));
+    $('#xmlhidden_input').val('');
+    $('#xmlhidden_input').val(Blockly.Xml.domToPrettyText(dom));
+    return true;
+  });
 
 });

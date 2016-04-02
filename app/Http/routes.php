@@ -31,11 +31,6 @@ Route::get('admin', ['middleware' => 'auth', function () {
     return view('admin.index');
 }]);
 
-Route::get('block', ['middleware' => 'auth', function () {
-    return view('block.builder');
-} ]);
-
-
 /*Login Routine*/
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -46,7 +41,6 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //Script
-
 Route::get('script/{id}',['uses' => 'ScriptCtrl@show']);
 
 Route::get('script','ScriptCtrl@index');
@@ -56,3 +50,17 @@ Route::post('script/{id}/edit',['uses'=>'ScriptCtrl@update']);
 Route::get('script/{id}/edit',['uses'=>'ScriptCtrl@edit']);
 Route::get('script/{id}/delete',['uses'=>'ScriptCtrl@destroy']);
 
+//Block
+Route::get('block', ['middleware' => 'auth', function () {
+    return view('block.home');
+} ]);
+
+Route::post('block', ['middleware' => 'auth', 'uses'=>'BlockCtrl@store']);
+
+Route::get('block/list', ['middleware' => 'auth', 'uses' => 'BlockCtrl@getList']);
+
+Route::get('block/{id}',['middleware' => 'auth','uses' => 'BlockCtrl@edit']);
+
+Route::post('block/{id}',['middleware' => 'auth','uses' => 'BlockCtrl@update']);
+
+Route::get('block/{id}/delete',['middleware' => 'auth','uses' => 'BlockCtrl@destroy']);
