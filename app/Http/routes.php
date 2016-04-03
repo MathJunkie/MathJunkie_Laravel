@@ -12,11 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('startpage', function () {
-    return view('startpage');
+    return redirect('admin');
 });
 
 Route::get('login',function () {
@@ -41,14 +37,21 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //Script
-Route::get('script/{id}',['uses' => 'ScriptCtrl@show']);
+Route::get('script', ['middleware' => 'auth', function () {
+    return view('script.home');
+} ]);
 
-Route::get('script','ScriptCtrl@index');
+Route::post('script', ['middleware' => 'auth', 'uses'=>'ScriptCtrl@store']);
 
-Route::post('script','ScriptCtrl@store');
-Route::post('script/{id}/edit',['uses'=>'ScriptCtrl@update']);
-Route::get('script/{id}/edit',['uses'=>'ScriptCtrl@edit']);
-Route::get('script/{id}/delete',['uses'=>'ScriptCtrl@destroy']);
+Route::get('script/list', ['middleware' => 'auth', 'uses' => 'ScriptCtrl@getList']);
+
+Route::get('script/{id}',['middleware' => 'auth','uses' => 'ScriptCtrl@edit']);
+
+Route::post('script/{id}',['middleware' => 'auth','uses' => 'ScriptCtrl@update']);
+
+Route::get('script/{id}/delete',['middleware' => 'auth','uses' => 'ScriptCtrl@destroy']);
+
+Route::get('script/{id}/view',['uses' => 'ScriptCtrl@viewScript']);
 
 //Block
 Route::get('block', ['middleware' => 'auth', function () {
@@ -64,3 +67,15 @@ Route::get('block/{id}',['middleware' => 'auth','uses' => 'BlockCtrl@edit']);
 Route::post('block/{id}',['middleware' => 'auth','uses' => 'BlockCtrl@update']);
 
 Route::get('block/{id}/delete',['middleware' => 'auth','uses' => 'BlockCtrl@destroy']);
+
+//Kommentare
+Route::get('comment', ['middleware' => 'auth', 'uses' => 'CommentCtrl@store']);
+
+Route::get('comment/{id}', ['middleware' => 'auth', 'uses' => 'CommentCtrl@show']);
+
+Route::get('comment/{id}/block_list', ['middleware' => 'auth', 'uses' => 'CommentCtrl@getBlockSection']);
+Route::get('comment/{id}/script_list', ['middleware' => 'auth', 'uses' => 'CommentCtrl@getScriptSection']);
+
+Route::get('comment/{id}/update', ['middleware' => 'auth', 'uses' => 'CommentCtrl@update']);
+
+Route::get('comment/{id}/delete', ['middleware' => 'auth', 'uses' => 'CommentCtrl@destroy']);

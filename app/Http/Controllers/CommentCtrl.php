@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Kommentar;
+use Illuminate\Support\Facades\Auth;
+use View;
 
 class CommentCtrl extends Controller
 {
@@ -37,7 +40,15 @@ class CommentCtrl extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kommentar = new Kommentar;
+        if (Auth::check()) {
+            $kommentar->owner = Auth::user()->email;
+            $kommentar->idScript = $request->idScript;
+            $kommentar->isScript = $request->isScript;
+            $kommentar->seen = false;
+            $kommentar->text = $request->text;
+            $kommentar->save();
+        }
     }
 
     /**
@@ -62,6 +73,23 @@ class CommentCtrl extends Controller
         //
     }
 
+    public function getBlockSection($id){
+        $kommentar = Kommentar::where('idScript','=',$id)
+            ->where('isScript','=',false)
+            ->get();
+        $countNew = 0;
+        foreach ($kommentar as $comment){
+            if (!$comment->seen){
+                $countNew++;
+            }
+        }
+        return View::make('comment.block')->with('kommentar',$kommentar)->with('countNew',$countNew)->with('id',$id);
+    }
+
+    public function getScriptSection($id){
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -71,7 +99,14 @@ class CommentCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kommentar = Kommentar::where('id','=',$id)->first();
+        if (empty($kommentar)){
+            return;
+        }
+        else{
+            $kommentar->text = $request->text;
+            $kommentar->save();
+        }
     }
 
     /**
@@ -82,6 +117,14 @@ class CommentCtrl extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kommentar = Kommentar::where('id','=',$id)->first();
+        if (empty($kommentar))
+            return 'Nope';
+        elseif ($kommentar->owner == Auth::user()->email) {
+            $kommentar->delete();
+        }
+        else{
+            return response()->withErrors('Only owned comments can be deleted');
+        }
     }
 }

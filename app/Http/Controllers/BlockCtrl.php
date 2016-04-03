@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Block;
+use App\Kommentar;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use View;
-use Log;
 
 class BlockCtrl extends Controller
 {
@@ -143,6 +143,10 @@ class BlockCtrl extends Controller
         $block = Block::where('id','=',$id)->first();
         if ($block->owner == Auth::user()->email){
             $block->delete();
+            $kommentar = Kommentar::where('idScript','=',$block->id)
+                ->where('isScript','=',false)
+                ->get();
+            $kommentar->delete();
         }
         return Redirect::to('block');
     }
