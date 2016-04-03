@@ -110,6 +110,8 @@ class BlockCtrl extends Controller
             $block->xml = $request->xml;
             $block->save();
         }
+        else
+            return back()->withErrors('You have no privileges to edit anothers script');
         return Redirect::to('block');
     }
 
@@ -120,14 +122,12 @@ class BlockCtrl extends Controller
 
         $resp = array();
         foreach ($block as $item){
-            if ($item->owner == Auth::user()->email){
-                $entry = [
-                    "description" => $item->description,
-                    "name" => $item->name,
-                    "id" => $item->id,
-                ];
-                array_push($resp,$entry);
-            }
+            $entry = [
+                "description" => $item->description,
+                "name" => $item->name,
+                "id" => $item->id,
+            ];
+            array_push($resp,$entry);
         }
         return response()->json($resp);
     }
