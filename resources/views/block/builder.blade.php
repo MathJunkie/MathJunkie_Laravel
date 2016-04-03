@@ -27,11 +27,11 @@
                <div id="blockly"></div>
                <div class="row white">
                    <div class="input-field col s12">
-                       <input name="description" id="desc" type="text"/>
+                       <input name="description" id="desc" type="text" value="{{$block->description}}"/>
                        <label for="desc">Beschreibung</label>
                    </div>
                    <div class="input-field col s8">
-                       <input name="category" id="category" type="text"/>
+                       <input name="category" id="category" type="text" value="{{$block->category}}"/>
                        <label for="category">Kategorie</label>
                    </div>
                    <input type="submit" id="saveBtn" class="green btn col s4" value="Save"/>
