@@ -210,53 +210,26 @@
 <script type="text/javascript">
     function reload_comment(){
         $('#navBar').load("{{Request::root()}}/comment/{{$block->id}}/block_list", function(){
-                $(".button-collapse").sideNav({
+            $(".button-collapse").sideNav({
                 menuWidth: 300, // Default is 240
                 edge: 'right' // Choose the horizontal origin
-                });
-
-                $("#comment_btn").click(function(){
-                    $.ajax({
-                        method: "GET",
-                        url: "{{Request::root()}}/comment",
-                        data: {
-                            'text' : $('#comment').val(),
-                            'isScript' : 0,
-                            'idScript' : '{{$block->id}}'
-                        },
-                        success: function(result){
-                            reload_comment();
-                        }
-                    });
-                });
             });
-    }
 
-    function edit_comment(i){
-            $.ajax({
-                method: "GET",
-                url: "{{Request::root()}}/comment/"+i+"/update",
-                data: {
-                    'text' : prompt("Please enter your updated Text", "")
-                },
-                success: function(result){
-                    reload_comment();
-                }
-            });
-    }
-
-    function delete_comment(i){
-
-        if (confirm("You sure?"))
-        {
-            $.ajax({
+            $("#comment_btn").click(function(){
+                $.ajax({
                     method: "GET",
-                    url: "{{Request::root()}}/comment/"+i+"/delete",
+                    url: "{{Request::root()}}/comment",
+                    data: {
+                        'text' : $('#comment').val(),
+                        'isScript' : 0,
+                        'idScript' : '{{$block->id}}'
+                    },
                     success: function(result){
                         reload_comment();
                     }
                 });
-        }
+            });
+        });
     }
 
     $(document).ready(function(){

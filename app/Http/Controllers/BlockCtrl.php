@@ -145,7 +145,9 @@ class BlockCtrl extends Controller
             $kommentar = Kommentar::where('idScript','=',$block->id)
                 ->where('isScript','=',false)
                 ->get();
-            $kommentar->delete();
+            foreach ($kommentar as $comment){
+                $comment->delete();
+            }
             $block->delete();
         }
         return Redirect::to('block');

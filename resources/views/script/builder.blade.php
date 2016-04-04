@@ -13,7 +13,7 @@
 <nav id="navBar" class="blue darken-3">
 
 </nav>
-<form class="sidebar row">
+<form class="sidebar row" action="{{Request::url()}}" method="post">
     <div style="position: absolute; top: 60px; left: 0;" class="red col s6">
         <div class="" id="blockly"></div>
     </div>
@@ -37,13 +37,14 @@
             <input type="submit" id="saveBtn" class="green btn col s12" value="Save"/>
         </div>
     </div>
-    <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->xml }}">
+    <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
 </form>
 {!! $content['xml'] !!}
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/blockly_compressed.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/Blockly/de.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/python.js') }}"></script>
 <script>
     'use strict';
@@ -111,6 +112,30 @@
         }
     }
 
+    function reload_comment(){
+        $('#navBar').load("{{Request::root()}}/comment/{{$script->id}}/script_list", function(){
+            $(".button-collapse").sideNav({
+                menuWidth: 300, // Default is 240
+                edge: 'right' // Choose the horizontal origin
+            });
+
+            $("#comment_btn").click(function(){
+                $.ajax({
+                    method: "GET",
+                    url: "{{Request::root()}}/comment",
+                    data: {
+                        'text' : $('#comment').val(),
+                        'isScript' : 0,
+                        'idScript' : '{{$script->id}}'
+                    },
+                    success: function(result){
+                        reload_comment();
+                    }
+                });
+            });
+        });
+    }
+
     $(document).ready(function() {
         //Comment
         reload_script();
@@ -148,7 +173,7 @@
         );
 
         // Create the root block
-                @if (empty($script->xml))
+                @if (empty($script->structure))
         var xml = '';
                 @else
         var xml = $('#xmlhidden_input').val();

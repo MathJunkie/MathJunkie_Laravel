@@ -75,7 +75,13 @@ class ScriptCtrl extends Controller
      */
     public function show($id)
     {
-        
+        $script = Script::where('id','=',$id)->first();
+        if (empty($script)){
+            return Redirect::to('script')->withErrors('Could not find the script');
+        }
+        else {
+            return View::make('script.view')->with('script',$script);
+        }
     }
 
     /**
@@ -102,7 +108,7 @@ class ScriptCtrl extends Controller
                 $temp = [
                     $item->category => $item->name,
                 ];
-                $xml_array = array_merge($xml_array,$temp);
+                $xml_array = array_merge_recursive($xml_array,$temp);
             }
             $keys = array_keys($xml_array);
             foreach ($keys as $key){
@@ -139,7 +145,7 @@ class ScriptCtrl extends Controller
     {
         $script = Script::where('id','=',$id)->first();
         if ($script->owner == Auth::user()->email){
-            $script->structure = $request->structure;
+            $script->structure = $request->xml;
             $script->function = $request->function;
             $script->description = $request->description;
             $script->save();
@@ -179,7 +185,9 @@ class ScriptCtrl extends Controller
             $kommentar = Kommentar::where('idScript','=',$script->id)
                 ->where('isScript','=',true)
                 ->get();
-            $kommentar->delete();
+            foreach ($kommentar as $comment){
+                $comment->delete();
+            }
             $script->delete();
         }
 
