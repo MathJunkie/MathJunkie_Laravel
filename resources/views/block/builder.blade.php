@@ -221,7 +221,7 @@
                         url: "{{Request::root()}}/comment",
                         data: {
                             'text' : $('#comment').val(),
-                            'isScript' : false,
+                            'isScript' : 0,
                             'idScript' : '{{$block->id}}'
                         },
                         success: function(result){
@@ -260,6 +260,19 @@
     }
 
     $(document).ready(function(){
+
+
+        $('form').submit(function(){
+            //$('#sageCodeSave').val(encodeURI($('#sageCodeSave').val()));
+            //$('#blockCodeSave').val(encodeURI($('#blockCodeSave').val()));
+
+            var dom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+            //$('#xmlhidden_input').val(encodeURI(Blockly.Xml.domToText(dom)));
+            $('#xmlhidden_input').val('');
+            $('#xmlhidden_input').val(Blockly.Xml.domToPrettyText(dom));
+            return true;
+        });
+
         //Comment
         reload_comment();
 

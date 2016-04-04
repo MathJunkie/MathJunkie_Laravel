@@ -44,6 +44,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/blockly_compressed.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/Blockly/python.js') }}"></script>
 <script>
     'use strict';
     {!! $content['structure'] !!}
@@ -66,7 +67,7 @@
                     url: "{{Request::root()}}/comment",
                     data: {
                         'text' : $('#comment').val(),
-                        'isScript' : true,
+                        'isScript' : 1,
                         'idScript' : '{{$script->id}}'
                     },
                     success: function(result){
@@ -91,7 +92,9 @@
     }
 
     function updateCode(){
-
+        var mainWorkspace = Blockly.getMainWorkspace();
+        var code = Blockly.Python.workspaceToCode(mainWorkspace);
+        $('#sageCode').val(code);
     }
 
     function delete_script(i){
@@ -111,6 +114,19 @@
     $(document).ready(function() {
         //Comment
         reload_script();
+
+        $('form').submit(function(){
+
+            var dom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+            $('#xmlhidden_input').val('');
+            $('#xmlhidden_input').val(Blockly.Xml.domToPrettyText(dom));
+            return true;
+        });
+
+
+        $('#btnSageCode').click(function(){
+            $('#sageCodeSave').val($('#sageCode').val());
+        });
 
         var toolbox = document.getElementById('toolbox');
         var mainWorkspace = Blockly.inject('blockly',
@@ -142,9 +158,8 @@
             Blockly.Xml.domToWorkspace(mainWorkspace, Blockly.Xml.textToDom(xml));
 
             mainWorkspace.clearUndo();
-
-            mainWorkspace.addChangeListener(updateCode);
         }
+        mainWorkspace.addChangeListener(updateCode);
     });
 
 </script>

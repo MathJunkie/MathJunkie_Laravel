@@ -51,7 +51,7 @@ Route::post('script/{id}',['middleware' => 'auth','uses' => 'ScriptCtrl@update']
 
 Route::get('script/{id}/delete',['middleware' => 'auth','uses' => 'ScriptCtrl@destroy']);
 
-Route::get('script/{id}/view',['uses' => 'ScriptCtrl@viewScript']);
+Route::get('script/{id}/view',['uses' => 'ScriptCtrl@show']);
 
 //Block
 Route::get('block', ['middleware' => 'auth', function () {
@@ -73,7 +73,10 @@ Route::get('comment', ['middleware' => 'auth', 'uses' => 'CommentCtrl@store']);
 
 Route::get('comment/{id}', ['middleware' => 'auth', 'uses' => 'CommentCtrl@show']);
 
+Route::get('comment/{id}/seen', ['middleware' => 'auth', 'uses' => 'CommentCtrl@setSeen']);
+
 Route::get('comment/{id}/block_list', ['middleware' => 'auth', 'uses' => 'CommentCtrl@getBlockSection']);
+
 Route::get('comment/{id}/script_list', ['middleware' => 'auth', 'uses' => 'CommentCtrl@getScriptSection']);
 
 Route::get('comment/{id}/update', ['middleware' => 'auth', 'uses' => 'CommentCtrl@update']);

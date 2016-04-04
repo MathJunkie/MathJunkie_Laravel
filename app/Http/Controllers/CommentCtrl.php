@@ -86,6 +86,21 @@ class CommentCtrl extends Controller
         return View::make('comment.block')->with('kommentar',$kommentar)->with('countNew',$countNew)->with('id',$id);
     }
 
+    public function setSeen($id){
+        $kommentar = Kommentar::where('id','=',$id)->first();
+        if (empty($kommentar)){
+            return "Nope";
+        }
+        else{
+            if ($kommentar->owner == Auth::user()->email)
+            {
+                $kommentar->seen = true;
+                $kommentar->save();
+            }
+        }
+
+    }
+
     public function getScriptSection($id){
         $kommentar = Kommentar::where('idScript','=',$id)
             ->where('isScript','=',true)
@@ -110,11 +125,14 @@ class CommentCtrl extends Controller
     {
         $kommentar = Kommentar::where('id','=',$id)->first();
         if (empty($kommentar)){
-            return;
+            return "Nope";
         }
         else{
-            $kommentar->text = $request->text;
-            $kommentar->save();
+            if ($kommentar->owner == Auth::user()->email)
+            {
+                $kommentar->text = $request->text;
+                $kommentar->save();
+            }
         }
     }
 
