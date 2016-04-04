@@ -1,0 +1,39 @@
+<div class="brand-logo center"><img height="50px" src="{{URL::asset('images/Icon.png')}}" style="vertical-align: middle;"  alt="Logo"/>
+    <span class="center-align shadow-text">Script-Builder</span></div>
+<ul class="right">
+    <li><a href="#" onclick="if (confirm('Möchtest du wirklich löschen?'))window.location = '{{Request::root()}}/script/{{$id}}/delete'"><i class="mdi-action-delete small white-text"></i></a></li>
+    <li><a href="#" data-activates="slide-out" class="button-collapse small show-on-large"><i class="medium mdi-navigation-menu"></i><span class="new badge">{{$countNew}}</span></a></li>
+</ul>
+<ul class="left">
+    <li><a href="{{Request::root()}}/script"><i class="mdi-navigation-arrow-back small white-text"></i></a></li>
+</ul>
+<div id="slide-out" class="grey side-nav darken-3">
+    <p class="orange darken-3 center-align flow-text">Comments</p>
+    <div class="collection grey darken-3 black-text" style="border-style:none;">
+        @foreach($kommentar->all() as $comment)
+            <div class="collection-item white" style="margin-bottom: 10px;">
+                <span class="flow-text">{{$comment->owner}}</span>
+                <p>{{$comment->text}}</p>
+                <div class="divider"></div>
+                                <span class="row">
+                                    <a class="col s2 mdi-editor-mode-edit" onclick="edit_script({{$comment->id}})"></a>
+                                    <a class="col s2 mdi-action-delete" onclick="delete_script({{$comment->id}})"></a>
+                                    <p class="col offset-s2 s6">22.03.2016</p>
+                                </span>
+            </div>
+        @endforeach
+    </div>
+    <div>
+        <p>Write a Comment</p>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea rows="2" name="comment_text" id="comment" class="materialize-textarea"></textarea>
+            </div>
+            <div class="input-field col s12">
+                <button id="comment_btn" type="submit" class="btn green small">
+                    Send Comment <i class="mdi-content-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,16 +7,16 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="utf-8">
-    <title>Blöcke Home</title>
+    <title>Script Home</title>
 </head>
 <body class="grey darken-4">
-<form action="/block" method="post" id="mainContainer" class="container row">
+<form action="/script" method="post" id="mainContainer" class="container row">
     <div class="input-field col s8">
-        <input value="" id="block_name" name="name" type="text" class="validate white-text">
-        <label class="active" for="block_name">Name of the new block</label>
+        <input value="" id="script_name" name="name" type="text" class="validate white-text">
+        <label class="active" for="script_name">Name of the new script</label>
     </div>
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="submit" value="Create" id="create_block" class="btn green col s4"/>
+    <input type="submit" value="Create" id="create_script" class="btn green col s4"/>
 </form>
 <nav>
     <div class="nav-wrapper">

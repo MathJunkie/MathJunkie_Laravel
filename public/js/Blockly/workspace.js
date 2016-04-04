@@ -1,7 +1,7 @@
 /**
  * Created by Bomberus on 28.03.2016.
  */
-var workspace = Blockly.inject('blocklyDiv',
+var workspace = Blockly.inject('blockly',
     {
         toolbox: document.getElementById('toolbox'),
         grid:
@@ -14,7 +14,7 @@ var workspace = Blockly.inject('blocklyDiv',
         zoom:
         {
             controls: true,
-            wheel: true
+            wheel: false
         }
     }
 );

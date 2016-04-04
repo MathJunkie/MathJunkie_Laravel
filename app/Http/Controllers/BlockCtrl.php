@@ -142,11 +142,11 @@ class BlockCtrl extends Controller
     {
         $block = Block::where('id','=',$id)->first();
         if ($block->owner == Auth::user()->email){
-            $block->delete();
             $kommentar = Kommentar::where('idScript','=',$block->id)
                 ->where('isScript','=',false)
                 ->get();
             $kommentar->delete();
+            $block->delete();
         }
         return Redirect::to('block');
     }

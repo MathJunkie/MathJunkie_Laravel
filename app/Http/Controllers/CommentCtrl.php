@@ -87,7 +87,16 @@ class CommentCtrl extends Controller
     }
 
     public function getScriptSection($id){
-
+        $kommentar = Kommentar::where('idScript','=',$id)
+            ->where('isScript','=',true)
+            ->get();
+        $countNew = 0;
+        foreach ($kommentar as $comment){
+            if (!$comment->seen){
+                $countNew++;
+            }
+        }
+        return View::make('comment.script')->with('kommentar',$kommentar)->with('countNew',$countNew)->with('id',$id);
     }
 
     /**
