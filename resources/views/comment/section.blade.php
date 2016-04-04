@@ -1,7 +1,9 @@
 <div class="brand-logo center"><img height="50px" src="{{URL::asset('images/Icon.png')}}" style="vertical-align: middle;"  alt="Logo"/>
     <span class="center-align shadow-text">Builder</span></div>
 <ul class="right">
+    @if($is_scriptowner)
     <li><a href="#" onclick="if (confirm('Möchtest du wirklich löschen?'))window.location = '{{Request::root()}}/{{$type}}/{{$id}}/delete'"><i class="mdi-action-delete small white-text"></i></a></li>
+    @endif
     <li><a href="#" data-activates="slide-out" class="button-collapse small show-on-large"><i class="medium mdi-navigation-menu"></i><span class="new badge">{{$countNew}}</span></a></li>
 </ul>
 <ul class="left">
