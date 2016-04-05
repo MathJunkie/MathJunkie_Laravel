@@ -68,7 +68,7 @@
                     url: "{{Request::root()}}/comment",
                     data: {
                         'text' : $('#comment').val(),
-                        'isScript' : 1,
+                        'isScript' : '1',
                         'idScript' : '{{$script->id}}'
                     },
                     success: function(result){
