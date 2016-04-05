@@ -3,7 +3,6 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/materialize.min.css') }}"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/mainpage/mainpage.css') }}"  media="screen,projection"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,11 +15,11 @@
 </header>
 
 <ul id="dropdown_user" class="dropdown-content">
-    <li><a href="#!"><i class="material-icons right">perm_identity</i>Profile</a></li>
-    <li><a href="#!"><i class="material-icons right">settings</i>Options</a></li>
+    <li><a href="#!"><i class="mdi-action-perm-identity right"></i>Profile</a></li>
+    <li><a href="#!"><i class="mdi-action-settings right"></i>Options</a></li>
     <li class="divider"></li>
     <form action="/auth/logout" method="GET">
-        <li><a type="submit"><i class="material-icons right">trending_flat</i>Log out</a></li>
+        <li><a type="submit"><i class="mdi-action-exit-to-app right"></i>Log out</a></li>
     </form>
 </ul>
 
@@ -37,7 +36,7 @@
                 <li><a class="btn-floating btn waves-effect waves-light red navigation" style="margin-left: 10px; margin-right: 10px;"></a></li>
 
                 @if (Auth::check())
-                <li><a class="dropdown-button" href="#!" data-activates="dropdown_user" style="min-width:150px;">{{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown_user" style="min-width:150px;">{{ Auth::user()->name }}<i class=" right"></i></a></li>
                 @else
                 <li><a class="btn waves-effect waves-light" style="min-width:150px;">Sign in</a></li>
                 @endif
@@ -87,13 +86,9 @@
 
 <script>
     $(document).ready(function(){
+        $(".dropdown-button").dropdown();
         $('.carousel').carousel();
     });
-</script>
-<script>
-    $(document).ready(function(){
-        $(".dropdown-button").dropdown();
-    };
 </script>
 
 </body>
