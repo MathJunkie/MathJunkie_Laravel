@@ -9,12 +9,25 @@
       <library name="PHARS">
         <CLASSES>
           <root url="phar://$MODULE_DIR$/composer.phar/" />
+          <root url="phar://C:/xampp/php/pharcommand.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/symfony/dependency-injection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
           <root url="phar://$MODULE_DIR$/composer.phar/" />
+          <root url="phar://C:/xampp/php/pharcommand.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/symfony/dependency-injection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHP">
+        <CLASSES>
+          <root url="file://C:/xampp/php" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/xampp/php" />
         </SOURCES>
       </library>
     </orderEntry>
