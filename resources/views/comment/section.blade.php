@@ -4,7 +4,7 @@
     @if($is_scriptowner)
     <li><a href="#" onclick="if (confirm('Möchtest du wirklich löschen?'))window.location = '{{Request::root()}}/{{$type}}/{{$id}}/delete'"><i class="mdi-action-delete small white-text"></i></a></li>
     @endif
-    <li><a href="#" data-activates="slide-out" class="button-collapse small show-on-large"><i class="medium mdi-navigation-menu"></i><span class="new badge">{{$countNew}}</span></a></li>
+    <li><a href="#" data-activates="slide-out" class="button-collapse small show-on-large">Comments<span class="new badge">{{$countNew}}</span></a></li>
 </ul>
 <ul class="left">
     <li><a href="{{Request::root()}}/{{$type}}"><i class="mdi-navigation-arrow-back small white-text"></i></a></li>
@@ -36,11 +36,9 @@
             <div class="input-field col s12">
                 <textarea rows="2" name="comment_text" id="comment" class="materialize-textarea"></textarea>
             </div>
-            <div class="input-field col s12">
-                <button id="comment_btn" type="submit" class="btn green small">
-                    Send Comment <i class="mdi-content-send"></i>
-                </button>
-            </div>
+            <button  class=" col s12 green btn waves-effect waves-light" type="submit" name="action">Send Comment
+                <i class="right mdi-content-send"></i>
+            </button>
         </div>
     </div>
 </div>

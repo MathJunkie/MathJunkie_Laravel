@@ -689,7 +689,7 @@ function updatePreview() {
  * @param {string} id ID of <pre> element to inject into.
  */
 function injectCode(code, id) {
-  Blockly.removeAllRanges();
+//  Blockly.removeAllRanges();
   var pre = document.getElementById(id);
   pre.value = code;
 }

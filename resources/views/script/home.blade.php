@@ -11,15 +11,7 @@
 </head>
 <body class="grey darken-4">
 <form action="/script" method="post" id="mainContainer" class="container row">
-    <div class="input-field col s8">
-        <input value="" id="script_name" name="name" type="text" class="validate white-text">
-        <label class="active" for="script_name">Name of the new script</label>
-    </div>
-    <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="submit" value="Create" id="create_script" class="btn green col s4"/>
-</form>
-<nav>
-    <div class="nav-wrapper">
+    <div class="col s8 nav-wrapper">
         <div>
             <div class="input-field">
                 <input id="search" type="search" required>
@@ -28,7 +20,9 @@
             </div>
         </div>
     </div>
-</nav>
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input type="submit" value="Create" id="create_block" class="btn green col s4"/>
+</form>
 <ul id="ownBlock" class="collection">
 </ul>
 
@@ -37,12 +31,14 @@
 <script type="text/javascript">
     $('#search').keypress(function(){
         $('#ownBlock').html('');
+        if ($(this).val().length < 2){
+            return;
+        }
         $.ajax({
             url: "{{Request::url()}}/list?search="+$('#search').val(),
             success: function(result){
                 for (var i = 0; i < result.length; i++){
-                    $('#ownBlock').html('<a href="{{Request::url()}}/'+result[i].id+'" class="collection-item"><h3>'+result[i].name+'</h3><p>'+result[i].description+'</p></a>');
-
+                    $('#ownBlock').append('<a href="{{Request::url()}}/'+result[i].id+'" class="collection-item"><h3>'+result[i].name+'</h3><p>'+result[i].description+'</p></a>');
                 }
             }
         })
