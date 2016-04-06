@@ -42,7 +42,7 @@ class BlockCtrl extends Controller
      */
     public function store(Request $request)
     {
-        $block = Block::where('name','=',$request->name)->first();
+        $block = Block::where('name','=',$request->search)->first();
         if (empty($block)) {
             //richtig
             if (Auth::check())

@@ -14,7 +14,7 @@
         <div class="col s8 nav-wrapper">
             <div>
                 <div class="input-field">
-                    <input id="search" type="search" required>
+                    <input id="search" name="search" type="search" required>
                     <label for="search"><i class="mdi-action-search"></i></label>
                     <i class="mdi-navigation-close"></i>
                 </div>

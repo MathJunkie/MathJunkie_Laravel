@@ -45,7 +45,7 @@ class ScriptCtrl extends Controller
      */
     public function store(Request $request)
     {
-        $script = Script::where('name','=',$request->name)->first();
+        $script = Script::where('name','=',$request->search)->first();
         if (empty($script)) {
             //richtig
             if (Auth::check())
