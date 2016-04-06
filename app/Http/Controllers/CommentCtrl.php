@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Kommentar;
+use Illuminate\Support\Facades\Auth;
+use View;
+use App\Block;
+use App\Script;
+use Log;
 
 class CommentCtrl extends Controller
 {
@@ -37,7 +43,15 @@ class CommentCtrl extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kommentar = new Kommentar;
+        if (Auth::check()) {
+            $kommentar->owner = Auth::user()->email;
+            $kommentar->idScript = $request->idScript;
+            $kommentar->isScript = $request->isScript;
+            $kommentar->seen = false;
+            $kommentar->text = $request->text;
+            $kommentar->save();
+        }
     }
 
     /**
@@ -62,6 +76,69 @@ class CommentCtrl extends Controller
         //
     }
 
+    public function setSeen($id){
+        $kommentar = Kommentar::where('id','=',$id)->first();
+        if (empty($kommentar)){
+            return "Nope";
+        }
+        else{
+            if ($kommentar->owner == Auth::user()->email)
+            {
+                $kommentar->seen = true;
+                $kommentar->save();
+            }
+        }
+
+    }
+
+    public function getBlockSection($id){
+        return $this->makeCommentSection($id,false);
+    }
+
+    public function getScriptSection($id){
+        return $this->makeCommentSection($id,true);
+    }
+
+    public function makeCommentSection($id,$isScript){
+        $kommentar = Kommentar::where('idScript','=',$id)
+            ->where('isScript','=',$isScript)
+            ->get();
+        if (empty($kommentar)){
+            return 'object does not exist';
+        }
+        $countNew = 0;
+        foreach ($kommentar as $comment){
+            if (!$comment->seen){
+                $countNew++;
+            }
+        }
+        $db = null;
+        if ($isScript){
+            $db = Script::where('id','=',$id)->first();
+        }
+        else{
+            $db = Block::where('id','=',$id)->first();
+        }
+        $script_owner = '';
+        if (!empty($db)){
+            $script_owner = $db->owner;
+        }
+        if (Auth::check()){
+            $user_email = Auth::user()->email;
+            $is_scriptowner = $user_email == $script_owner;
+        }
+        else{
+            $is_scriptowner = false;
+            $user_email = '';
+        }
+        $type = 'block';
+        if ($isScript){
+            $type = 'script';
+        }
+        
+        return View::make('comment.section')->with('type',$type)->with('kommentar',$kommentar)->with('countNew',$countNew)->with('id',$id)->with('user_email',$user_email)->with('is_scriptowner',$is_scriptowner);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -71,7 +148,17 @@ class CommentCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kommentar = Kommentar::where('id','=',$id)->first();
+        if (empty($kommentar)){
+            return "Nope";
+        }
+        else{
+            if ($kommentar->owner == Auth::user()->email)
+            {
+                $kommentar->text = $request->text;
+                $kommentar->save();
+            }
+        }
     }
 
     /**
@@ -82,6 +169,14 @@ class CommentCtrl extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kommentar = Kommentar::where('id','=',$id)->first();
+        if (empty($kommentar))
+            return 'Nope';
+        elseif ($kommentar->owner == Auth::user()->email) {
+            $kommentar->delete();
+        }
+        else{
+            return response()->withErrors('Only owned comments can be deleted');
+        }
     }
 }

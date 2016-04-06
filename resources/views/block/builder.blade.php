@@ -11,70 +11,60 @@
     <title>BlockBuilder</title>
 </head>
 <body class="grey darken-2">
-    <div class="blue darken-3 center" height="50px" width="100%">
-        <button style="position:absolute; top:5px; left: 5px" class="btn btn-flat btn-floating blue">
-            <a href="{{Request::url()}}/.."><i class="mdi-navigation-arrow-back white-text" ></i></a>
-        </button>
-        <button style="position:absolute; top:5px; right: 5px" class="btn btn-flat btn-floating red">
-            <a href="{{Request::url()}}/delete"><i class="mdi-action-delete white-text" ></i></a>
-        </button>
-        <img height="50px" src="{{URL::asset('images/Icon.png')}}" style="vertical-align: middle;" class="brand-logo center" alt="Logo"/>
-        <span class="center-align shadow-text">MathJunkie - Who said Math has to be difficult and ugly?</span>
-    </div>
-    <form class="mainContent" action="{{Request::url()}}" method="post">
-       <div class="row">
-           <div class="sidebar red col s6">
-               <div id="blockly"></div>
-               <div class="row white">
-                   <div class="input-field col s12">
-                       <input name="description" id="desc" type="text"/>
-                       <label for="desc">Beschreibung</label>
-                   </div>
-                   <div class="input-field col s8">
-                       <input name="category" id="category" type="text"/>
-                       <label for="category">Kategorie</label>
-                   </div>
-                   <input type="submit" id="saveBtn" class="green btn col s4" value="Save"/>
-               </div>
-           </div>
-           <div class="col s6">
-               <div class="switch white">
-                   <label>
-                       Generierten
-                       <input id="selPreview" type="checkbox">
-                       <span class="lever"></span>
-                       Gespeicherten
-                   </label>
-               </div>
-               <div id="preview" class="blue" ></div>
-                   <div>
-                       <ul class="tabs">
-                           <li class="tab col s6"><a href="#tabBlockCode">Generated</a> </li>
-                           <li class="tab col s6"><a href="#tabBlockCodeSave">Saved</a> </li>
-                       </ul>
-                   </div>
-                   <div id="tabBlockCode">
-                       <textarea readonly id="blockCode" class="yellow" ></textarea>
-                       <div id="btnBlockCode" class="btn waves-effect btn-flat green">Copy to Saved</div>
-                   </div>
-                   <div id="tabBlockCodeSave"><textarea name="structure" id="blockCodeSave" class="yellow" >{{ $block->structure }}</textarea></div>
-                   <div>
-                       <ul class="tabs">
-                           <li class="tab col s6"><a href="#tabSageCode">Generated</a> </li>
-                           <li class="tab col s6"><a href="#tabSageCodeSave">Saved</a> </li>
-                       </ul>
-                   </div>
-                   <div id="tabSageCode">
-                       <textarea readonly id="sageCode" class="blue" ></textarea>
-                       <div id="btnSageCode" class="btn waves-effect btn-flat green">Copy to Saved</div>
-                   </div>
-                   <div id="tabSageCodeSave"><textarea name="function" id="sageCodeSave" class="blue" >{{ $block->function }}</textarea></div>
-           </div>
-       </div>
-       <div class="row"></div>
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $block->xml }}">
-    </form>
+        <nav id="navBar" class="blue darken-3">
+
+        </nav>
+        <form class="row mainContent" action="{{Request::url()}}" method="post">
+            <div style="left: 0; top:60px; position:absolute;" class="sidebar red col s6">
+                <div id="blockly"></div>
+                <div class="row white">
+                    <div class="input-field col s12">
+                        <input name="description" id="desc" type="text" value="{{$block->description}}"/>
+                        <label for="desc">Beschreibung</label>
+                    </div>
+                    <div class="input-field col s8">
+                        <input name="category" id="category" type="text" value="{{$block->category}}"/>
+                        <label for="category">Kategorie</label>
+                    </div>
+                    <input type="submit" id="saveBtn" class="green btn col s4" value="Save"/>
+                </div>
+            </div>
+            <div class="col s6" style="right: 0; top:60px; position:absolute;">
+                <div class="switch white">
+                    <label>
+                        Generierten
+                        <input id="selPreview" type="checkbox">
+                        <span class="lever"></span>
+                        Gespeicherten
+                    </label>
+                </div>
+                <div id="preview" class="blue" ></div>
+                <div>
+                    <ul class="tabs">
+                        <li class="tab col s6"><a href="#tabBlockCode">Generated</a> </li>
+                        <li class="tab col s6"><a href="#tabBlockCodeSave">Saved</a> </li>
+                    </ul>
+                </div>
+                <div id="tabBlockCode">
+                    <textarea readonly id="blockCode" class="yellow" ></textarea>
+                    <div id="btnBlockCode" class="btn waves-effect btn-flat green">Copy to Saved</div>
+                </div>
+                <div id="tabBlockCodeSave"><textarea name="structure" id="blockCodeSave" class="yellow" >{{ $block->structure }}</textarea></div>
+                <div>
+                    <ul class="tabs">
+                        <li class="tab col s6"><a href="#tabSageCode">Generated</a> </li>
+                        <li class="tab col s6"><a href="#tabSageCodeSave">Saved</a> </li>
+                    </ul>
+                </div>
+                <div id="tabSageCode">
+                    <textarea readonly id="sageCode" class="blue lighten-3" ></textarea>
+                    <div id="btnSageCode" class="btn waves-effect btn-flat green">Copy to Saved</div>
+                </div>
+                <div id="tabSageCodeSave"><textarea name="function" id="sageCodeSave" class="blue lighten-3" >{{ $block->function }}</textarea></div>
+            </div>
+            <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $block->xml }}">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+        </form>
     <xml id="toolbox" style="display: none">
         <category name="Input">
             <block type="input_value">
@@ -218,7 +208,47 @@
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/de.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/factory.js') }}"></script>
 <script type="text/javascript">
+    function reload_comment(){
+        $('#navBar').load("{{Request::root()}}/comment/{{$block->id}}/block_list", function(){
+            $(".button-collapse").sideNav({
+                menuWidth: 300, // Default is 240
+                edge: 'right' // Choose the horizontal origin
+            });
+
+            $("#comment_btn").click(function(){
+                $.ajax({
+                    method: "GET",
+                    url: "{{Request::root()}}/comment",
+                    data: {
+                        'text' : $('#comment').val(),
+                        'isScript' : 0,
+                        'idScript' : '{{$block->id}}'
+                    },
+                    success: function(result){
+                        reload_comment();
+                    }
+                });
+            });
+        });
+    }
+
     $(document).ready(function(){
+
+
+        $('form').submit(function(){
+            //$('#sageCodeSave').val(encodeURI($('#sageCodeSave').val()));
+            //$('#blockCodeSave').val(encodeURI($('#blockCodeSave').val()));
+
+            var dom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+            //$('#xmlhidden_input').val(encodeURI(Blockly.Xml.domToText(dom)));
+            $('#xmlhidden_input').val('');
+            $('#xmlhidden_input').val(Blockly.Xml.domToPrettyText(dom));
+            return true;
+        });
+
+        //Comment
+        reload_comment();
+
     var toolbox = document.getElementById('toolbox');
     var
             mainWorkspace = Blockly.inject('blockly',

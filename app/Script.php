@@ -8,5 +8,5 @@ class Script extends Model
 {
     protected $table = 'scripts';
 
-    protected $fillable = ['owner, name, data'];
+    protected $fillable = ['description, owner, name, function, structure'];
 }

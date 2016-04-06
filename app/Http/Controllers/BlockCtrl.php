@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Block;
+use App\Kommentar;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use View;
-use Log;
 
 class BlockCtrl extends Controller
 {
@@ -110,6 +110,8 @@ class BlockCtrl extends Controller
             $block->xml = $request->xml;
             $block->save();
         }
+        else
+            return back()->withErrors('You have no privileges to edit anothers script');
         return Redirect::to('block');
     }
 
@@ -120,14 +122,12 @@ class BlockCtrl extends Controller
 
         $resp = array();
         foreach ($block as $item){
-            if ($item->owner == Auth::user()->email){
-                $entry = [
-                    "description" => $item->description,
-                    "name" => $item->name,
-                    "id" => $item->id,
-                ];
-                array_push($resp,$entry);
-            }
+            $entry = [
+                "description" => $item->description,
+                "name" => $item->name,
+                "id" => $item->id,
+            ];
+            array_push($resp,$entry);
         }
         return response()->json($resp);
     }
@@ -142,6 +142,12 @@ class BlockCtrl extends Controller
     {
         $block = Block::where('id','=',$id)->first();
         if ($block->owner == Auth::user()->email){
+            $kommentar = Kommentar::where('idScript','=',$block->id)
+                ->where('isScript','=',false)
+                ->get();
+            foreach ($kommentar as $comment){
+                $comment->delete();
+            }
             $block->delete();
         }
         return Redirect::to('block');

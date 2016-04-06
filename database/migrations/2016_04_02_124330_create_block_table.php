@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScriptsTable extends Migration
+class CreateBlockTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,15 @@ class CreateScriptsTable extends Migration
      */
     public function up()
     {
-        Schema::create('scripts', function (Blueprint $table) {
+        Schema::create('block', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('owner');
             $table->string('name')->unique();
-            $table->string('description');
-            $table->text('function');
             $table->text('structure');
+            $table->text('function');
+            $table->string('owner');
+            $table->string('category');
+            $table->string('description');
+            $table->text('xml');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateScriptsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('scripts');
+        Schema::drop('block');
     }
 }
