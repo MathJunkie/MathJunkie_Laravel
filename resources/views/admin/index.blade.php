@@ -36,9 +36,9 @@
                 <li><a class="btn-floating btn waves-effect waves-light red navigation" style="margin-left: 10px; margin-right: 10px;"></a></li>
 
                 @if (Auth::check())
-                <li><a class="dropdown-button" href="#!" data-activates="dropdown_user" style="min-width:150px;">{{ Auth::user()->name }}<i class=" right"></i></a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown_user" style="text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class=" right"></i></a></li>
                 @else
-                <li><a class="btn waves-effect waves-light" style="min-width:150px;">Sign in</a></li>
+                <li><a class="btn waves-effect waves-light" style="text-align: center; min-width:150px;">Sign in</a></li>
                 @endif
 
             </ul>
