@@ -26,7 +26,7 @@
 <div class="navbar-fixed">
     <nav class="teal">
         <div class="nav-wrapper">
-            <a href="#!" class="left" style="margin-left: 10px; margin-right: 10px;"><img class="circle" src="images/icon.png" style="wider:100%;height:100%;"></a>
+            <a href="#!" class="left" style="margin-left: 10px; margin-right: 10px;"><img class="circle" src="{{ URL::asset('images/Icon.png') }}" style=height:100%;"></a>
             <ul class="left" style="vertical-align: middle;">
                 <li><a class="btn waves-effect waves-light navigation">Script builder</a></li>
                 <li><a class="btn waves-effect waves-light navigation">Block builder</a></li>
