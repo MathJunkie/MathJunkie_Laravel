@@ -32,15 +32,18 @@
             </div>
             <div class="col s5">
                 <ul class="center">
-                    <li><button class="btn waves-effect waves-light navigation">Script builder</button></li>
-                    <form action="/block" method="GET">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <form action="" method="get">
+                        <input type="hidden" name="nav" value="script">
+                        <li><button type="submit" class="btn waves-effect waves-light navigation">Script builder</button></li>
+                    </form>
+                    <form action="" method="GET">
+                        <input type="hidden" name="nav" value="block">
                         <li><button type="submit" class="btn waves-effect waves-light navigation">Block builder</button></li>
                     </form>
                 </ul>
             </div>
             <div class="col s2">
-                <a href="#!" class="center brand-logo">MathJunkie</a>
+                <a href="{{Request::root()}}/admin" class="center brand-logo">MathJunkie</a>
             </div>
             <div class="col s5">
                 <a class="right btn-floating btn waves-effect waves-light red navigation" style="top: 15px;"></a>
@@ -49,7 +52,7 @@
                 @if (Auth::check())
                     <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
                 @else
-                <a class="btn waves-effect waves-light right" type="submit" style="text-align: center; min-width:150px;">Sign in</a>
+                    <a class="btn waves-effect waves-light right" href="{{ Request::root() }}/login" type="submit" style="text-align: center; min-width:150px;">Sign in</a>
                 @endif
             </div>
         </div>
@@ -57,6 +60,7 @@
 </div>
 
 <main>
+    @if( empty(Request::input('nav')) )
     <div class="teal darken-2 welcome">
         <h1>Welcome</h1>
     </div>
@@ -79,6 +83,11 @@
             <a class="carousel-item" href="#five!"><img src="http://lorempixel.com/250/250/nature/5"></a>
         </div>
     </div>
+    @elseif(Request::input('nav') == 'block')
+        @include('block.home')
+    @elseif(Request::input('nav') == 'script')
+        @include('script.home')
+    @endif
 </main>
 
 <footer class="teal">

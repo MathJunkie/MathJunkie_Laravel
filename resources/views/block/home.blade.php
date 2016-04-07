@@ -30,18 +30,18 @@
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript">
     $('#search').keypress(function(){
-        $('#ownBlock').html('');
-        if ($(this).val().length < 2)
-        {
+        if ($(this).val().length < 2) {
             return;
         }
         $.ajax({
-            url: "{{Request::url()}}/list?search="+$('#search').val(),
+            url: "{{Request::root()}}/block/list?search="+$('#search').val(),
             success: function(result){
+                $('#ownBlock').html('');
+                var html = '';
                 for (var i = 0; i < result.length; i++){
-                    $('#ownBlock').append('<a href="{{ Request::url() }}/'+result[i].id+'" class="collection-item"><h3>'+result[i].name+'</h3><p>'+result[i].description+'</p></a>');
-
+                    html += '<a href="{{ Request::root() }}/block/'+result[i].id+'" class="collection-item"><h3>'+result[i].name+'</h3><p>'+result[i].description+'</p></a>';
                 }
+                $('#ownBlock').html(html);
             }
         })
     })
