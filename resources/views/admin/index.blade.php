@@ -47,7 +47,7 @@
             </div>
             <div class="col s1">
                 @if (Auth::check())
-                    <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class=" right"></i></a>
+                    <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
                 @else
                 <a class="btn waves-effect waves-light right" type="submit" style="text-align: center; min-width:150px;">Sign in</a>
                 @endif
