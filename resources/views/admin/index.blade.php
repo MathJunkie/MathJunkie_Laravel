@@ -19,29 +19,39 @@
     <li><a href="#!"><i class="mdi-action-settings right"></i>Options</a></li>
     <li class="divider"></li>
     <form action="/auth/logout" method="GET">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <li><a type="submit"><i class="mdi-action-exit-to-app right"></i>Log out</a></li>
     </form>
 </ul>
 
 <div class="navbar-fixed">
     <nav class="teal">
-        <div class="nav-wrapper">
-            <a href="#!" class="left" style="margin-left: 10px; margin-right: 10px;"><img class="circle" src="{{ URL::asset('images/Icon.png') }}" style=height:100%;"></a>
-            <ul class="left" style="vertical-align: middle;">
-                <li><a class="btn waves-effect waves-light navigation">Script builder</a></li>
-                <li><a class="btn waves-effect waves-light navigation">Block builder</a></li>
-            </ul>
-            <a href="#!" class="center brand-logo">MathJunkie</a>
-            <ul class="right">
-                <li><a class="btn-floating btn waves-effect waves-light red navigation" style="margin-left: 10px; margin-right: 10px;"></a></li>
-
+        <div class="nav-wrapper row">
+            <div class="col s1">
+                <a href="#!"><img class="left circle" src="{{ URL::asset('images/Icon.png') }}" style="height: 100%"></a>
+            </div>
+            <div class="col s5">
+                <ul class="center">
+                    <li><button class="btn waves-effect waves-light navigation">Script builder</button></li>
+                    <form action="/block" method="GET">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <li><button type="submit" class="btn waves-effect waves-light navigation">Block builder</button></li>
+                    </form>
+                </ul>
+            </div>
+            <div class="col s2">
+                <a href="#!" class="center brand-logo">MathJunkie</a>
+            </div>
+            <div class="col s5">
+                <a class="right btn-floating btn waves-effect waves-light red navigation" style="top: 15px;"></a>
+            </div>
+            <div class="col s1">
                 @if (Auth::check())
-                <li><a class="dropdown-button" href="#!" data-activates="dropdown_user" style="min-width:150px;">{{ Auth::user()->name }}<i class=" right"></i></a></li>
+                    <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
                 @else
-                <li><a class="btn waves-effect waves-light" style="min-width:150px;">Sign in</a></li>
+                <a class="btn waves-effect waves-light right" type="submit" style="text-align: center; min-width:150px;">Sign in</a>
                 @endif
-
-            </ul>
+            </div>
         </div>
     </nav>
 </div>
