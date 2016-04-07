@@ -52,7 +52,7 @@ class ScriptCtrl extends Controller
             {
                 $script = new Script();
                 $script->owner = Auth::user()->email;
-                $script->name = $request->name;
+                $script->name = $request->search;
                 $script->save();
                 return Redirect::to('script/'.$script->id);
             }

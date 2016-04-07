@@ -36,7 +36,7 @@
             <div class="input-field col s12">
                 <textarea rows="2" name="comment_text" id="comment" class="materialize-textarea"></textarea>
             </div>
-            <button  class=" col s12 green btn waves-effect waves-light" type="submit" name="action">Send Comment
+            <button id="comment_btn" class="col s12 green btn waves-effect waves-light" type="submit" name="action">Send Comment
                 <i class="right mdi-content-send"></i>
             </button>
         </div>

@@ -50,7 +50,7 @@ class BlockCtrl extends Controller
             {
                 $block = new Block();
                 $block->owner = Auth::user()->email;
-                $block->name = $request->name;
+                $block->name = $request->search;
                 $block->save();
                 return Redirect::to('block/'.$block->id);
             }
