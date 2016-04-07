@@ -20,16 +20,5 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHP">
-        <CLASSES>
-          <root url="file://C:/xampp/php" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://C:/xampp/php" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>

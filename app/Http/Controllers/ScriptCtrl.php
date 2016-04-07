@@ -45,21 +45,21 @@ class ScriptCtrl extends Controller
      */
     public function store(Request $request)
     {
-        $script = Script::where('name','=',$request->name)->first();
+        $script = Script::where('name','=',$request->search)->first();
         if (empty($script)) {
             //richtig
             if (Auth::check())
             {
                 $script = new Script();
                 $script->owner = Auth::user()->email;
-                $script->name = $request->name;
+                $script->name = $request->search;
                 $script->save();
                 return Redirect::to('script/'.$script->id);
             }
         }
         elseif ($script->owner == Auth::user()->email) {
             //existiert bereits, user hat aber berechtigung
-            Redirect::to('script/'.$script->id);
+            return Redirect::to('script/'.$script->id);
         }
         else{
             //existiert bereits, keine Berechtigung

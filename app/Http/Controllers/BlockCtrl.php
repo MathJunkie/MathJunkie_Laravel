@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use View;
+use Log;
 
 class BlockCtrl extends Controller
 {
@@ -42,21 +43,21 @@ class BlockCtrl extends Controller
      */
     public function store(Request $request)
     {
-        $block = Block::where('name','=',$request->name)->first();
+        $block = Block::where('name','=',$request->search)->first();
         if (empty($block)) {
             //richtig
             if (Auth::check())
             {
                 $block = new Block();
                 $block->owner = Auth::user()->email;
-                $block->name = $request->name;
+                $block->name = $request->search;
                 $block->save();
                 return Redirect::to('block/'.$block->id);
             }
         }
         elseif ($block->owner == Auth::user()->email) {
             //existiert bereits, user hat aber berechtigung
-            Redirect::to('block/'.$block->id);
+            return Redirect::to('block/'.$block->id);
         }
         else{
             //existiert bereits, keine Berechtigung
