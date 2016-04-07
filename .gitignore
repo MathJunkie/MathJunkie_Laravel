@@ -1,5 +1,5 @@
 /.idea
-/MathJunkie.iml
+/MathJunkie_Laravel.iml
 *.iml
 /.env.behat
 /composer.lock

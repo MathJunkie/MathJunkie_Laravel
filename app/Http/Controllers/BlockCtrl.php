@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use View;
+use Log;
 
 class BlockCtrl extends Controller
 {
@@ -56,7 +57,7 @@ class BlockCtrl extends Controller
         }
         elseif ($block->owner == Auth::user()->email) {
             //existiert bereits, user hat aber berechtigung
-            Redirect::to('block/'.$block->id);
+            return Redirect::to('block/'.$block->id);
         }
         else{
             //existiert bereits, keine Berechtigung

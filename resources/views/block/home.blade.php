@@ -39,7 +39,7 @@
             url: "{{Request::url()}}/list?search="+$('#search').val(),
             success: function(result){
                 for (var i = 0; i < result.length; i++){
-                    $('#ownBlock').append('<a href="{{Request::url()}}/'+result[i].id+'" class="collection-item"><h3>'+result[i].name+'</h3><p>'+result[i].description+'</p></a>');
+                    $('#ownBlock').append('<a href="{{ Request::url() }}/'+result[i].id+'" class="collection-item"><h3>'+result[i].name+'</h3><p>'+result[i].description+'</p></a>');
 
                 }
             }

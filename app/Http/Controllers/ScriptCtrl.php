@@ -59,7 +59,7 @@ class ScriptCtrl extends Controller
         }
         elseif ($script->owner == Auth::user()->email) {
             //existiert bereits, user hat aber berechtigung
-            Redirect::to('script/'.$script->id);
+            return Redirect::to('script/'.$script->id);
         }
         else{
             //existiert bereits, keine Berechtigung
