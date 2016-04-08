@@ -11,20 +11,24 @@
 <div class="navbar-fixed">
     <nav class="teal">
         <div class="nav-wrapper row">
-            <div class="col s6">
+            <div class="col s12">
                 <form action="/admin" method="GET">
                     <input type="hidden" name="nav" value="admin">
                     <button class="btn waves-effect waves-light"type="submit" style="height: 100%; position: absolute; left: 0px;"><i class="mdi-navigation-arrow-back"></i></button>
                 </form>
             </div>
-            <div class="col s2">
+            <div class="col s4">
                 <a href="{{Request::root()}}/admin" class="center brand-logo">MathJunkie</a>
             </div>
-            <div class="col s5">
+            <div class="col s11">
                 <a class="right btn-floating btn waves-effect waves-light red navigation" style="top: 15px;"></a>
             </div>
             <div class="col s1">
+                @if (Auth::check())
                 <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                @else
+                <a class="btn waves-effect waves-light right" href="{{ Request::root() }}/login" type="submit" style="text-align: center; min-width:150px;">Sign in</a>
+                @endif
             </div>
         </div>
     </nav>
