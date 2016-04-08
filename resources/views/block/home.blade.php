@@ -9,7 +9,8 @@
     <meta charset="utf-8">
     <title>Blöcke Home</title>
 </head>
-<body class="grey darken-4">
+<body class="teal darken-2">
+    @include('template/header_builder')
     <form action="/block" method="post" id="mainContainer" class="container row">
         <div class="col s8 nav-wrapper">
             <div>
@@ -26,9 +27,11 @@
     <ul id="ownBlock" class="collection">
     </ul>
 
+    @include('template/footer_main')
+
     <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
-<script type="text/javascript">
+    <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
+    <script type="text/javascript">
     $('#search').keypress(function(){
         if ($(this).val().length < 2) {
             return;
@@ -45,9 +48,9 @@
             }
         })
     })
-</script>
-@foreach ($errors->all() as $error)
-    <script>Materialize.toast("{{$error}}",3000)</script>
-@endforeach
+    </script>
+    @foreach ($errors->all() as $error)
+        <script>Materialize.toast("{{$error}}",3000)</script>
+    @endforeach
 </body>
 </html>

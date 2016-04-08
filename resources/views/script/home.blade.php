@@ -9,7 +9,8 @@
     <meta charset="utf-8">
     <title>Script Home</title>
 </head>
-<body class="grey darken-4">
+<body class="teal darken-2">
+@include('template/header_builder')
 <form action="/script" method="post" id="mainContainer" class="container row">
     <div class="col s8 nav-wrapper">
         <div>
@@ -25,6 +26,8 @@
 </form>
 <ul id="ownBlock" class="collection">
 </ul>
+
+@include('template/footer_main')
 
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
