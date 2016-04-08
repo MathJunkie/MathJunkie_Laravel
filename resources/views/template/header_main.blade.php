@@ -10,35 +10,23 @@
 
 <div class="navbar-fixed">
     <nav class="teal">
-        <div class="nav-wrapper row">
-            <div class="col s1">
-                <a href="#!"><img class="left circle" src="{{ URL::asset('images/Icon.png') }}" style="height: 100%"></a>
-            </div>
-            <div class="col s5">
-                <ul class="center">
-                    <form action="/script/home" method="get">
-                        <input type="hidden" name="nav" value="script">
-                        <li><button type="submit" class="btn waves-effect waves-light navigation">Script builder</button></li>
-                    </form>
-                    <form action="/block/home" method="GET">
-                        <input type="hidden" name="nav" value="block">
-                        <li><button type="submit" class="btn waves-effect waves-light navigation">Block builder</button></li>
-                    </form>
-                </ul>
-            </div>
-            <div class="col s2">
-                <a href="{{Request::root()}}/admin" class="center brand-logo">MathJunkie</a>
-            </div>
-            <div class="col s5">
-                <a class="right btn-floating btn waves-effect waves-light red navigation" style="top: 15px;"></a>
-            </div>
-            <div class="col s1">
-                @if (Auth::check())
-                <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                @else
-                <a class="btn waves-effect waves-light right" href="{{ Request::root() }}/login" type="submit" style="text-align: center; min-width:150px;">Sign in</a>
-                @endif
-            </div>
+        <div class="nav-wrapper">
+            <a href="#!" class="left" style="position: relative; bottom: 15px;"><img class="circle" src="{{ URL::asset('images/Icon.png') }}" style="height: 100%;"></a>
+            <form action="/script/home" method="get">
+                <input type="hidden" name="nav" value="script">
+                <button type="submit" class="btn waves-effect waves-light left" style="margin-left: 20px; margin-right: 10px;">Script builder</button>
+            </form>
+            <form action="/block/home" method="GET">
+                <input type="hidden" name="nav" value="block">
+                <button type="submit" class="btn waves-effect waves-light left" style="margin-left: 10px; margin-right: 10px;">Block builder</button>
+            </form>
+            @if (Auth::check())
+            <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="position: relative; bottom: 15px; text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+            @else
+            <a class="btn waves-effect waves-light right" href="{{ Request::root() }}/login" type="submit" style="position: relative; bottom: 15px; text-align: center; min-width:150px;">Sign in</a>
+            @endif
+            <a class="btn-floating btn waves-effect waves-light red right"></a>
+            <a href="{{Request::root()}}/admin" class="right brand-logo" style="position: relative; bottom: 15px; margin-left: 20px; margin-right: 10px;">MathJunkie</a>
         </div>
     </nav>
 </div>

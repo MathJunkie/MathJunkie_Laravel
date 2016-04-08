@@ -11,6 +11,7 @@
     <title>BlockBuilder</title>
 </head>
 <body class="grey darken-2">
+        <!--@include('template/header_builder')-->
         <nav id="navBar" class="blue darken-3">
 
         </nav>
