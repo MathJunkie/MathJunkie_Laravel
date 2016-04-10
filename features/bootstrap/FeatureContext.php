@@ -1,24 +1,31 @@
 <?php
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Behat\MinkExtension\Context\MinkContext;
 use PHPUnit_Framework_Assert as PHPUnit;
+use Laracasts\Behat\Context\Migrator;
+use Laracasts\Behat\Context\DatabaseTransactions;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends Behat\MinkExtension\Context\MinkContext implements Context, SnippetAcceptingContext
+class FeatureContext extends MinkContext implements Context, SnippetAcceptingContext
 {
     /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
+     * @Then I should be able to do something with Laravel
      */
-    public function __construct()
+
+    use Migrator;
+    use DatabaseTransactions;
+    public function iShouldBeAbleToDoSomethingWithLaravel()
     {
+        $environmentFileName = app()->environmentFile();
+        $environmentName = env('APP_ENV');
+        PHPUnit::assertEquals('.env.behat', $environmentFileName);
+        PHPUnit::assertEquals('acceptance', $environmentName);
     }
 }
