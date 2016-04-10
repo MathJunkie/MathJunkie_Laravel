@@ -19,3 +19,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Kommentar::class, function (Faker\Generator $faker) {
+   return [
+       'owner' => function(){
+           return factory(App\User::class)->create()->id;
+       },
+       'text' => $faker->realText(),
+       'idScript' => '1',
+       'isScript' => rand(0,1)
+   ];
+});
