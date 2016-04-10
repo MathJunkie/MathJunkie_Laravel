@@ -1,6 +1,10 @@
 <div class="brand-logo center"><img height="50px" src="{{URL::asset('images/Icon.png')}}" style="vertical-align: middle;"  alt="Logo"/>
     <span class="center-align shadow-text">Builder</span></div>
 <ul class="right">
+    <li><a href="#" onclick="window.print();"><i class="mdi-action-print"></i></a></li>
+    @if($type == 'script')
+        <li><a href="#" onclick="if (prompt('Save the link?', '{{Request::root()}}/{{$type}}/{{$id}}/view'))return true"><i class="mdi-social-share small white-text"></i></a></li>
+    @endif
     @if($is_scriptowner)
     <li><a href="#" onclick="if (confirm('Möchtest du wirklich löschen?'))window.location = '{{Request::root()}}/{{$type}}/{{$id}}/delete'"><i class="mdi-action-delete small white-text"></i></a></li>
     @endif

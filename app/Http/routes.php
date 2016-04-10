@@ -16,16 +16,22 @@ Route::get('/', function () {
 });
 
 Route::get('login',function () {
+    if (Auth::check())
+    {
+        return redirect('admin');
+    }
     return view('login.index');
 });
 
 Route::get('register',function () {
+    if (Auth::check())
+    {
+        return redirect('admin');
+    }
     return view('login.register');
 });
 
-Route::get('admin', ['middleware' => 'auth', function () {
-    return view('admin.index');
-}]);
+Route::get('admin', ['middleware' => 'auth', 'uses'=>'AdminCtrl@index' ]);
 
 /*Login Routine*/
 Route::get('auth/login', 'Auth\AuthController@getLogin');

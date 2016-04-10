@@ -24,19 +24,27 @@
     <div id="carousel_slider">
         <div class="carousel_header">Newest scripts</div>
         <div class="carousel">
-            <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/250/250/nature/1"></a>
-            <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/250/250/nature/2"></a>
-            <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/250/250/nature/3"></a>
-            <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/250/250/nature/4"></a>
-            <a class="carousel-item" href="#five!"><img src="http://lorempixel.com/250/250/nature/5"></a>
+            @foreach($scripts as $script)
+            <div class="carousel-item">
+                <div class="center" style="background-color: #9ccc65;">
+                    <a href="{{Request::root()}}/script/{{$script->id}}" class="flow-text">{{$script->name}}</a>
+                    <p>{{$script->description}}</p>
+                    <p>made by {{$script->owner}}</p>
+                </div>
+            </div>
+            @endforeach
         </div>
         <div class="carousel_header">Newest blocks</div>
         <div class="carousel">
-            <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/250/250/nature/1"></a>
-            <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/250/250/nature/2"></a>
-            <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/250/250/nature/3"></a>
-            <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/250/250/nature/4"></a>
-            <a class="carousel-item" href="#five!"><img src="http://lorempixel.com/250/250/nature/5"></a>
+            @foreach($blocks as $block)
+                <div class="carousel-item">
+                    <div class="center" style="background-color: #9ccc65;" onselectstart="return false" ondragstart="return false">
+                        <a href="{{Request::root()}}/block/{{$block->id}}" class="flow-text">{{$block->name}}</a>
+                        <p>{{$block->description}}</p>
+                        <p>made by {{$block->owner}}</p>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </main>
