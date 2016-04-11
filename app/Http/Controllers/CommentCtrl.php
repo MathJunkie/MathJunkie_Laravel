@@ -87,7 +87,7 @@ class CommentCtrl extends Controller
             return "Nope";
         }
         else{
-            if ($kommentar->user_id == Auth::user()->id)
+            if ($kommentar->commentable->user_id == Auth::user()->id)
             {
                 $kommentar->seen = true;
                 $kommentar->save();

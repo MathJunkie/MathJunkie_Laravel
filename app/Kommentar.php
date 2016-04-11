@@ -19,12 +19,4 @@ class Kommentar extends Model
     public function commentable(){
         return $this->morphTo();
     }
-
-    /*public function script(){
-        return $this->belongsTo('App\Script');
-    }
-
-    public function block(){
-        return $this->belongsTo('App\Block');
-    }*/
 }
