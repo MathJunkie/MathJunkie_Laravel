@@ -14,7 +14,7 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('owner');
+            $table->integer('owner');
             $table->string('text');
             $table->boolean('seen');
             $table->boolean('isScript');

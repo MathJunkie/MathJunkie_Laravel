@@ -13,8 +13,29 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+        //Delete Data
+        DB::table('block')->delete();
+        DB::table('comments')->delete();
+        DB::table('password_resets')->delete();
+        DB::table('scripts')->delete();
+        DB::table('users')->delete();
 
-        // $this->call(UserTableSeeder::class);
+        //Create Admin User
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@bomberus.de',
+            'password' => bcrypt('admin'),
+        ]);
+
+        //Create standard Blocks
+        $this->call(BlockSeeder::class);
+
+        //Create test comments
+        factory(App\User::class, 10)->create()->each(function($u) {
+            $u->blocks()->save(factory(App\Block::class)->make());
+            $u->scripts()->save(factory(App\Script::class)->make());
+            $u->comments()->save(factory(App\Kommentar::class)->make());
+        });
 
         Model::reguard();
     }

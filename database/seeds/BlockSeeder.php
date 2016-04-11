@@ -1,13 +1,34 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Bomberus
- * Date: 10.04.2016
- * Time: 19:03
- */
 
-DB::table('block')->insert([
-    'name' => str_random(10),
-    'email' => str_random(10).'@gmail.com',
-    'password' => bcrypt('secret'),
-]);
+use Illuminate\Database\Seeder;
+
+class BlockSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //Manuelly add necessary Blocks
+        if (($handle = fopen(base_path()."/database/csv/block.csv", "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 0, ",","@")) !== FALSE) {
+                //$this->command->info(print_r($data));
+                $admin = \DB::table('users')->first();
+                DB::table('block')->insert([
+                    'name' => $data[0],
+                    'owner' => $admin->id,
+                    'function' => $data[2],
+                    'structure' => $data[1],
+                    'category' => $data[3],
+                    'description' => $data[4],
+                    'updated_at' => time(),
+                    'created_at' => time(),
+                ]);
+            }
+            fclose($handle);
+        }
+
+    }
+}

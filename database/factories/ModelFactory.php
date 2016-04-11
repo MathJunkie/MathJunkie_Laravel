@@ -21,12 +21,33 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Kommentar::class, function (Faker\Generator $faker) {
-   return [
-       'owner' => function(){
-           return factory(App\User::class)->create()->id;
-       },
+   $i = rand(0,1);
+    $idScript = random_int(\DB::table('block')->min('id'), \DB::table('block')->max('id'));
+    if ($i == 1) {
+        $idScript = random_int(\DB::table('scripts')->min('id'), \DB::table('scripts')->max('id'));
+    }
+    return [
+       'owner' => factory(App\User::class)->create()->email,
        'text' => $faker->realText(),
-       'idScript' => '1',
-       'isScript' => rand(0,1)
+       'idScript' => $idScript,
+       'isScript' => $i,
    ];
+
+});
+
+$factory->define(App\Block::class, function (Faker\Generator $faker) {
+    return [
+        'owner' => factory(App\User::class)->create()->email,
+        'name' => $faker->unique()->word(),
+        'category' => $faker->word(),
+        'description' => $faker->realText(100),
+    ];
+});
+
+$factory->define(App\Script::class, function (Faker\Generator $faker) {
+    return [
+        'owner' => factory(App\User::class)->create()->email,
+        'name' => $faker->unique()->word(),
+        'description' => $faker->realText(100),
+    ];
 });
