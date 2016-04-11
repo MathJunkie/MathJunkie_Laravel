@@ -14,7 +14,7 @@ class CreateScriptsTable extends Migration
     {
         Schema::create('scripts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('owner');
+            $table->integer('user_id');
             $table->string('name')->unique();
             $table->string('description');
             $table->text('function');

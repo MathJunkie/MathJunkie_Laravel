@@ -49,19 +49,18 @@ class BlockCtrl extends Controller
             if (Auth::check())
             {
                 $block = new Block();
-                $block->owner = Auth::user()->email;
                 $block->name = $request->search;
-                $block->save();
+                Auth::user()->blocks()->save($block);
                 return Redirect::to('block/'.$block->id);
             }
         }
-        elseif ($block->owner == Auth::user()->email) {
+        elseif ($block->user_od == Auth::user()->id) {
             //existiert bereits, user hat aber berechtigung
             return Redirect::to('block/'.$block->id);
         }
         else{
             //existiert bereits, keine Berechtigung
-            return back()->withErrors('Der Block existiert bereits und du hast keine Berechtigung zum Bearbeiten');
+            return back()->withErrors('You have no privileges for this script!');
         }
     }
 
@@ -84,7 +83,7 @@ class BlockCtrl extends Controller
      */
     public function edit($id)
     {
-        $block = Block::where('id','=',$id)->first();
+        $block = Block::find($id);
         if (empty($block)){
             return Redirect::to('block')->withErrors('Could not find the block');
         }
@@ -102,8 +101,11 @@ class BlockCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        $block = Block::where('id','=',$id)->first();
-        if ($block->owner == Auth::user()->email){
+        $block = Block::find($id);
+        if (empty($block))
+            return back()->withErrors('Block with this id does not exists');
+
+        if ($block->user_id == Auth::user()->id){
             $block->structure = $request->structure;
             $block->function = $request->function;
             $block->category = $request->category;
@@ -141,12 +143,9 @@ class BlockCtrl extends Controller
      */
     public function destroy($id)
     {
-        $block = Block::where('id','=',$id)->first();
-        if ($block->owner == Auth::user()->email){
-            $kommentar = Kommentar::where('idScript','=',$block->id)
-                ->where('isScript','=',false)
-                ->get();
-            foreach ($kommentar as $comment){
+        $block = Block::find($id);
+        if ($block->user_id == Auth::user()->id){
+            foreach ($block->comments as $comment){
                 $comment->delete();
             }
             $block->delete();

@@ -16,7 +16,7 @@
 <div id="slide-out" class="grey side-nav darken-3">
     <p class="orange darken-3 center-align flow-text">Comments</p>
     <div class="collection grey darken-3 black-text" style="border-style:none;">
-        @foreach($kommentar->all() as $comment)
+        @foreach($kommentar as $comment)
             <div class="collection-item @if($comment->seen) grey lighten-2 @else white @endif" style="margin-bottom: 10px;">
                 <span class="flow-text">{{$comment->user->name}}</span>
                 <p>{{$comment->text}}</p>

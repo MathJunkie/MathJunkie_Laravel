@@ -9,13 +9,14 @@ class Block extends Model
     public $timestamps = true;
     protected $fillable = ['name, structure, function, category, description, xml'];
 
+
     public function comments()
     {
-        return $this->hasMany('App\Kommentar');
+        return $this->morphMany('App\Kommentar','commentable');
     }
 
     public function user()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsTo('App\User');
     }
 }

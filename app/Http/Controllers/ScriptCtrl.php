@@ -51,13 +51,12 @@ class ScriptCtrl extends Controller
             if (Auth::check())
             {
                 $script = new Script();
-                $script->owner = Auth::user()->email;
                 $script->name = $request->search;
-                $script->save();
+                Auth::user()->scripts()->save($script);
                 return Redirect::to('script/'.$script->id);
             }
         }
-        elseif ($script->owner == Auth::user()->email) {
+        elseif ($script->user_id == Auth::user()->id) {
             //existiert bereits, user hat aber berechtigung
             return Redirect::to('script/'.$script->id);
         }
@@ -75,7 +74,7 @@ class ScriptCtrl extends Controller
      */
     public function show($id)
     {
-        $script = Script::where('id','=',$id)->first();
+        $script = Script::find($id);
         if (empty($script)){
             return Redirect::to('script')->withErrors('Could not find the script');
         }
@@ -92,7 +91,7 @@ class ScriptCtrl extends Controller
      */
     public function edit($id)
     {
-        $script = Script::where('id','=',$id)->first();
+        $script = Script::find($id);
         if (empty($script)){
             return Redirect::to('script')->withErrors('Could not find the script');
         }
@@ -143,8 +142,8 @@ class ScriptCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        $script = Script::where('id','=',$id)->first();
-        if ($script->owner == Auth::user()->email){
+        $script = Script::find($id);
+        if ($script->user_id == Auth::user()->id){
             $script->structure = $request->xml;
             $script->function = $request->function;
             $script->description = $request->description;
@@ -180,12 +179,9 @@ class ScriptCtrl extends Controller
      */
     public function destroy($id)
     {
-        $script = Script::where('id','=',$id)->first();
-        if ($script->owner == Auth::user()->email) {
-            $kommentar = Kommentar::where('idScript','=',$script->id)
-                ->where('isScript','=',true)
-                ->get();
-            foreach ($kommentar as $comment){
+        $script = Script::find($id);
+        if ($script->user_id == Auth::user()->id) {
+            foreach ($script->kommentar as $comment){
                 $comment->delete();
             }
             $script->delete();
