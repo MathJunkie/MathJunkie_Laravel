@@ -12,6 +12,14 @@ class Kommentar extends Model
 
     public function user()
     {
-        return $this->belongsTo('User','id');
+        return $this->belongsTo('App\User','owner');
+    }
+
+    public function script(){
+        return $this->belongsToMany('App\Script','idScript');
+    }
+
+    public function block(){
+        return $this->belongsToMany('App\Block','idScript');
     }
 }

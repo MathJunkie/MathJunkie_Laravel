@@ -40,17 +40,17 @@ class User extends Model implements AuthenticatableContract,
 
     public function scripts()
     {
-        return $this->hasMany('App\Script', 'owner');
+        return $this->hasMany('App\Script');
     }
 
     public function blocks()
     {
-        return $this->hasMany('App\Block', 'owner');
+        return $this->hasMany('App\Block');
     }
 
     public function comments()
     {
-        return $this->hasOne('App\Kommentar', 'owner');
+        return $this->hasMany('App\Kommentar');
     }
 
 }

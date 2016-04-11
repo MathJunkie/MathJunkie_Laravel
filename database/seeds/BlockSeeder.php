@@ -18,7 +18,7 @@ class BlockSeeder extends Seeder
                 $admin = \DB::table('users')->first();
                 DB::table('block')->insert([
                     'name' => $data[0],
-                    'owner' => $admin->id,
+                    'user_id' => $admin->id,
                     'function' => $data[2],
                     'structure' => $data[1],
                     'category' => $data[3],

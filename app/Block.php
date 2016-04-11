@@ -7,15 +7,15 @@ class Block extends Model
 {
     protected $table = 'block';
     public $timestamps = true;
-    protected $fillable = ['name, structure, function, owner, category, description, xml'];
+    protected $fillable = ['name, structure, function, category, description, xml'];
 
     public function comments()
     {
-        return $this->hasOne('Kommentar', 'idScript');
+        return $this->hasMany('App\Kommentar');
     }
 
     public function user()
     {
-        return $this->belongsTo('User','id');
+        return $this->belongsToMany('App\User');
     }
 }

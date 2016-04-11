@@ -12,11 +12,11 @@ class Script extends Model
 
     public function comments()
     {
-        return $this->hasMany('Kommentar', 'idScript');
+        return $this->hasMany('App\Kommentar');
     }
     
     public function user()
     {
-        return $this->belongsTo('User','id');
+        return $this->belongsToMany('App\User','owner');
     }
 }

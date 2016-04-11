@@ -18,14 +18,14 @@
     <div class="collection grey darken-3 black-text" style="border-style:none;">
         @foreach($kommentar->all() as $comment)
             <div class="collection-item @if($comment->seen) grey lighten-2 @else white @endif" style="margin-bottom: 10px;">
-                <span class="flow-text">{{$comment->owner}}</span>
+                <span class="flow-text">{{$comment->user->name}}</span>
                 <p>{{$comment->text}}</p>
                 <div class="divider"></div>
                                 <span class="row">
-                                    @if($is_scriptowner && !$comment->seen)
+                                    @if(($is_scriptowner) && !$comment->seen)
                                         <a class="col s2 mdi-image-remove-red-eye" onclick="seen_comment({{$comment->id}})"></a>
                                     @endif
-                                    @if($comment->owner == $user_email)
+                                    @if($comment->owner == Auth::user()->id)
                                         <a class="col s2 mdi-editor-mode-edit" onclick="edit_comment({{$comment->id}})"></a>
                                         <a class="col s2 mdi-action-delete" onclick="delete_comment({{$comment->id}})"></a>
                                     @endif

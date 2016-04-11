@@ -119,24 +119,21 @@ class CommentCtrl extends Controller
         else{
             $db = Block::where('id','=',$id)->first();
         }
-        $script_owner = '';
-        if (!empty($db)){
-            $script_owner = $db->owner;
+        if (empty($db)){
+            return;
         }
         if (Auth::check()){
-            $user_email = Auth::user()->email;
-            $is_scriptowner = $user_email == $script_owner;
+            $is_scriptowner = Auth::user()->email == $db->owner;;
         }
         else{
             $is_scriptowner = false;
-            $user_email = '';
         }
         $type = 'block';
         if ($isScript){
             $type = 'script';
         }
         
-        return View::make('comment.section')->with('type',$type)->with('kommentar',$kommentar)->with('countNew',$countNew)->with('id',$id)->with('user_email',$user_email)->with('is_scriptowner',$is_scriptowner);
+        return View::make('comment.section')->with('type',$type)->with('kommentar',$kommentar)->with('countNew',$countNew)->with('id',$id)->with('is_scriptowner',$is_scriptowner);
     }
 
     /**
