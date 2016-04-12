@@ -7,14 +7,10 @@
 
 <div class="navbar-fixed">
     <nav class="teal">
-        <div class="nav-wrapper">
+        <div class="nav-wrapper" style="padding-top:10px">
             <a href="#!" class="left" style="position: relative; bottom: 15px;"><img class="circle" src="{{ URL::asset('images/Icon.png') }}" style="height: 100%;"></a>
-            <form action="/script/home" method="get">
-                <button type="submit" href="/script/home" class="btn waves-effect waves-light left" style="margin-left: 20px; margin-right: 10px;">Script builder</button>
-            </form>
-            <form action="/block/home" method="GET">
-                <button type="submit" href="/block/home" class="btn waves-effect waves-light left" style="margin-left: 10px; margin-right: 10px;">Block builder</button>
-            </form>
+            <a href="/script" class="btn waves-effect waves-light left" style="margin-left: 20px; margin-right: 10px;">Script builder</a>
+            <a href="/block" class="btn waves-effect waves-light left" style="margin-left: 10px; margin-right: 10px;">Block builder</a>
             @if (Auth::check())
             <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="position: relative; bottom: 15px; text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
             @else
@@ -25,10 +21,3 @@
         </div>
     </nav>
 </div>
-
-<script>
-    $(document).ready(function(){
-        $(".dropdown-button").dropdown();
-        $('.carousel').carousel();
-    });
-</script>

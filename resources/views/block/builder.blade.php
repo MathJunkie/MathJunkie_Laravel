@@ -17,7 +17,7 @@
         <div style="position: relative; width: 100%; height: 100%;">
             <!--left-->
             <div style="position: relative; width: 50%; height: 100%; float: left;">
-                <div id="blockly"style="position: relative; height: calc(100vh - 240px)"></div>
+                <div id="blockly" style="position: relative; height: calc(100vh - 240px)"></div>
                 <div class="row white" style="position: relative; bottom: 0px; left: 0px; width: 100%; height: 150px;">
                     <a type="submit" class="teal accent-4 btn col s4" style="position: relative; top: 15px;">Save</a>
                     <div class="input-field col s8">
@@ -42,7 +42,7 @@
                         </label>
                     </div>
                 </div>
-                <div style="position: relative; height: 15vh;">
+                <div id="preview" style="position: relative; height: 15vh;">
                     <!-- review -->
                 </div>
                 <ul class="tabs">
@@ -70,7 +70,7 @@
                     <textarea name="function" id="sageCodeSave" class="white" style="position: relative; height: 100%;">{{ $block->function }}</textarea>
                 </div>
 
-                <!--??????-->
+                <!--Necessary to save the xml data of the builder and we need to generate a token for the laravel framework-->
                 <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $block->xml }}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 

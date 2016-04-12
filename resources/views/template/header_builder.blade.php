@@ -23,9 +23,3 @@
     </nav>
 </div>
 
-<script>
-    $(document).ready(function(){
-        $(".dropdown-button").dropdown();
-        $('.carousel').carousel();
-    });
-</script>
