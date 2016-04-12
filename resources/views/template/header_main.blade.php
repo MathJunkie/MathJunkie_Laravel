@@ -2,10 +2,7 @@
     <li><a href="#!"><i class="mdi-action-perm-identity right"></i>Profile</a></li>
     <li><a href="#!"><i class="mdi-action-settings right"></i>Options</a></li>
     <li class="divider"></li>
-    <form action="/auth/logout" method="GET">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <li><a type="submit"><i class="mdi-action-exit-to-app right"></i>Log out</a></li>
-    </form>
+    <li><a type="submit" href="/auth/logout"><i class="mdi-action-exit-to-app right"></i>Log out</a></li>
 </ul>
 
 <div class="navbar-fixed">
@@ -13,12 +10,10 @@
         <div class="nav-wrapper">
             <a href="#!" class="left" style="position: relative; bottom: 15px;"><img class="circle" src="{{ URL::asset('images/Icon.png') }}" style="height: 100%;"></a>
             <form action="/script/home" method="get">
-                <input type="hidden" name="nav" value="script">
-                <button type="submit" class="btn waves-effect waves-light left" style="margin-left: 20px; margin-right: 10px;">Script builder</button>
+                <button type="submit" href="/script/home" class="btn waves-effect waves-light left" style="margin-left: 20px; margin-right: 10px;">Script builder</button>
             </form>
             <form action="/block/home" method="GET">
-                <input type="hidden" name="nav" value="block">
-                <button type="submit" class="btn waves-effect waves-light left" style="margin-left: 10px; margin-right: 10px;">Block builder</button>
+                <button type="submit" href="/block/home" class="btn waves-effect waves-light left" style="margin-left: 10px; margin-right: 10px;">Block builder</button>
             </form>
             @if (Auth::check())
             <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="position: relative; bottom: 15px; text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
