@@ -10,7 +10,7 @@
     <title>Blöcke Home</title>
 </head>
 <body class="teal darken-2">
-    @include('template/header_builder')
+    @include('template/header_home')
     <form action="/block" method="post" id="mainContainer" class="container row">
         <div class="col s8 nav-wrapper">
             <div>

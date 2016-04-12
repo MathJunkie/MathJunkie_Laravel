@@ -1,4 +1,4 @@
-<footer class="teal" style="width: 100%; height: 3%; position: fixed; bottom: 0;">
+<footer class="teal" style="width: 100%; height: 25px; position: fixed; bottom: 0;">
     <div class="footer-copyright">
         <div class="container">
             © 2016 MathJunkie
