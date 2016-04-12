@@ -6,3 +6,7 @@
         </div>
     </div>
 </footer>
+
+@foreach ($errors->all() as $error)
+    <script>Materialize.toast("{{$error}}",3000)</script>
+@endforeach
