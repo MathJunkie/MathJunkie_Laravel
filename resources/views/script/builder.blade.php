@@ -62,42 +62,6 @@
         {!! $content['function'] !!}
     </script>
     <script type="text/javascript">
-        function reload_script(){
-            $('#navBar').load("{{Request::root()}}/comment/{{$script->id}}/script_list", function(){
-                $(".button-collapse").sideNav({
-                    menuWidth: 300, // Default is 240
-                    edge: 'right' // Choose the horizontal origin
-                });
-
-                $("#comment_btn").click(function(){
-                    $.ajax({
-                        method: "GET",
-                        url: "{{Request::root()}}/comment",
-                        data: {
-                            'text' : $('#comment').val(),
-                            'isScript' : '1',
-                            'idScript' : '{{$script->id}}'
-                        },
-                        success: function(result){
-                            reload_script();
-                        }
-                    });
-                });
-            });
-        }
-
-        function edit_script(i){
-            $.ajax({
-                method: "GET",
-                url: "{{Request::root()}}/comment/"+i+"/update",
-                data: {
-                    'text' : prompt("Please enter your updated Text", "")
-                },
-                success: function(result){
-                    reload_script();
-                }
-            });
-        }
 
         function updateCode(){
             var mainWorkspace = Blockly.getMainWorkspace();
@@ -105,47 +69,9 @@
             $('#sageCode').val(code);
         }
 
-        function delete_script(i){
-
-            if (confirm("You sure?"))
-            {
-                $.ajax({
-                    method: "GET",
-                    url: "{{Request::root()}}/comment/"+i+"/delete",
-                    success: function(result){
-                        reload_script();
-                    }
-                });
-            }
-        }
-
-        function reload_comment(){
-            $('#navBar').load("{{Request::root()}}/comment/{{$script->id}}/script_list", function(){
-                $(".button-collapse").sideNav({
-                    menuWidth: 300, // Default is 240
-                    edge: 'right' // Choose the horizontal origin
-                });
-
-                $("#comment_btn").click(function(){
-                    $.ajax({
-                        method: "GET",
-                        url: "{{Request::root()}}/comment",
-                        data: {
-                            'text' : $('#comment').val(),
-                            'isScript' : 0,
-                            'idScript' : '{{$script->id}}'
-                        },
-                        success: function(result){
-                            reload_comment();
-                        }
-                    });
-                });
-            });
-        }
-
         $(document).ready(function() {
             //Comment
-            reload_script();
+            @include('template/include_comments')
 
             $('form').submit(function(){
 
@@ -195,8 +121,5 @@
         });
 
     </script>
-    @foreach ($errors->all() as $error)
-        <script>Materialize.toast("{{$error}}",3000)</script>
-    @endforeach
 </body>
 </html>

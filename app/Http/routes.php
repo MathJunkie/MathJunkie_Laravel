@@ -79,6 +79,8 @@ Route::get('comment', ['middleware' => 'auth', 'uses' => 'CommentCtrl@store']);
 
 Route::get('comment/{id}', ['middleware' => 'auth', 'uses' => 'CommentCtrl@show']);
 
+Route::get('comment/{id}/getNew/{isScript}', ['middleware' => 'auth', 'uses' => 'CommentCtrl@getNew']);
+
 Route::get('comment/{id}/seen', ['middleware' => 'auth', 'uses' => 'CommentCtrl@setSeen']);
 
 Route::get('comment/{id}/block_list', ['middleware' => 'auth', 'uses' => 'CommentCtrl@getBlockSection']);

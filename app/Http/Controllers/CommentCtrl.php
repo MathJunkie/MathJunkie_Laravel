@@ -81,6 +81,29 @@ class CommentCtrl extends Controller
         //
     }
 
+    public function getNew($id,$isScript)
+    {
+        if ($isScript)
+            $db = Script::find($id);
+        else
+            $db = Block::find($id);
+
+        if (empty($db)){
+            return "0";
+        }
+
+        $kommentare = $db->comments;
+
+        $countNew = 0;
+        foreach ($kommentare as $comment){
+            if (!$comment->seen){
+                $countNew++;
+            }
+        }
+
+        return $countNew;
+    }
+
     public function setSeen($id){
         $kommentar = Kommentar::find($id);
         if (empty($kommentar)){
@@ -135,7 +158,7 @@ class CommentCtrl extends Controller
             $type = 'block';
         }
         
-        return View::make('comment.section')->with('type',$type)->with('kommentar',$kommentare)->with('countNew',$countNew)->with('id',$id)->with('is_scriptowner',$is_scriptowner);
+        return View::make('comment.section')->with('type',$type)->with('kommentar',$kommentare)->with('id',$id)->with('is_scriptowner',$is_scriptowner);
     }
 
     /**
