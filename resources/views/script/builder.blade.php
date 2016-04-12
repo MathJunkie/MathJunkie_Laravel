@@ -25,7 +25,7 @@
                 <div id="tabSageCode" style="position: relative; height: 66vh;">
                     <textarea readonly id="sageCode" class="white" style="position: relative; height: 100%;"></textarea>
                 </div>
-                <div id="tabSageCodeSave" style="position: relative; height: 60vh;">
+                <div id="tabSageCodeSave" style="position: relative; height: 66vh;">
                     <textarea name="function" id="sageCodeSave" class="white" style="position: relative; height: 100%;">{{ $script->function }}</textarea>
                 </div>
                 <div id="btnSageCode" class="btn waves-effect btn-flat teal accent-3">Copy to Saved</div>
