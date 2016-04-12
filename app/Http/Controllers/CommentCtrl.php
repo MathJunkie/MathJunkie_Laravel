@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use View;
 use App\Block;
 use App\Script;
-use Log;
 
 class CommentCtrl extends Controller
 {
@@ -43,14 +42,20 @@ class CommentCtrl extends Controller
      */
     public function store(Request $request)
     {
-        $kommentar = new Kommentar;
         if (Auth::check()) {
-            $kommentar->owner = Auth::user()->email;
-            $kommentar->idScript = $request->idScript;
-            $kommentar->isScript = $request->isScript;
+            $kommentar = new Kommentar;
             $kommentar->seen = false;
             $kommentar->text = $request->text;
-            $kommentar->save();
+            $kommentar->user_id = Auth::user()->id;
+            if ($request->isScript)
+                $db = Script::find($request->idScript);
+            else
+                $db = Block::find($request->idScript);
+
+            if (empty($db))
+                return "nope";
+
+            $db->comments()->save($kommentar);
         }
     }
 
@@ -77,12 +82,12 @@ class CommentCtrl extends Controller
     }
 
     public function setSeen($id){
-        $kommentar = Kommentar::where('id','=',$id)->first();
+        $kommentar = Kommentar::find($id);
         if (empty($kommentar)){
             return "Nope";
         }
         else{
-            if ($kommentar->owner == Auth::user()->email)
+            if ($kommentar->commentable->user_id == Auth::user()->id)
             {
                 $kommentar->seen = true;
                 $kommentar->save();
@@ -100,43 +105,37 @@ class CommentCtrl extends Controller
     }
 
     public function makeCommentSection($id,$isScript){
-        $kommentar = Kommentar::where('idScript','=',$id)
-            ->where('isScript','=',$isScript)
-            ->get();
-        if (empty($kommentar)){
-            return 'object does not exist';
+        if ($isScript)
+            $db = Script::find($id);
+        else
+            $db = Block::find($id);
+
+        if (empty($db)){
+            return "Nope";
         }
+
+        $kommentare = $db->comments;
+
         $countNew = 0;
-        foreach ($kommentar as $comment){
+        foreach ($kommentare as $comment){
             if (!$comment->seen){
                 $countNew++;
             }
         }
-        $db = null;
-        if ($isScript){
-            $db = Script::where('id','=',$id)->first();
-        }
-        else{
-            $db = Block::where('id','=',$id)->first();
-        }
-        $script_owner = '';
-        if (!empty($db)){
-            $script_owner = $db->owner;
-        }
+
+        $is_scriptowner = false;
         if (Auth::check()){
-            $user_email = Auth::user()->email;
-            $is_scriptowner = $user_email == $script_owner;
+            $is_scriptowner = Auth::user()->id == $db->user_id;
         }
-        else{
-            $is_scriptowner = false;
-            $user_email = '';
-        }
-        $type = 'block';
+
         if ($isScript){
             $type = 'script';
         }
+        else{
+            $type = 'block';
+        }
         
-        return View::make('comment.section')->with('type',$type)->with('kommentar',$kommentar)->with('countNew',$countNew)->with('id',$id)->with('user_email',$user_email)->with('is_scriptowner',$is_scriptowner);
+        return View::make('comment.section')->with('type',$type)->with('kommentar',$kommentare)->with('countNew',$countNew)->with('id',$id)->with('is_scriptowner',$is_scriptowner);
     }
 
     /**
@@ -148,12 +147,12 @@ class CommentCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kommentar = Kommentar::where('id','=',$id)->first();
+        $kommentar = Kommentar::find($id);
         if (empty($kommentar)){
             return "Nope";
         }
         else{
-            if ($kommentar->owner == Auth::user()->email)
+            if ($kommentar->user_id == Auth::user()->id)
             {
                 $kommentar->text = $request->text;
                 $kommentar->save();
@@ -169,10 +168,10 @@ class CommentCtrl extends Controller
      */
     public function destroy($id)
     {
-        $kommentar = Kommentar::where('id','=',$id)->first();
+        $kommentar = Kommentar::find($id);
         if (empty($kommentar))
             return 'Nope';
-        elseif ($kommentar->owner == Auth::user()->email) {
+        elseif ($kommentar->user_id == Auth::user()->id) {
             $kommentar->delete();
         }
         else{

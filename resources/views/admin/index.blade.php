@@ -29,7 +29,7 @@
                 <div class="center" style="background-color: #9ccc65;">
                     <a href="{{Request::root()}}/script/{{$script->id}}" class="flow-text">{{$script->name}}</a>
                     <p>{{$script->description}}</p>
-                    <p>made by {{$script->owner}}</p>
+                    <p>made by {{$script->user->name}}</p>
                 </div>
             </div>
             @endforeach
@@ -41,7 +41,7 @@
                     <div class="center" style="background-color: #9ccc65;" onselectstart="return false" ondragstart="return false">
                         <a href="{{Request::root()}}/block/{{$block->id}}" class="flow-text">{{$block->name}}</a>
                         <p>{{$block->description}}</p>
-                        <p>made by {{$block->owner}}</p>
+                        <p>made by {{$block->user->name}}</p>
                     </div>
                 </div>
             @endforeach

@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Kommentar extends Model
 {
     protected $table = 'comments';
+    public $timestamps = true;
+    protected $fillable = array('text', 'seen');
+    protected $morphClass = 'Kommentar';
 
-    protected $fillable = ['owner, text, seen, isScript, idScript'];
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function commentable(){
+        return $this->morphTo();
+    }
 }

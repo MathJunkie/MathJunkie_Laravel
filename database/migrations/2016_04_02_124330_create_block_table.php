@@ -17,7 +17,7 @@ class CreateBlockTable extends Migration
             $table->string('name')->unique();
             $table->text('structure');
             $table->text('function');
-            $table->string('owner');
+            $table->integer('user_id');
             $table->string('category');
             $table->string('description');
             $table->text('xml');
