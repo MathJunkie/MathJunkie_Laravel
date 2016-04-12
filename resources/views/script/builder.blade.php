@@ -15,20 +15,20 @@
     <form class="sidebar row" action="{{Request::url()}}" method="post">
         <div style="position: relative; width: 100%; height: 100%;">
             <div style="position: relative; width: 50%; height: 100%; float: left;">
-                <div id="blockly" style="position: relative; height: calc(100vh - 60px);"></div>
+                <div id="blockly" style="position: relative; height: 90vh;"></div>
             </div>
             <div style="position: relative; width: 50%; height: 100%; float: right;">
                 <ul class="tabs row">
                     <li class="tab col s6 red accent-2"><a href="#tabSageCode" style="color: white;">Generated</a> </li>
                     <li class="tab col s6 teal darken-1"><a href="#tabSageCodeSave" style="color: white;">Saved</a> </li>
                 </ul>
-                <div id="tabSageCode" style="position: relative; height: 70vh;">
+                <div id="tabSageCode" style="position: relative; height: 66vh;">
                     <textarea readonly id="sageCode" class="white" style="position: relative; height: 100%;"></textarea>
                 </div>
-                <div id="tabSageCodeSave" style="position: relative; height: 70vh;">
+                <div id="tabSageCodeSave" style="position: relative; height: 66vh;">
                     <textarea name="function" id="sageCodeSave" class="white" style="position: relative; height: 100%;">{{ $script->function }}</textarea>
                 </div>
-                <div id="btnSageCode" class="btn waves-effect btn-flat teal accent-3">Copy to Saved</div>
+                <div id="btnSageCode" class="btn waves-effect btn-flat teal accent-3" style="position: relative; bottom: 0px;">Copy to Saved</div>
                 <div class="row white">
                     <div class="input-field col s12">
                         <input name="description" id="desc" type="text" value="{{$script->description}}"/>
@@ -44,7 +44,9 @@
 
         </div>
     </form>
-    
+
+    @include('template/footer_main')
+
     {!! $content['xml'] !!}
     <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>

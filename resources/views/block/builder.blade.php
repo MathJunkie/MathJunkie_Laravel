@@ -77,6 +77,8 @@
             </div>
         </div>
     </form>
+
+    @include('template/footer_main')
     
     <xml id="toolbox" style="display: none">
         <category name="Input">
@@ -128,7 +130,6 @@
             <block type="colour_hue"><mutation colour="330"></mutation><field name="HUE">330</field></block>
         </category>
     </xml>
-        @include('template/footer_main')
 </body>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>

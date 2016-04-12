@@ -8,8 +8,11 @@
 <div class="navbar-fixed">
     <nav class="teal">
         <div class="nav-wrapper">
-            <!--if for the question of the page-->
+            @if(empty($block))
+            <a href="/script" class="blue darken-3 btn waves-effect waves-light left mdi-navigation-arrow-back" style="height: 100%;"></a>
+            @else
             <a href="/block" class="blue darken-3 btn waves-effect waves-light left mdi-navigation-arrow-back" style="height: 100%;"></a>
+            @endif
             
             <a class="left red darken-3 btn waves-effect waves-light mdi-action-delete" style="height: 100%;"></a>
             <a href="{{Request::root()}}/admin" class="center brand-logo">MathJunkie</a>
