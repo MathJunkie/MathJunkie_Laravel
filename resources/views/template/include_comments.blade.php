@@ -36,6 +36,16 @@
         });
     }
 
+    function seen_script(i){
+        $.ajax({
+            method: "GET",
+            url: "{{Request::root()}}/comment/"+i+"/seen",
+            success: function(result){
+                reload_script();
+            }
+        });
+    }
+
     function edit_script(i){
         $.ajax({
             method: "GET",

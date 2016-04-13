@@ -30,42 +30,4 @@
 <div id="slide-out" class="grey side-nav darken-3">
 
 </div>
-<script>
-    function edit_comment(i){
-        $.ajax({
-            method: "GET",
-            url: "{{Request::root()}}/comment/"+i+"/update",
-            data: {
-                'text' : prompt("Please enter your updated Text", "")
-            },
-            success: function(result){
-                reload_comment();
-            }
-        });
-    }
-
-    function seen_comment(i){
-        $.ajax({
-            method: "GET",
-            url: "{{Request::root()}}/comment/"+i+"/seen",
-            success: function(result){
-                reload_comment();
-            }
-        });
-    }
-
-    function delete_comment(i){
-
-        if (confirm("You sure?"))
-        {
-            $.ajax({
-                method: "GET",
-                url: "{{Request::root()}}/comment/"+i+"/delete",
-                success: function(result){
-                    reload_comment();
-                }
-            });
-        }
-    }
-</script>
 
