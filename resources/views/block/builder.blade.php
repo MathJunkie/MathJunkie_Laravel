@@ -91,6 +91,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/python.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/de.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/Blockly/factory.js') }}"></script>
+@include('template/include_comments')
 <script type="text/javascript">
     $(document).ready(function(){
 
@@ -104,7 +105,7 @@
             $('#xmlhidden_input').val(Blockly.Xml.domToPrettyText(dom));
             return true;
         });
-    @include('template/include_comments')
+
 
     var toolbox = document.getElementById('toolbox');
     var

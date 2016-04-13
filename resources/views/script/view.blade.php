@@ -35,13 +35,6 @@
 </div>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        //Comment
-        @include('template/include_comments')
-    });
-
-</script>
+@include('template/include_comments')
 </body>
 </html>

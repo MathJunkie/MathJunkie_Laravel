@@ -61,6 +61,7 @@
         'use strict';
         {!! $content['function'] !!}
     </script>
+    @include('template/include_comments')
     <script type="text/javascript">
 
         function updateCode(){
@@ -71,7 +72,7 @@
 
         $(document).ready(function() {
             //Comment
-            @include('template/include_comments')
+
 
             $('form').submit(function(){
 

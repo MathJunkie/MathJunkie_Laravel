@@ -1,3 +1,4 @@
+<script type="text/javascript">
     function reload_script(){
     @if (empty($block))
         url_getNew = "{{Request::root()}}/comment/{{$script->id}}/getNew/1";
@@ -28,7 +29,7 @@
                         'idScript' : idScript
                     },
                     success: function(result){
-                        reload_comment();
+                        reload_script();
                     }
                 });
             });
@@ -61,5 +62,7 @@
             });
         }
     }
-
-    reload_script();
+    $(document).ready(function(){
+        reload_script();
+    });
+</script>
