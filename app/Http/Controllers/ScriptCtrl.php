@@ -79,7 +79,7 @@ class ScriptCtrl extends Controller
             return Redirect::to('script')->withErrors('Could not find the script');
         }
         else {
-            return View::make('script.view')->with('script',$script);
+            return View::make('script.view')->with('script',$script)->with('isView',true);
         }
     }
 

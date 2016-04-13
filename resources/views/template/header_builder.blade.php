@@ -14,7 +14,9 @@
             <a href="/block" class="blue darken-3 btn waves-effect waves-light left mdi-navigation-arrow-back" style="height: 100%;"></a>
             @endif
             
-            <a class="left red darken-3 btn waves-effect waves-light mdi-action-delete" style="height: 100%;"></a>
+            @if(empty($isView))
+                <a class="left red darken-3 btn waves-effect waves-light mdi-action-delete" style="height: 100%;"></a>
+            @endif
             <a href="{{Request::root()}}/admin" class="center brand-logo">MathJunkie</a>
             @if (Auth::check())
             <a class="dropdown-button right" href="#!" data-activates="dropdown_user" style="text-align: center; min-width:150px;">{{ Auth::user()->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>

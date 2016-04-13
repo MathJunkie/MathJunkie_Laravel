@@ -10,9 +10,7 @@
     <title>Script Builder</title>
 </head>
 <body class="grey darken-4">
-<nav id="navBar" class="blue darken-3">
-
-</nav>
+@include('template/header_builder')
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
 <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
@@ -38,62 +36,12 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript">
-    function reload_script(){
-        $('#navBar').load("{{Request::root()}}/comment/{{$script->id}}/script_list", function(){
-            $(".button-collapse").sideNav({
-                menuWidth: 300, // Default is 240
-                edge: 'right' // Choose the horizontal origin
-            });
-
-            $("#comment_btn").click(function(){
-                $.ajax({
-                    method: "GET",
-                    url: "{{Request::root()}}/comment",
-                    data: {
-                        'text' : $('#comment').val(),
-                        'isScript' : 1,
-                        'idScript' : '{{$script->id}}'
-                    },
-                    success: function(result){
-                        reload_script();
-                    }
-                });
-            });
-        });
-    }
-
-    function reload_comment(){
-        $('#navBar').load("{{Request::root()}}/comment/{{$script->id}}/script_list", function(){
-            $(".button-collapse").sideNav({
-                menuWidth: 300, // Default is 240
-                edge: 'right' // Choose the horizontal origin
-            });
-
-            $("#comment_btn").click(function(){
-                $.ajax({
-                    method: "GET",
-                    url: "{{Request::root()}}/comment",
-                    data: {
-                        'text' : $('#comment').val(),
-                        'isScript' : 0,
-                        'idScript' : '{{$script->id}}'
-                    },
-                    success: function(result){
-                        reload_comment();
-                    }
-                });
-            });
-        });
-    }
 
     $(document).ready(function() {
         //Comment
-        reload_script();
+        @include('template/include_comments')
     });
 
 </script>
-@foreach ($errors->all() as $error)
-    <script>Materialize.toast("{{$error}}",3000)</script>
-@endforeach
 </body>
 </html>
