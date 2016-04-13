@@ -1,4 +1,16 @@
-    function reload_script(url_getNew, url_sidebar, idScript, isScript){
+    function reload_script(){
+    @if (empty($block))
+        url_getNew = "{{Request::root()}}/comment/{{$script->id}}/getNew/1";
+        url_sidebar = "{{Request::root()}}/comment/{{$script->id}}/script_list";
+        idScript = {{$script->id}};
+        isScript = 1;
+    @else
+        url_getNew = "{{Request::root()}}/comment/{{$block->id}}/getNew/0";
+        url_sidebar = "{{Request::root()}}/comment/{{$block->id}}/block_list";
+        idScript = {{$block->id}};
+        isScript = 0;
+    @endif
+
         $('#side_trigger').load(url_getNew);
         $('#slide-out').load(url_sidebar, function(){
             $("#side_trigger").sideNav({
@@ -49,8 +61,5 @@
             });
         }
     }
-@if (empty($block))
-    reload_script("{{Request::root()}}/comment/{{$script->id}}/getNew/1","{{Request::root()}}/comment/{{$script->id}}/script_list",{{$script->id}},1);
-@else
-    reload_script("{{Request::root()}}/comment/{{$block->id}}/getNew/0","{{Request::root()}}/comment/{{$block->id}}/block_list",{{$block->id}},0);
-@endif
+
+    reload_script();
