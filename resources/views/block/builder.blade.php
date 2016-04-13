@@ -19,7 +19,7 @@
             <div style="position: relative; width: 50%; height: 100%; float: left;">
                 <div id="blockly" style="position: relative; height: calc(100vh - 240px)"></div>
                 <div class="row white" style="position: relative; bottom: 0px; left: 0px; width: 100%; height: 150px;">
-                    <a type="submit" class="teal accent-4 btn col s4" style="position: relative; top: 15px;">Save</a>
+                    <input type="submit" class="teal accent-4 btn col s4" style="position: relative; top: 15px;" value="Save" />
                     <div class="input-field col s8">
                         <input name="category" id="cate" type="text" value="{{$block->category}}"/>
                         <label for="cate">Category</label>
