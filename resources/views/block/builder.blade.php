@@ -4,7 +4,6 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/materialize.min.css') }}"  media="screen,projection"/>
     <!--<link type="text/css" rel="stylesheet" href="{{ URL::asset('css/builder/builder.css') }}"  media="screen,projection"/>-->
-
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="utf-8">
@@ -99,7 +98,7 @@
             //$('#sageCodeSave').val(encodeURI($('#sageCodeSave').val()));
             //$('#blockCodeSave').val(encodeURI($('#blockCodeSave').val()));
 
-            var dom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+            var dom = Blockly.Xml.workspaceToDom(window.mainWorkspace);
             //$('#xmlhidden_input').val(encodeURI(Blockly.Xml.domToText(dom)));
             $('#xmlhidden_input').val('');
             $('#xmlhidden_input').val(Blockly.Xml.domToPrettyText(dom));
@@ -115,7 +114,7 @@
                         toolbox: toolbox,
                         media: '../../media/'
                     });
-
+        window.mainWorkspace = mainWorkspace;
     // Create the root block.
         @if (empty($block->xml))
             var xml = '<xml><block type="factory_base" deletable="false" movable="false"></block></xml>';
