@@ -9,41 +9,43 @@
     <meta charset="utf-8">
     <title>Script Builder</title>
 </head>
-<body>
+<body style="overflow-y:hidden">
     @include('template/header_builder')
 
-    <form class="sidebar row" action="{{Request::url()}}" method="post">
+    <form id="structure" class="row" action="{{Request::url()}}" method="post">
         <div style="position: relative; width: 100%; height: 100%;">
-            <div style="position: relative; width: 50%; height: 100%; float: left;">
+            <div style="position: relative; width: 100%; height: 100%; float: left;">
                 <div id="blockly" style="position: relative; height: 90vh;"></div>
-            </div>
-            <div style="position: relative; width: 50%; height: 100%; float: right;">
-                <ul class="tabs row">
-                    <li class="tab col s6 red accent-2"><a href="#tabSageCode" style="color: white;">Generated</a> </li>
-                    <li class="tab col s6 teal darken-1"><a href="#tabSageCodeSave" style="color: white;">Saved</a> </li>
-                </ul>
-                <div id="tabSageCode" style="position: relative; height: 66vh;">
-                    <textarea readonly id="sageCode" class="white" style="position: relative; height: 100%;"></textarea>
-                </div>
-                <div id="tabSageCodeSave" style="position: relative; height: 66vh;">
-                    <textarea name="function" id="sageCodeSave" class="white" style="position: relative; height: 100%;">{{ $script->function }}</textarea>
-                </div>
-                <div id="btnSageCode" class="btn waves-effect btn-flat teal accent-3" style="position: relative; bottom: 0px;">Copy to Saved</div>
-                <div class="row white">
-                    <div class="input-field col s12">
-                        <input name="description" id="desc" type="text" value="{{$script->description}}"/>
-                        <label for="desc">Beschreibung</label>
-                    </div>
-                    <input type="submit" id="saveBtn" class="teal accent-4 btn col s12" value="Save"/>
-                </div>
             </div>
 
             <!--?????-->
+            <input type="hidden" name="function" id="hidden_function">
             <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
         </div>
     </form>
+    <div id="code" style="width: 100%; height: 100%; z-index: 999">
+        <ul class="tabs row">
+            <li class="tab col s6 red accent-2"><a href="#tabSageCode" style="color: white;">Generated</a> </li>
+            <li class="tab col s6 teal darken-1"><a href="#tabSageCodeSave" style="color: white;">Saved</a> </li>
+        </ul>
+        <div id="tabSageCode" style="position: relative; height: 68vh;">
+            <textarea readonly id="sageCode" class="white" style="position: relative; height: 100%;"></textarea>
+            <div id="btnSageCode" class="left btn waves-effect btn-flat teal accent-3">Copy to Saved</div>
+        </div>
+        <div id="tabSageCodeSave" style="position: relative; height: 70vh;">
+            <pre id="sageCodeSave" style="position: relative; height: 100%;">{{ $script->function }}</pre>
+        </div>
+
+        <div class="row white">
+            <div class="input-field col s12">
+                <input name="description" id="desc" type="text" value="{{$script->description}}"/>
+                <label for="desc">Beschreibung</label>
+            </div>
+            <input type="submit" id="saveBtn" class="teal accent-4 btn col s12" value="Save"/>
+        </div>
+    </div>
 
     @include('template/footer_main')
 
@@ -61,7 +63,24 @@
         'use strict';
         {!! $content['function'] !!}
     </script>
+    <script type="text/javascript" charset="utf-8" src="{{ URL::asset('js/Editor/ace.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/Editor/ext-language_tools.js') }}"></script>
+    <script>
+        ace.require("ace/ext/language_tools");
+        var editor = ace.edit("sageCodeSave");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/python");
+        editor.setOptions({
+            fontSize: "11pt",
+            showInvisibles: true,
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: false
+        });
+        window.Codeeditor = editor;
+    </script>
     @include('template/include_comments')
+
     <script type="text/javascript">
 
         function updateCode(){
@@ -79,12 +98,13 @@
                 var dom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
                 $('#xmlhidden_input').val('');
                 $('#xmlhidden_input').val(Blockly.Xml.domToPrettyText(dom));
+                $('#function_hidden').val(window.Codeeditor.getValue());
                 return true;
             });
 
 
             $('#btnSageCode').click(function(){
-                $('#sageCodeSave').val($('#sageCode').val());
+                window.Codeeditor.setValue($('#sageCode').val());
             });
 
             var toolbox = document.getElementById('toolbox');

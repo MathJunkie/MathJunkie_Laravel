@@ -621,7 +621,7 @@ function updatePreview() {
   // Fetch the code and determine its format (JSON or JavaScript).
 
   if (document.getElementById('selPreview').checked)
-    var code = document.getElementById('blockCodeSave').value;
+    var code = window.Structeditor.getValue();
   else
     var code = document.getElementById('blockCode').value;
     // If the code is JSON, it will parse, otherwise treat as JS.
@@ -741,13 +741,13 @@ $(document).ready(function() {
 
   $('#btnBlockCode').click(
       function() {
-        $('#blockCodeSave').val( $('#blockCode').val());
+        window.Structeditor.setValue($('#blockCode').val());
       }
   );
 
   $('#btnSageCode').click(
       function() {
-        $('#sageCodeSave').val( $('#sageCode').val());
+        window.Codeeditor.setValue($('#sageCode').val());
       }
   );
 

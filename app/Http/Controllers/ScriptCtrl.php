@@ -156,8 +156,8 @@ class ScriptCtrl extends Controller
 
     public function getList(Request $request)
     {
-        $script = Script::where('name','like', $request->search.'%')
-            ->orWhere('description','like', $request->search.'%')->get();
+        $script = Script::where('name','like', '%'.$request->search.'%')
+            ->orWhere('description','like', '%'.$request->search.'%')->get();
 
         $resp = array();
         foreach ($script as $item){

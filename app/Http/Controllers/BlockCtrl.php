@@ -120,8 +120,8 @@ class BlockCtrl extends Controller
 
     public function getList(Request $request)
     {
-        $block = Block::where('name','like', $request->search.'%')
-                 ->orWhere('description','like', $request->search.'%')->get();
+        $block = Block::where('name','like', '%'.$request->search.'%')
+                 ->orWhere('description','like', '%'.$request->search.'%')->get();
 
         $resp = array();
         foreach ($block as $item){
