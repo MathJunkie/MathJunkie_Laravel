@@ -160,12 +160,12 @@ input_colorbox,@Blockly.Blocks['input_colorbox'] = {
         this.setHelpUrl('http://www.example.com/');
     }
 };@,@Blockly.Python['input_colorbox'] = function(block) {
-    var text_titel = block.getFieldValue('titel');
-    var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
-    // TODO: Assemble Python into code variable.
-    var code = ','+variable_var+"=checkbox(True, label='"+text_titel+"')";
-    return code;
-};@,Input,Dynamic Input Colorbox
+        var text_titel = block.getFieldValue('titel');
+        var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
+        // TODO: Assemble Python into code variable.
+        var code = ','+variable_var+"=color_selector(widget='colorpicker', label='"+text_titel+"')";
+        return code;
+    };@,Input,Dynamic Input Colorbox
 input_checkbox,@Blockly.Blocks['input_checkbox'] = {
     init: function() {
         this.appendDummyInput()
@@ -181,12 +181,12 @@ input_checkbox,@Blockly.Blocks['input_checkbox'] = {
         this.setHelpUrl('http://www.example.com/');
     }
 };@,@Blockly.Python['input_checkbox'] = function(block) {
-    var text_titel = block.getFieldValue('titel');
-    var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
-    // TODO: Assemble Python into code variable.
-    var code = ','+variable_var+"=color_selector(widget='colorpicker', label='"+text_titel+"')";
-    return code;
-};@,Input,Dynamic Input Checkbox
+        var text_titel = block.getFieldValue('titel');
+        var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
+        // TODO: Assemble Python into code variable.
+        var code = ','+variable_var+"=checkbox(True, label='"+text_titel+"')";
+        return code;
+    };@,Input,Dynamic Input Checkbox
 input_list,@Blockly.Blocks['input_list'] = {
     init: function() {
         this.appendStatementInput("NAME")

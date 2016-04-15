@@ -119,6 +119,29 @@ class CommentCtrl extends Controller
 
     }
 
+    //isScript : 0 - block
+    //           1 - script
+    //           2 - both
+
+    public function hasComment($isScript){
+        if ($isScript == 2 || $isScript == 0){
+            foreach (Auth::user()->blocks as $block){
+                $count_new = app('App\Http\Controllers\CommentCtrl')->getNew($block->id,false);
+                if ($count_new > 0)
+                    return true;
+            }
+        }
+
+        if ($isScript == 2 || $isScript == 1){
+            foreach (Auth::user()->scripts as $script){
+                $count_new = app('App\Http\Controllers\CommentCtrl')->getNew($script->id,true);
+                if ($count_new > 0)
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public function getBlockSection($id){
         return $this->makeCommentSection($id,false);
     }

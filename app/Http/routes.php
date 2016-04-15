@@ -32,6 +32,7 @@ Route::get('register',function () {
 });
 
 Route::get('admin', ['middleware' => 'auth', 'uses'=>'AdminCtrl@index' ]);
+Route::get('admin/getNews/{isScript}', ['middleware' => 'auth', 'uses'=>'AdminCtrl@getNews']);
 
 /*Login Routine*/
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -44,7 +45,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //Script
 Route::get('script', ['middleware' => 'auth', function () {
-    return view('script.home');
+    return view('script.home')->with('hasComment',app('App\Http\Controllers\CommentCtrl')->hasComment(1));
 } ]);
 
 Route::post('script', ['middleware' => 'auth', 'uses'=>'ScriptCtrl@store']);
@@ -61,7 +62,7 @@ Route::get('script/{id}/view',['uses' => 'ScriptCtrl@show']);
 
 //Block
 Route::get('block', ['middleware' => 'auth', function () {
-    return view('block.home');
+    return view('block.home')->with('hasComment',app('App\Http\Controllers\CommentCtrl')->hasComment(0));
 } ]);
 
 Route::post('block', ['middleware' => 'auth', 'uses'=>'BlockCtrl@store']);

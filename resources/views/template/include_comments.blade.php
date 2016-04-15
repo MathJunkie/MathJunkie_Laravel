@@ -74,5 +74,13 @@
     }
     $(document).ready(function(){
         reload_script();
+        $('#scrollBtn').click(function () {
+            var scrollPos = document.body.scrollHeight;
+            if ($('body').scrollTop() != 0) {
+                scrollPos = 0;
+            }
+            $("html, body").animate({ scrollTop: scrollPos }, 1500);
+        });
+        $('.modal-trigger').leanModal();
     });
 </script>
