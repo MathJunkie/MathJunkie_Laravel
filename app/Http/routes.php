@@ -32,6 +32,7 @@ Route::get('register',function () {
 });
 
 Route::get('admin', ['middleware' => 'auth', 'uses'=>'AdminCtrl@index' ]);
+Route::get('admin/getNews/{isScript}', ['middleware' => 'auth', 'uses'=>'AdminCtrl@getNews']);
 
 /*Login Routine*/
 Route::get('auth/login', 'Auth\AuthController@getLogin');

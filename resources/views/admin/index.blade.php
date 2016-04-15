@@ -2,6 +2,7 @@
 <head>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/materialize.min.css') }} "  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/jquery.webui-popover.min.css') }}"/>
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/mainpage/mainpage.css') }} "  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
@@ -54,10 +55,16 @@
 <!--script-->
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/jquery.webui-popover.min.js') }}"></script>
 
 <script>
     $(document).ready(function(){
         $('.carousel').carousel();
+        $('#home_comment_btn').webuiPopover({
+            type:'async',
+            animate:'pop',
+            url:'{{Request::root()}}/admin/getNews/2'
+        });
     });
 </script>
 

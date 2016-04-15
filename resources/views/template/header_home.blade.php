@@ -15,7 +15,7 @@
             @else
             <a class="btn waves-effect waves-light right" href="{{ Request::root() }}/login" type="submit" style="text-align: center; min-width:150px;">Sign in</a>
             @endif
-            <a class="right btn-floating btn waves-effect waves-light red right" style="top: 15px;"></a>
+            <a id="home_comment_btn" class="right btn-floating btn waves-effect waves-light red right" style="top: 15px;"></a>
         </div>
     </nav>
 </div>

@@ -3,6 +3,7 @@
 <head>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/materialize.min.css') }}"  media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
     <!--<link type="text/css" rel="stylesheet" href="{{ URL::asset('css/script/builder.css') }}"  media="screen,projection"/>-->
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,6 +12,11 @@
 </head>
 <body style="overflow-y:hidden">
     @include('template/header_builder')
+    <div id="preview_modal" class="modal">
+        <div class="modal-content">
+            <div id="preview_update" class="btn">Update</div>
+        </div>
+    </div>
 
     <form id="structure" class="row" action="{{Request::url()}}" method="post">
         <div style="position: relative; width: 100%; height: 100%;">
@@ -51,6 +57,7 @@
 
     {!! $content['xml'] !!}
     <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/Blockly/blockly_compressed.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/Blockly/de.js') }}"></script>
@@ -92,6 +99,19 @@
         $(document).ready(function() {
             //Comment
 
+            $('#preview_update').click(function(){
+                $('.compute').remove();
+                $('.modal-content').append('<div class="compute"></div>');
+                $('.compute').append('<script type="text/x-sage">'+window.Codeeditor.getValue()+'</' + 'script>');
+                $(function () {
+                // Make *any* div with class 'compute' a Sage cell
+                sagecell.makeSagecell({inputLocation: '.compute',
+                evalButtonText: 'Evaluate',
+                autoeval: true,
+                template:       sagecell.templates.minimal,
+                hide: ["evalButton","permalink","editor"]});
+                });
+            });
 
             $('form').submit(function(){
 
