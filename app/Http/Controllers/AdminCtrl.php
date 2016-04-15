@@ -21,7 +21,7 @@ class AdminCtrl extends Controller
                          ->take(5)
                          ->get();
 
-        return View::make('admin.index')->with('blocks',$blocks)->with('scripts',$scripts);
+        return View::make('admin.index')->with('blocks',$blocks)->with('scripts',$scripts)->with('hasComment',app('App\Http\Controllers\CommentCtrl')->hasComment(2));
 
     }
 
