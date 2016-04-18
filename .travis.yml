@@ -7,7 +7,7 @@ before_script:
   - mv .env.behat.travis .env.behat
   - mv .env.travis .env
   - chmod -R 777 storage
-  - touch storage/acceptance.sqlite
+  - touch storage/database.sqlite
   - composer self-update
   - composer update --no-scripts
   - composer update
