@@ -4,4 +4,5 @@ Feature: In order to see if the testing framework is working I have created thes
   Scenario: Home Page Test
     When I should be able to do something with Laravel
     When I am on the homepage
-    Then I should see "Laravel 5"
+    Then I am on "/login"
+    Then I should see "Login"
