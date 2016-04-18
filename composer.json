@@ -19,7 +19,8 @@
     "behat/behat": "^3.0",
     "behat/mink": "^1.7",
     "behat/mink-extension": "^2.1",
-    "laracasts/behat-laravel-extension": "^1.0"
+    "laracasts/behat-laravel-extension": "^1.0",
+    "laracasts/testdummy": "dev-master#44807c5"
   },
   "autoload": {
     "classmap": [
@@ -49,6 +50,7 @@
       "php -r \"copy('.env.example', '.env');\""
     ],
     "post-create-project-cmd": [
+      "php -r \"copy('.env.example', '.env');\"",
       "php artisan key:generate"
     ]
   },
