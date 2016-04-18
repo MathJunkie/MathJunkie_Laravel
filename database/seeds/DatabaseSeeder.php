@@ -27,7 +27,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('admin'),
         ]);
 
-        $this->call(BlockSeeder::class);
+        if (env('APP_ENV') == 'acceptance'){
+            $this->call(BlockSeeder::class);
+        }
 
         //Create standard Blocks
         //composer dump-autoload
