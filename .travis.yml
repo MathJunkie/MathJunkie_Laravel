@@ -1,0 +1,23 @@
+language: php
+php:
+  - 5.6
+  - 7
+sudo: false
+before_script:
+  - mv .env.behat.travis .env.behat
+  - chmod -R 777 storage
+  - touch storage/acceptance.sqlite
+  - composer self-update
+  - composer update --no-scripts
+  - composer update
+  - php artisan key:generate
+  - php artisan migrate --seed
+  #- npm install - if you want to use gulp/elixir
+
+
+script:
+  # Run them tests, y'all
+  #- gulp # if you are running 'npm install' in before_script
+  - phpunit tests/
+  - vendor/bin/phpspec run -v
+  - vendor/bin/behat --config behat.yml
