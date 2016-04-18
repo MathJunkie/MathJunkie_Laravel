@@ -10,7 +10,6 @@ before_script:
   - composer self-update
   - composer update --no-scripts
   - composer update
-  - php artisan key:generate
   - php artisan migrate --seed
 
 
