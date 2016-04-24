@@ -4,8 +4,8 @@ php:
   - 7
 sudo: false
 before_script:
-  - mv .env.old.behat.travis .env.old.behat
-  - mv .env.old.travis .env.old
+  - mv .env.behat.travis .env.behat
+  - mv .env.travis .env
   - chmod -R 777 storage
   - touch storage/database.sqlite
   - composer self-update
