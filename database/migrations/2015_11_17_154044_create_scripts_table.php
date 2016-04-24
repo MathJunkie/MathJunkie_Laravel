@@ -16,10 +16,10 @@ class CreateScriptsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('name')->unique();
-            $table->string('description');
-            $table->text('function');
-            $table->text('structure');
-            $table->timestamps();
+            $table->string('description')->nullable();
+            $table->text('function')->nullable();
+            $table->text('structure')->nullable();
+            $table->nullableTimestamps();
         });
     }
 
