@@ -18,12 +18,11 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     /**
      * @Then I should be able to do something with Laravel
      */
-
     public function iShouldBeAbleToDoSomethingWithLaravel()
     {
         $environmentFileName = app()->environmentFile();
         $environmentName = env('APP_ENV');
-        //PHPUnit::assertEquals('.env.behat', $environmentFileName);
+        //PHPUnit::assertEquals('.env.old.behat', $environmentFileName);
         //PHPUnit::assertEquals('acceptance', $environmentName);
     }
 }

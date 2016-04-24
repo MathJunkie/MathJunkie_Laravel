@@ -30,6 +30,7 @@ $factory->define(App\Kommentar::class, function (Faker\Generator $faker) {
             'text' => $faker->realText(),
             'commentable_id' => $scripts_id,
             'commentable_type' => 'App\Script',
+            'seen' => false,
         ];
     }
     else {
@@ -39,6 +40,7 @@ $factory->define(App\Kommentar::class, function (Faker\Generator $faker) {
             'text' => $faker->realText(),
             'commentable_id' => $block_id,
             'commentable_type' => 'App\Block',
+            'seen' => false,
         ];
     }
 

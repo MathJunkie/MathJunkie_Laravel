@@ -27,20 +27,16 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('admin'),
         ]);
 
-        if (env('APP_ENV') == 'acceptance'){
-            $this->call(BlockSeeder::class);
-        }
+        $this->call(BlockSeeder::class);
 
         //Create standard Blocks
         //composer dump-autoload
-        if ( env('APP_ENV') == 'acceptance') {
             //Create test comments
             factory(App\User::class, 10)->create()->each(function($u) {
                 $u->blocks()->save(factory(App\Block::class)->make());
                 $u->scripts()->save(factory(App\Script::class)->make());
                 $u->comments()->save(factory(App\Kommentar::class)->make());
             });
-        }
         Model::reguard();
     }
 }

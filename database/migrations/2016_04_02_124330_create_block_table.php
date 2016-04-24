@@ -15,13 +15,13 @@ class CreateBlockTable extends Migration
         Schema::create('block', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->text('structure');
-            $table->text('function');
+            $table->text('structure')->nullable();
+            $table->text('function')->nullable();
             $table->integer('user_id');
-            $table->string('category');
-            $table->string('description');
-            $table->text('xml');
-            $table->timestamps();
+            $table->string('category')->nullable();
+            $table->string('description')->nullable();
+            $table->text('xml')->nullable();
+            $table->nullableTimestamps();
         });
     }
 
