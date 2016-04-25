@@ -35,7 +35,8 @@ class DatabaseSeeder extends Seeder
             factory(App\User::class, 10)->create()->each(function($u) {
                 $u->blocks()->save(factory(App\Block::class)->make());
                 $u->scripts()->save(factory(App\Script::class)->make());
-                $u->comments()->save(factory(App\Kommentar::class)->make());
+                $u->comments()->save(factory(App\Kommentar::class,'block_comment')->make());
+                $u->comments()->save(factory(App\Kommentar::class,'script_comment')->make());
             });
         Model::reguard();
     }
