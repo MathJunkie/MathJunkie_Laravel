@@ -10,6 +10,9 @@ class CommentCtrlTest extends TestCase{
         //Get a User that made a comment and see if the Commentcontroller registers that
         $kommentar = Kommentar::where('commentable_type','=','App\\Block')->first();
 
+        if (empty($kommentar))
+            return true;
+
         $id = $kommentar->commentable_id;
 
 
