@@ -1,3 +1,4 @@
+/.phpunit
 /.idea
 /MathJunkie_Laravel.iml
 *.iml
