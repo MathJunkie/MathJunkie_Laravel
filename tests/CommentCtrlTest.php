@@ -19,4 +19,18 @@ class CommentCtrlTest extends TestCase{
 
         PHPUnit::isTrue($count>0);
     }
+
+    public function testScriptComment(){
+        //Get a User that made a comment and see if the Commentcontroller registers that
+        $kommentar = Kommentar::where('commentable_type','=','App\\Script')->first();
+
+        $id = $kommentar->commentable_id;
+
+
+        $comment = new CommentCtrl();
+        $count = $comment->getNew($id,true);
+
+
+        PHPUnit::isTrue($count>0);
+    }
 }

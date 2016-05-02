@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         //Create standard Blocks
         //composer dump-autoload
             //Create test comments
-            factory(App\User::class, 10)->create()->each(function($u) {
+            factory(App\User::class, 2)->create()->each(function($u) {
                 $u->blocks()->save(factory(App\Block::class)->make());
                 $u->scripts()->save(factory(App\Script::class)->make());
                 $u->comments()->save(factory(App\Kommentar::class,'block_comment')->make());

@@ -14,15 +14,4 @@ abstract class Controller extends BaseController
     protected function sendStatus($message){
         return redirect()->back()->with('status',$message)->withInput(array('email'));
     }
-
-    public function isLoggedIn($request){
-
-    }
-
-    public function getUserName($request){
-
-    }
-    public function errorResponse($message){
-
-    }
 }
