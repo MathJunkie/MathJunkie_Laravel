@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\category_color;
 use App\Script;
 use App\Block;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\Response;
 use View;
 use Log;
@@ -88,9 +90,15 @@ class ScriptCtrl extends Controller
                 ];
                 $xml_array = array_merge_recursive($xml_array,$temp);
             }
-            $keys = array_keys($xml_array);
-            foreach ($keys as $key){
-                $xml .= '<category name="'.$key.'">';
+           $keys = array_keys($xml_array);
+           foreach ($keys as $key){
+               $color = category_color::where('name','=',$key)->first();
+               if (empty($color)){
+                   $xml .= '<category name="'.$key.'">';
+               }
+               else{
+                   $xml .= '<category colour="'.$color->color.'" name="'.$key.'">';
+               }
                 $b_item = $xml_array[$key];
                 if (!is_array($b_item)){
                     $xml .= '<block type="'.$b_item.'"></block>';
@@ -111,6 +119,7 @@ class ScriptCtrl extends Controller
             return View::make('script.builder')->with('content',$content)->with('script',$script);
         }
     }
+
 
     /**
      * Update the specified resource in storage.

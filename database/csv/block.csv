@@ -19,7 +19,7 @@ input_vector,@Blockly.Blocks['input_vector'] = {
     var text_titel = block.getFieldValue('titel');
     var variable_vektor = Blockly.Python.variableDB_.getName(block.getFieldValue('Vektor'), Blockly.Variables.NAME_TYPE);
     var text_grad = block.getFieldValue('grad');
-    // TODO: Assemble Python into code variable.
+
     var default_text = 'default=[[';
     for (var i = 0; i < text_grad; i++) {
         default_text += i;
@@ -51,7 +51,7 @@ input_matrix,@Blockly.Blocks['input_matrix'] = {
     var text_titel = block.getFieldValue('titel');
     var variable_matrix = Blockly.Python.variableDB_.getName(block.getFieldValue('Matrix'), Blockly.Variables.NAME_TYPE);
     var text_grad = block.getFieldValue('grad');
-    // TODO: Assemble Python into code variable.
+
     var code = ','+variable_matrix+"=('"+text_titel+"', identity_matrix("+text_grad+"))";
     return code;
 };@,Input,Dynamic Input Matrix
@@ -65,7 +65,9 @@ input_text,@Blockly.Blocks['input_text'] = {
             .appendField("px Weite");
         this.appendDummyInput()
             .appendField("Titel: ")
-            .appendField(new Blockly.FieldTextInput("Titel"), "titel");
+            .appendField(new Blockly.FieldTextInput("Titel"), "titel")
+            .appendField("Default: ")
+            .appendField(new Blockly.FieldTextInput("0"), "default");
         this.setPreviousStatement(true, "Input");
         this.setNextStatement(true, "Input");
         this.setColour(210);
@@ -74,10 +76,11 @@ input_text,@Blockly.Blocks['input_text'] = {
     }
 };@,@Blockly.Python['input_text'] = function(block) {
     var text_titel = block.getFieldValue('titel');
+    var text_default = block.getFieldValue('default');
     var variable_textbox = Blockly.Python.variableDB_.getName(block.getFieldValue('Textbox'), Blockly.Variables.NAME_TYPE);
     var text_grad = block.getFieldValue('grad');
-    // TODO: Assemble Python into code variable.
-    var code = ','+variable_textbox+"=input_box(width="+text_grad+",label='"+text_titel+"')";
+
+    var code = ','+variable_textbox+"=input_box(default='"+text_default+"',width="+text_grad+",label='"+text_titel+"')";
     return code;
 };@,Input,Dynamic Input Text
 input_rangeslider,@Blockly.Blocks['input_rangeslider'] = {
@@ -139,7 +142,7 @@ input_slider,@Blockly.Blocks['input_slider'] = {
     var text_min = block.getFieldValue('min');
     var text_max = block.getFieldValue('max');
     var text_step = block.getFieldValue('step');
-    // TODO: Assemble Python into code variable.
+
     var code = ','+variable_var+"=('"+text_titel+"',slider("+text_min+','+
                                        text_max+','+
                                        text_step + "))";
@@ -162,7 +165,7 @@ input_colorbox,@Blockly.Blocks['input_colorbox'] = {
 };@,@Blockly.Python['input_colorbox'] = function(block) {
         var text_titel = block.getFieldValue('titel');
         var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
-        // TODO: Assemble Python into code variable.
+    
         var code = ','+variable_var+"=color_selector(widget='colorpicker', label='"+text_titel+"')";
         return code;
     };@,Input,Dynamic Input Colorbox
@@ -183,7 +186,7 @@ input_checkbox,@Blockly.Blocks['input_checkbox'] = {
 };@,@Blockly.Python['input_checkbox'] = function(block) {
         var text_titel = block.getFieldValue('titel');
         var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
-        // TODO: Assemble Python into code variable.
+    
         var code = ','+variable_var+"=checkbox(True, label='"+text_titel+"')";
         return code;
     };@,Input,Dynamic Input Checkbox
@@ -191,7 +194,7 @@ input_list,@Blockly.Blocks['input_list'] = {
     init: function() {
         this.appendStatementInput("NAME")
             .setCheck('Input')
-            .appendField("Dynamische Eingaben");
+            .appendField("Interactive Input");
         this.setInputsInline(false);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -209,20 +212,20 @@ input_list,@Blockly.Blocks['input_list'] = {
 statement_list,@Blockly.Blocks['statement_list'] = {
     init: function() {
         this.appendStatementInput("NAME")
-            .appendField("Ausführung");
+            .appendField("Execution");
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
-        this.setColour(330);
+        this.setColour(230);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
 };@,@Blockly.Python['statement_list'] = function(block) {
         var statements_name = Blockly.Python.statementToCode(block, 'NAME');
-        // TODO: Assemble Python into code variable.
+    
         var code = statements_name;
         return code;
     };@,Base,Base Element add all calculation blocks to it
-get_variable,@Blockly.Blocks['get_variableet'] = {
+get_variable,@Blockly.Blocks['get_variable'] = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldVariable("out"), "out");
@@ -233,7 +236,7 @@ get_variable,@Blockly.Blocks['get_variableet'] = {
     }
 };@,@Blockly.Python['get_variable'] = function(block) {
     var variable_out = Blockly.Python.variableDB_.getName(block.getFieldValue('out'), Blockly.Variables.NAME_TYPE);
-    // TODO: Assemble Python into code variable.
+
     var code = variable_out;
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
@@ -251,7 +254,7 @@ text_print,@Blockly.Blocks['text_print'] = {
     }
 };@,@Blockly.Python['text_print'] = function(block) {
     var value_print = Blockly.Python.valueToCode(block, 'print', Blockly.Python.ORDER_ATOMIC);
-    // TODO: Assemble Python into code variable.
+
     var code = 'print '+value_print+'\n';
     return code;
 };@,Text,Output a value of a variable
@@ -1075,55 +1078,7 @@ controls_for,@Blockly.Blocks['controls_for'] = {
   }
   code += 'for ' + variable0 + ' in ' + range + ':\n' + branch;
   return code;
-};@,Loop,
-controls_forEach,@Blockly.Blocks['controls_forEach'] = {
-  /**
-   * Block for 'for each' loop.
-   * @@this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "message0": Blockly.Msg.CONTROLS_FOREACH_TITLE,
-      "args0": [
-        {
-          "type": "field_variable",
-          "name": "VAR",
-          "variable": null
-        },
-        {
-          "type": "input_value",
-          "name": "LIST",
-          "check": "Array"
-        }
-      ],
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": 65,
-      "helpUrl": Blockly.Msg.CONTROLS_FOREACH_HELPURL
-    });
-    this.appendStatementInput('DO')
-        .appendField(Blockly.Msg.CONTROLS_FOREACH_INPUT_DO);
-    // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    this.setTooltip(function() {
-      return Blockly.Msg.CONTROLS_FOREACH_TOOLTIP.replace('%1',
-          thisBlock.getFieldValue('VAR'));
-    });
-  },
-  customContextMenu: Blockly.Blocks['controls_for'].customContextMenu
-};@,@Blockly.Python['controls_forEach'] = function(block) {
-  // For each loop.
-  var variable0 = Blockly.Python.variableDB_.getName(
-      block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-  var argument0 = Blockly.Python.valueToCode(block, 'LIST',
-      Blockly.Python.ORDER_RELATIONAL) || '[]';
-  var branch = Blockly.Python.statementToCode(block, 'DO');
-  branch = Blockly.Python.addLoopTrap(branch, block.id) ||
-      Blockly.Python.PASS;
-  var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch;
-  return code;
-};@,Loop,
-controls_flow_statement,@Blockly.Blocks['controls_flow_statements'] = {
+};@,Loop,controls_flow_statements,@Blockly.Blocks['controls_flow_statements'] = {
   /**
    * Block for flow statements: continue, break.
    * @@this Blockly.Block
@@ -1738,7 +1693,7 @@ math_single,@Blockly.Blocks['math_single'] = {
   }
   return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
 };@,Math,
-math_const,@Blockly.Blocks['math_constant'] = {
+math_constant,@Blockly.Blocks['math_constant'] = {
   /**
    * Block for constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
    * @@this Blockly.Block

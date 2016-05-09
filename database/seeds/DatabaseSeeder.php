@@ -28,16 +28,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(BlockSeeder::class);
+        $this->call(ColorSeeder::class);
 
         //Create standard Blocks
         //composer dump-autoload
-            //Create test comments
-            factory(App\User::class, 2)->create()->each(function($u) {
+        //Create test comments
+        if (App::environment() !== 'production'){
+            factory(App\User::class, 2)->create()->each(function ($u) {
                 $u->blocks()->save(factory(App\Block::class)->make());
                 $u->scripts()->save(factory(App\Script::class)->make());
-                $u->comments()->save(factory(App\Kommentar::class,'block_comment')->make());
-                $u->comments()->save(factory(App\Kommentar::class,'script_comment')->make());
+                $u->comments()->save(factory(App\Kommentar::class, 'block_comment')->make());
+                $u->comments()->save(factory(App\Kommentar::class, 'script_comment')->make());
             });
+        }
         Model::reguard();
     }
 }
