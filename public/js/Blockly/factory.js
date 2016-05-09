@@ -79,7 +79,7 @@ function updateLanguage() {
   }
   blockType = blockType.replace(/\W/g, '_').replace(/^(\d)/, '_\\1');
   var code = formatJavaScript_(blockType, rootBlock);
-  injectCode(code, 'blockCode');
+  injectCode(code, 'structure_hidden');
   updatePreview();
 }
 
@@ -591,7 +591,7 @@ function updateGenerator(block) {
   }
   code.push("};");
 
-  injectCode(code.join('\n'), 'sageCode');
+  injectCode(code.join('\n'), 'function_hidden');
 }
 
 /**
@@ -608,22 +608,34 @@ function updatePreview() {
   if (oldDir != newDir) {
     if (previewWorkspace) {
       previewWorkspace.dispose();
+      slaveWorkspace.dispose();
     }
     var rtl = newDir == 'rtl';
     previewWorkspace = Blockly.inject('preview',
         {rtl: rtl,
          media: '../../media/',
-         scrollbars: true});
+         scrollbars: true,
+         zoom: {
+           controls: true,
+           wheel: false
+         }});
     oldDir = newDir;
   }
   previewWorkspace.clear();
+  slaveWorkspace.clear();
 
   // Fetch the code and determine its format (JSON or JavaScript).
 
-  if (document.getElementById('selPreview').checked)
+  if (document.getElementById('selPreview').checked){
     var code = window.Structeditor.getValue();
+    eval(code);
+    //jQuery.globalEval(code);
+  }
   else
-    var code = document.getElementById('blockCode').value;
+  {
+    var code = document.getElementById('structure_hidden').value;
+    //eval("if (Blockly.Blocks['"+window.BlockName+"']) Blockly.Blocks['"+window.BlockName+"'] = {}");
+  }
     // If the code is JSON, it will parse, otherwise treat as JS.
   var format = 'JavaScript';
   if (!code.trim()) {
@@ -655,7 +667,7 @@ function updatePreview() {
     }
 
     // Look for a block on Blockly.Blocks that does not match the backup.
-    var blockType = null;
+    /*var blockType = null;
     for (var type in Blockly.Blocks) {
       if (typeof Blockly.Blocks[type].init == 'function' &&
           Blockly.Blocks[type] != backupBlocks[type]) {
@@ -665,21 +677,39 @@ function updatePreview() {
     }
     if (!blockType) {
       return;
-    }
+    }*/
 
     // Create the preview block.
-    var previewBlock = previewWorkspace.newBlock(blockType);
+    //var previewBlock = previewWorkspace.newBlock(blockType);
+    var previewBlock = previewWorkspace.newBlock(window.BlockName);
     previewBlock.initSvg();
     previewBlock.render();
     previewBlock.setMovable(false);
     previewBlock.setDeletable(false);
     previewBlock.moveBy(15, 10);
-    previewWorkspace.clearUndo();
+
+    if (!document.getElementById('selPreview').checked){
+      previewBlock = slaveWorkspace.newBlock(window.BlockName);
+      previewBlock.initSvg();
+      previewBlock.render();
+      previewBlock.setMovable(false);
+      previewBlock.setDeletable(false);
+      previewBlock.moveBy(15, 10);
+      previewWorkspace.clearUndo();
+      slaveWorkspace.clearUndo();
+    }
 
     updateGenerator(previewBlock);
   } finally {
     Blockly.Blocks = backupBlocks;
   }
+
+  previewWorkspace.addChangeListener(function(){
+    if (document.getElementById('selPreview').checked){
+      eval(window.Codeeditor.getValue());
+      document.getElementById('previewCode').innerHTML = Blockly.Python.workspaceToCode(previewWorkspace);
+    }
+  });
 }
 
 /**
@@ -707,7 +737,6 @@ function getRootBlock() {
   }
   return null;
 }
-
 /**
  * Disable the link button if the format is 'Manual', enable otherwise.
  */
@@ -720,17 +749,13 @@ function disableEnableLink() {
  * Initialize Blockly and layout.  Called on page load.
  */
 function init() {
-
-  document.getElementById('blockCode')
-      .addEventListener('change', updatePreview);
-  document.getElementById('blockCode')
-      .addEventListener('keyup', updatePreview);
   document.getElementById('selPreview')
       .addEventListener('change', updatePreview);
-
-  document.getElementById('blockCodeSave')
+  document.getElementById('structure_hidden')
       .addEventListener('change', updatePreview);
   document.getElementById('blockCodeSave')
+      .addEventListener('keyup', updatePreview);
+  document.getElementById('sageCodeSave')
       .addEventListener('keyup', updatePreview);
 }
 
@@ -750,5 +775,7 @@ $(document).ready(function() {
         window.Codeeditor.setValue($('#sageCode').val());
       }
   );
+
+  updatePreview();
 
 });

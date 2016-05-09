@@ -81,6 +81,12 @@
             }
             $("html, body").animate({ scrollTop: scrollPos }, 1500);
         });
-        $('.modal-trigger').leanModal();
+        $("#slider").slideReveal({
+            trigger: $(".modal-trigger"),
+            push: false,
+            overlay: true,
+            width: 500,
+            position: "left"
+        });
     });
 </script>

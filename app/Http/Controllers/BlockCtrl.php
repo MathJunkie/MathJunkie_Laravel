@@ -34,7 +34,7 @@ class BlockCtrl extends Controller
                 return Redirect::to('block/'.$block->id);
             }
         }
-        elseif ($block->user_od == Auth::user()->id) {
+        elseif ($block->user_id == Auth::user()->id) {
             //existiert bereits, user hat aber berechtigung
             return Redirect::to('block/'.$block->id);
         }
