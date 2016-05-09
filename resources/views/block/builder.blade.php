@@ -109,27 +109,37 @@
 <script type="text/javascript" src="{{ URL::asset('js/Editor/ext-language_tools.js') }}"></script>
 <script>
     ace.require("ace/ext/language_tools");
-    var editor = ace.edit("sageCodeSave");
-    editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/javascript");
-    editor.setOptions({
-        fontSize: "11pt",
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: false
-    });
-    window.Codeeditor = editor;
 
-    var editor = ace.edit("blockCodeSave");
-    editor.setTheme("ace/theme/monokai");
-    editor.session.setMode("ace/mode/javascript");
-    editor.setOptions({
-        fontSize: "11pt",
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: false
-    });
-    window.Structeditor = editor;
+    function Factory() {
+        this.createEditor = function (id,type) {
+            var editor = ace.edit(id);
+
+            if(type === "javascript"){
+                new JavascriptEditor(editor);
+            } else if(type === "phyton"){
+                new PhytonEditor(editor);
+            }
+
+            editor.setTheme("ace/theme/monokai");
+            editor.setOptions({
+                fontSize: "11pt",
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: false
+            });
+            return editor;
+        }
+    }
+
+    var JavascriptEditor = function (e) {
+        e.session.setMode("ace/mode/javascript");
+    };
+
+    var PhytonEditor = function (e) {
+        e.session.setMode("ace/mode/python");
+    };
+
+
 </script>
 @include('template/include_comments')
 <script type="text/javascript">

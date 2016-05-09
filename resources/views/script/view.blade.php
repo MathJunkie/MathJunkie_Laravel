@@ -12,6 +12,7 @@
 <body class="grey darken-4">
 @include('template/header_builder')
 <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/slide.js') }}"></script>
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
 <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
 <script>$(function () {

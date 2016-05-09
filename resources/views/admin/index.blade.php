@@ -67,6 +67,25 @@
         });
     });
 </script>
+<!-- Console Log is bad -->
+<script src="{{ URL::asset('js/log.js') }}"></script>
+<script>
+    var textStyle = "font-family: \'Roboto\'; color:#000; font-size: 24px";
+    var textError = "font-family: \'Roboto\'; color:#f00; font-size: 20px";
+    var errorheader = "font-family: \'Helvetica Neue\', " +
+            "Helvetica, Arial, sans-serif; " +
+            "color: #fff; " +
+            "font-size: 20px; " +
+            "padding: 15px 20px; " +
+            "background: #7f0000; " +
+            "border-radius: 4px; " +
+            "line-height: 100px; " +
+            "text-shadow: 0 1px #000";
+
+    log('[c='+errorheader+']' + 'MathJunkie Development View[c]\n'+
+        '[c='+textStyle+']' + 'Please note that this application heavily depends on Javascript. Tinkering with setting in this console, could break the application. You have been warned !!![c]\n'+
+        '[c='+textError+']' + 'PS: No Caro, NOOOO!!![c]');
+</script>
 
 </body>
 </html>

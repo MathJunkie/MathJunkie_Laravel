@@ -28,8 +28,6 @@
     <ul id="ownBlock" class="collection">
     </ul>
 
-    @include('template/footer_main')
-
     <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery.webui-popover.min.js') }}"></script>
@@ -56,5 +54,6 @@
         url:'{{Request::root()}}/admin/getNews/0'
     });
     </script>
+    @include('template/footer_main')
 </body>
 </html>
