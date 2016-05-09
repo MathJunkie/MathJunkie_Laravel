@@ -12,7 +12,7 @@ function Factory() {
         }
         editor.setTheme("ace/theme/monokai");
         editor.setOptions({
-            fontSize: "11pt",
+            fontSize: "14pt",
             enableBasicAutocompletion: true,
             enableSnippets: true,
             enableLiveAutocompletion: false
