@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         //Create standard Blocks
         //composer dump-autoload
         //Create test comments
-        if (App::environment() !== 'production'){
+        if (getenv('APP_ENV') !== 'production'){
             factory(App\User::class, 2)->create()->each(function ($u) {
                 $u->blocks()->save(factory(App\Block::class)->make());
                 $u->scripts()->save(factory(App\Script::class)->make());

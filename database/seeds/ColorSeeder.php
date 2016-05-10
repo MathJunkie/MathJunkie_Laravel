@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\category_color;
+use App\Category_color;
 class ColorSeeder extends Seeder
 {
     /**
@@ -34,7 +34,7 @@ class ColorSeeder extends Seeder
                 "color" => "20"),
         ];
         foreach ($colors as $key => $value){
-            $color = new category_color();
+            $color = new Category_color();
             $color->name = $value["name"];
             $color->color = $value["color"];
             $color->save();

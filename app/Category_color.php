@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class category_color extends Model
+class Category_color extends Model
 {
     protected $table = 'category_color';
     public $timestamps = false;

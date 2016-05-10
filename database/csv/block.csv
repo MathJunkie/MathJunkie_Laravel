@@ -225,21 +225,43 @@ statement_list,@Blockly.Blocks['statement_list'] = {
         var code = statements_name;
         return code;
     };@,Base,Base Element add all calculation blocks to it,,,
-get_variable,@Blockly.Blocks['get_variable'] = {
+variables_get,@Blockly.Blocks['variables_get'] = {
+    /**
+     * Block for variable getter.
+     * @@this Blockly.Block
+     */
     init: function() {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldVariable("out"), "out");
-        this.setOutput(true, null);
-        this.setTooltip('');
+        this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
         this.setColour(window.ColorArray.Variable);
-        this.setHelpUrl('http://www.example.com/');
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldVariable(
+                Blockly.Msg.VARIABLES_DEFAULT_NAME), 'VAR');
+        this.setOutput(true);
+        this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP);
+        this.contextMenuMsg_ = Blockly.Msg.VARIABLES_GET_CREATE_SET;
+    },
+    contextMenuType_: 'variables_set',
+    /**
+     * Add menu option to create getter/setter block for this setter/getter.
+     * @@param {!Array} options List of menu options to add to.
+     * @@this Blockly.Block
+     */
+    customContextMenu: function(options) {
+        var option = {enabled: true};
+        var name = this.getFieldValue('VAR');
+        option.text = this.contextMenuMsg_.replace('%1', name);
+        var xmlField = goog.dom.createDom('field', null, name);
+        xmlField.setAttribute('name', 'VAR');
+        var xmlBlock = goog.dom.createDom('block', null, xmlField);
+        xmlBlock.setAttribute('type', this.contextMenuType_);
+        option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
+        options.push(option);
     }
-};@,@Blockly.Python['get_variable'] = function(block) {
-    var variable_out = Blockly.Python.variableDB_.getName(block.getFieldValue('out'), Blockly.Variables.NAME_TYPE);
-
-    var code = variable_out;
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+};@,@Blockly.Python['variables_get'] = function(block) {
+    // Variable getter.
+    var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),
+        Blockly.Variables.NAME_TYPE);
+    return [code, Blockly.Python.ORDER_ATOMIC];
 };@,Variable,Get the value of a variable,,,
 text_print,@Blockly.Blocks['text_print'] = {
     init: function() {
@@ -258,25 +280,42 @@ text_print,@Blockly.Blocks['text_print'] = {
     var code = 'print '+value_print+'\n';
     return code;
 };@,Text,Output a value of a variable,,,
-set_variable,@Blockly.Blocks['set_variable'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Set Variable")
-        .appendField(new Blockly.FieldVariable("item"), "var");
-    this.appendValueInput("input")
-        .setCheck(null)
-        .appendField("to");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(window.ColorArray.Variable);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};@,@Blockly.Python['set_variable'] = function(block) {
-  var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
-  var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
-  var code = variable_var+'='+value_input+'\n';
-  return code;
+variables_set,@Blockly.Blocks['variables_set'] = {
+    /**
+     * Block for variable setter.
+     * @@this Blockly.Block
+     */
+    init: function() {
+        this.jsonInit({
+            "message0": Blockly.Msg.VARIABLES_SET,
+            "args0": [
+                {
+                    "type": "field_variable",
+                    "name": "VAR",
+                    "variable": Blockly.Msg.VARIABLES_DEFAULT_NAME
+                },
+                {
+                    "type": "input_value",
+                    "name": "VALUE"
+                }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": window.ColorArray.Variable,
+            "tooltip": Blockly.Msg.VARIABLES_SET_TOOLTIP,
+            "helpUrl": Blockly.Msg.VARIABLES_SET_HELPURL
+        });
+        this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET;
+    },
+    contextMenuType_: 'variables_get',
+    customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
+};@,@Blockly.Python['variables_set'] = function(block) {
+    // Variable setter.
+    var argument0 = Blockly.Python.valueToCode(block, 'VALUE',
+            Blockly.Python.ORDER_NONE) || '0';
+    var varName = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),
+        Blockly.Variables.NAME_TYPE);
+    return varName + ' = ' + argument0 + '\n';
 };@,Variable,,,,
 controls_if,@Blockly.Blocks['controls_if'] = {
   /**
@@ -1952,22 +1991,6 @@ math_random_float,@Blockly.Blocks['math_random_float'] = {
   Blockly.Python.definitions_['import_random'] = 'import random';
   return ['random.random()', Blockly.Python.ORDER_FUNCTION_CALL];
 };@,Math,,,,
-init_variable,@Blockly.Blocks['init_variable'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Init Variable: ")
-        .appendField(new Blockly.FieldVariable("item"), "var");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(window.ColorArray.Variable);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};@,@Blockly.Python['init_variable'] = function(block) {
-  var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
-  var code = 'var(\''+variable_var+'\')\n';
-  return code;
-};@,Variable,,,,
 text_indexOf,@Blockly.Blocks['text_indexOf'] = {
   /**
    * Block for finding a substring in the text.
@@ -4469,23 +4492,3 @@ lists_create_empty,@Blockly.Blocks['lists_create_empty'] = {
   // Create an empty list.
   return ['[]', Blockly.Python.ORDER_ATOMIC];
 };@,List,,,,
-exec_variable,@Blockly.Blocks['exec_variable'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Execute Variable Function")
-        .appendField(new Blockly.FieldVariable("item"), "var");
-    this.appendValueInput("input")
-        .setCheck(null)
-        .appendField("to");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(window.ColorArray.Variable);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  }
-};@,@Blockly.Python['exec_variable'] = function(block) {
-  var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
-  var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
-  var code = variable_var+'.'+value_input+'\n';
-  return code;
-};@,Variable,,,,

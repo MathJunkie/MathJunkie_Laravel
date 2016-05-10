@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\category_color;
+use App\Category_color;
 use App\Script;
 use App\Block;
 use Illuminate\Http\Request;
@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Redirect;
 use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\Response;
 use View;
-use Log;
 
 class ScriptCtrl extends Controller
 {
@@ -92,15 +91,18 @@ class ScriptCtrl extends Controller
             }
            $keys = array_keys($xml_array);
            foreach ($keys as $key){
-               $color = category_color::where('name','=',$key)->first();
+               if ($key !== "Method" && $key !== "Variable"){
+               $color = Category_color::where('name','=',$key)->first();
+
                if (empty($color)){
-                   $xml .= '<category name="'.$key.'">';
+                   $xml .= '<category name="'.$key.'" >';
                }
                else{
                    $xml .= '<category colour="'.$color->color.'" name="'.$key.'">';
                }
                 $b_item = $xml_array[$key];
-                if (!is_array($b_item)){
+
+               if (!is_array($b_item)){
                     $xml .= '<block type="'.$b_item.'"></block>';
                 }
                 else{
@@ -108,8 +110,12 @@ class ScriptCtrl extends Controller
                         $xml .= '<block type="'.$item.'"></block>';
                     }
                 }
+               }
                 $xml .= '</category>';
             }
+            $xml .= '<sep></sep>';
+            $xml .= '<category name="Variables" colour = "'.Category_color::where('name','=','Variable')->first()->color.'" custom="VARIABLE"></category>
+                     <category name="Functions" colour = "'.Category_color::where('name','=','Method')->first()->color.'"custom="PROCEDURE"></category>';
             $xml .= '</xml>';
             $color = category_color::all();
             $color_script = '<script>';
