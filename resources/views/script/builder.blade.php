@@ -20,14 +20,10 @@
     </div>
     @include('template/header_builder')
 
-    <form style="position:absolute; left:0; top:64px; width: 100%; height: calc(100vh - 64px);" id="structure" class="row" action="{{Request::url()}}" method="post">
+    <div style="position:absolute; left:0; top:64px; width: 100%; height: calc(100vh - 64px);" id="structure" class="row">
         <div id="blockly" style="height: 100%; width: 100%"></div>
-            <!--?????-->
-        <input type="hidden" name="function" id="hidden_function">
-        <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-    </form>
-    <form id="code" style="position:absolute; top: calc(100vh + 64px); left: 0; width: 100%; height: calc(100vh - 64px);">
+    </div>
+    <form id="code" style="position:absolute; top: calc(100vh + 64px); left: 0; width: 100%; height: calc(100vh - 64px);" action="{{Request::url()}}" method="post">
         <div style="margin-top:5%; height: 100%">
             <pre id="sageCodeSave" style="height: 75%;">{{ $script->function }}</pre>
 
@@ -36,6 +32,9 @@
                     <input name="description" id="desc" type="text" value="{{$script->description}}"/>
                     <label for="desc">Beschreibung</label>
                 </div>
+                <input type="hidden" name="function" id="hidden_function">
+                <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <input type="submit" id="saveBtn" class="teal accent-4 btn col s12" value="Save"/>
             </div>
         </div>
