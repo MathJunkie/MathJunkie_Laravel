@@ -11,7 +11,7 @@ input_vector,@Blockly.Blocks['input_vector'] = {
             .appendField(new Blockly.FieldTextInput("Titel"), "titel");
         this.setPreviousStatement(true, "Input");
         this.setNextStatement(true, "Input");
-        this.setColour(210);
+        this.setColour(window.ColorArray.Input);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -29,7 +29,7 @@ input_vector,@Blockly.Blocks['input_vector'] = {
     default_text += ']]';
         var code = ','+variable_vektor+"=('"+text_titel+"',input_grid(1,"+text_grad+","+default_text+",to_value=lambda x: vector(flatten(x))))";
     return code;
-};@,Input,Dynamic Input Vector
+};@,Input,Dynamic Input Vector,,,
 input_matrix,@Blockly.Blocks['input_matrix'] = {
     init: function() {
         this.appendDummyInput()
@@ -43,7 +43,7 @@ input_matrix,@Blockly.Blocks['input_matrix'] = {
             .appendField(new Blockly.FieldTextInput("Titel"), "titel");
         this.setPreviousStatement(true, "Input");
         this.setNextStatement(true, "Input");
-        this.setColour(210);
+        this.setColour(window.ColorArray.Input);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -54,7 +54,7 @@ input_matrix,@Blockly.Blocks['input_matrix'] = {
 
     var code = ','+variable_matrix+"=('"+text_titel+"', identity_matrix("+text_grad+"))";
     return code;
-};@,Input,Dynamic Input Matrix
+};@,Input,Dynamic Input Matrix,,,
 input_text,@Blockly.Blocks['input_text'] = {
     init: function() {
         this.appendDummyInput()
@@ -70,7 +70,7 @@ input_text,@Blockly.Blocks['input_text'] = {
             .appendField(new Blockly.FieldTextInput("0"), "default");
         this.setPreviousStatement(true, "Input");
         this.setNextStatement(true, "Input");
-        this.setColour(210);
+        this.setColour(window.ColorArray.Input);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -82,7 +82,7 @@ input_text,@Blockly.Blocks['input_text'] = {
 
     var code = ','+variable_textbox+"=input_box(default='"+text_default+"',width="+text_grad+",label='"+text_titel+"')";
     return code;
-};@,Input,Dynamic Input Text
+};@,Input,Dynamic Input Text,,,
 input_rangeslider,@Blockly.Blocks['input_rangeslider'] = {
     init: function() {
         this.appendDummyInput()
@@ -100,7 +100,7 @@ input_rangeslider,@Blockly.Blocks['input_rangeslider'] = {
             .appendField(new Blockly.FieldTextInput("Titel"), "titel");
         this.setPreviousStatement(true, "Input");
         this.setNextStatement(true, "Input");
-        this.setColour(210);
+        this.setColour(window.ColorArray.Input);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -114,7 +114,7 @@ input_rangeslider,@Blockly.Blocks['input_rangeslider'] = {
                                              text_max+','+
                                              text_step + "))";
     return code;
-};@,Input,Dynamic Input Rangeslider
+};@,Input,Dynamic Input Rangeslider,,,
 input_slider,@Blockly.Blocks['input_slider'] = {
     init: function() {
         this.appendDummyInput()
@@ -132,7 +132,7 @@ input_slider,@Blockly.Blocks['input_slider'] = {
             .appendField(new Blockly.FieldTextInput("Titel"), "titel");
         this.setPreviousStatement(true, "Input");
         this.setNextStatement(true, "Input");
-        this.setColour(210);
+        this.setColour(window.ColorArray.Input);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -147,7 +147,7 @@ input_slider,@Blockly.Blocks['input_slider'] = {
                                        text_max+','+
                                        text_step + "))";
     return code;
-};@,Input,Dynamic Input Slider
+};@,Input,Dynamic Input Slider,,,
 input_colorbox,@Blockly.Blocks['input_colorbox'] = {
     init: function() {
         this.appendDummyInput()
@@ -158,7 +158,7 @@ input_colorbox,@Blockly.Blocks['input_colorbox'] = {
             .appendField(new Blockly.FieldTextInput("Titel"), "titel");
         this.setPreviousStatement(true, "Input");
         this.setNextStatement(true, "Input");
-        this.setColour(210);
+        this.setColour(window.ColorArray.Input);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -168,7 +168,7 @@ input_colorbox,@Blockly.Blocks['input_colorbox'] = {
     
         var code = ','+variable_var+"=color_selector(widget='colorpicker', label='"+text_titel+"')";
         return code;
-    };@,Input,Dynamic Input Colorbox
+    };@,Input,Dynamic Input Colorbox,,,
 input_checkbox,@Blockly.Blocks['input_checkbox'] = {
     init: function() {
         this.appendDummyInput()
@@ -179,7 +179,7 @@ input_checkbox,@Blockly.Blocks['input_checkbox'] = {
             .appendField(new Blockly.FieldTextInput("Titel"), "titel");
         this.setPreviousStatement(true, "Input");
         this.setNextStatement(true, "Input");
-        this.setColour(210);
+        this.setColour(window.ColorArray.Input);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -189,7 +189,7 @@ input_checkbox,@Blockly.Blocks['input_checkbox'] = {
     
         var code = ','+variable_var+"=checkbox(True, label='"+text_titel+"')";
         return code;
-    };@,Input,Dynamic Input Checkbox
+    };@,Input,Dynamic Input Checkbox,,,
 input_list,@Blockly.Blocks['input_list'] = {
     init: function() {
         this.appendStatementInput("NAME")
@@ -197,7 +197,7 @@ input_list,@Blockly.Blocks['input_list'] = {
             .appendField("Interactive Input");
         this.setInputsInline(false);
         this.setNextStatement(true, null);
-        this.setColour(230);
+        this.setColour(window.ColorArray.Base);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -208,14 +208,14 @@ input_list,@Blockly.Blocks['input_list'] = {
     statements_name = statements_name.replace("  ,","");
     code += 'def _('+statements_name+'):\n';
     return code;
-};@,Base,Base Element add all dynamic inputs to it
+};@,Base,Base Element add all dynamic inputs to it,,,
 statement_list,@Blockly.Blocks['statement_list'] = {
     init: function() {
         this.appendStatementInput("NAME")
             .appendField("Execution");
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
-        this.setColour(230);
+        this.setColour(window.ColorArray.Base);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -224,14 +224,14 @@ statement_list,@Blockly.Blocks['statement_list'] = {
     
         var code = statements_name;
         return code;
-    };@,Base,Base Element add all calculation blocks to it
+    };@,Base,Base Element add all calculation blocks to it,,,
 get_variable,@Blockly.Blocks['get_variable'] = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldVariable("out"), "out");
         this.setOutput(true, null);
         this.setTooltip('');
-        this.setColour(330);
+        this.setColour(window.ColorArray.Variable);
         this.setHelpUrl('http://www.example.com/');
     }
 };@,@Blockly.Python['get_variable'] = function(block) {
@@ -240,7 +240,7 @@ get_variable,@Blockly.Blocks['get_variable'] = {
     var code = variable_out;
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.Python.ORDER_NONE];
-};@,Variable,Get the value of a variable
+};@,Variable,Get the value of a variable,,,
 text_print,@Blockly.Blocks['text_print'] = {
     init: function() {
         this.appendValueInput("print")
@@ -248,7 +248,7 @@ text_print,@Blockly.Blocks['text_print'] = {
             .appendField("Print");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(120);
+        this.setColour(window.ColorArray.Text);
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
@@ -257,7 +257,7 @@ text_print,@Blockly.Blocks['text_print'] = {
 
     var code = 'print '+value_print+'\n';
     return code;
-};@,Text,Output a value of a variable
+};@,Text,Output a value of a variable,,,
 set_variable,@Blockly.Blocks['set_variable'] = {
   init: function() {
     this.appendDummyInput()
@@ -268,7 +268,7 @@ set_variable,@Blockly.Blocks['set_variable'] = {
         .appendField("to");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(330);
+    this.setColour(window.ColorArray.Variable);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -277,7 +277,7 @@ set_variable,@Blockly.Blocks['set_variable'] = {
   var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
   var code = variable_var+'='+value_input+'\n';
   return code;
-};@,Variable,
+};@,Variable,,,,
 controls_if,@Blockly.Blocks['controls_if'] = {
   /**
    * Block for if/elseif/else condition.
@@ -285,7 +285,7 @@ controls_if,@Blockly.Blocks['controls_if'] = {
    */
   init: function() {
     this.setHelpUrl(Blockly.Msg.CONTROLS_IF_HELPURL);
-    this.setColour(20);
+    this.setColour(window.ColorArray.Logic);
     this.appendValueInput('IF0')
         .setCheck('Boolean')
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
@@ -469,7 +469,7 @@ Blockly.Blocks['controls_if_if'] = {
    * @@this Blockly.Block
    */
   init: function() {
-    this.setColour(20);
+    this.setColour(window.ColorArray.Logic);
     this.appendDummyInput()
         .appendField(Blockly.Msg.CONTROLS_IF_IF_TITLE_IF);
     this.setNextStatement(true);
@@ -484,7 +484,7 @@ Blockly.Blocks['controls_if_elseif'] = {
    * @@this Blockly.Block
    */
   init: function() {
-    this.setColour(20);
+    this.setColour(window.ColorArray.Logic);
     this.appendDummyInput()
         .appendField(Blockly.Msg.CONTROLS_IF_ELSEIF_TITLE_ELSEIF);
     this.setPreviousStatement(true);
@@ -500,7 +500,7 @@ Blockly.Blocks['controls_if_else'] = {
    * @@this Blockly.Block
    */
   init: function() {
-    this.setColour(20);
+    this.setColour(window.ColorArray.Logic);
     this.appendDummyInput()
         .appendField(Blockly.Msg.CONTROLS_IF_ELSE_TITLE_ELSE);
     this.setPreviousStatement(true);
@@ -528,7 +528,7 @@ Blockly.Blocks['controls_if_else'] = {
     code += 'else:\n' + branch;
   }
   return code;
-};@,Logic,
+};@,Logic,,,,
 logic_compare,@Blockly.Blocks['logic_compare'] = {
   /**
    * Block for comparison operator.
@@ -551,7 +551,7 @@ logic_compare,@Blockly.Blocks['logic_compare'] = {
           ['\u2265', 'GTE']
         ];
     this.setHelpUrl(Blockly.Msg.LOGIC_COMPARE_HELPURL);
-    this.setColour(20);
+    this.setColour(window.ColorArray.Logic);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('A');
     this.appendValueInput('B')
@@ -616,7 +616,7 @@ logic_compare,@Blockly.Blocks['logic_compare'] = {
   var argument1 = Blockly.Python.valueToCode(block, 'B', order) || '0';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   return [code, order];
-};@,Logic,
+};@,Logic,,,,
 logic_operation,@Blockly.Blocks['logic_operation'] = {
   /**
    * Block for logical operations: 'and', 'or'.
@@ -627,7 +627,7 @@ logic_operation,@Blockly.Blocks['logic_operation'] = {
         [[Blockly.Msg.LOGIC_OPERATION_AND, 'AND'],
          [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']];
     this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
-    this.setColour(20);
+    this.setColour(window.ColorArray.Logic);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('A')
         .setCheck('Boolean');
@@ -669,7 +669,7 @@ logic_operation,@Blockly.Blocks['logic_operation'] = {
   }
   var code = argument0 + ' ' + operator + ' ' + argument1;
   return [code, order];
-};@,Logic,
+};@,Logic,,,,
 logic_negate,@Blockly.Blocks['logic_negate'] = {
   /**
    * Block for negation.
@@ -686,7 +686,7 @@ logic_negate,@Blockly.Blocks['logic_negate'] = {
         }
       ],
       "output": "Boolean",
-      "colour": 20,
+      "colour":window.ColorArray.Logic,
       "tooltip": Blockly.Msg.LOGIC_NEGATE_TOOLTIP,
       "helpUrl": Blockly.Msg.LOGIC_NEGATE_HELPURL
     });
@@ -697,7 +697,7 @@ logic_negate,@Blockly.Blocks['logic_negate'] = {
       Blockly.Python.ORDER_LOGICAL_NOT) || 'True';
   var code = 'not ' + argument0;
   return [code, Blockly.Python.ORDER_LOGICAL_NOT];
-};@,Logic,
+};@,Logic,,,,
 logic_boolean,@Blockly.Blocks['logic_boolean'] = {
   /**
    * Block for boolean data type: true and false.
@@ -717,7 +717,7 @@ logic_boolean,@Blockly.Blocks['logic_boolean'] = {
         }
       ],
       "output": "Boolean",
-      "colour": 20,
+      "colour":window.ColorArray.Logic,
       "tooltip": Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP,
       "helpUrl": Blockly.Msg.LOGIC_BOOLEAN_HELPURL
     });
@@ -727,7 +727,7 @@ logic_boolean,@Blockly.Blocks['logic_boolean'] = {
   // Boolean values true and false.
   var code = (block.getFieldValue('BOOL') == 'TRUE') ? 'True' : 'False';
   return [code, Blockly.Python.ORDER_ATOMIC];
-};@,Logic,
+};@,Logic,,,,
 logic_null,@Blockly.Blocks['logic_null'] = {
   /**
    * Block for null data type.
@@ -737,7 +737,7 @@ logic_null,@Blockly.Blocks['logic_null'] = {
     this.jsonInit({
       "message0": Blockly.Msg.LOGIC_NULL,
       "output": null,
-      "colour": 20,
+      "colour":window.ColorArray.Logic,
       "tooltip": Blockly.Msg.LOGIC_NULL_TOOLTIP,
       "helpUrl": Blockly.Msg.LOGIC_NULL_HELPURL
     });
@@ -746,7 +746,7 @@ logic_null,@Blockly.Blocks['logic_null'] = {
   // Null data type.
   return ['None', Blockly.Python.ORDER_ATOMIC];
 };
-@,Logic,
+@,Logic,,,,
 logic_ternary,@Blockly.Blocks['logic_ternary'] = {
   /**
    * Block for ternary operator.
@@ -754,7 +754,7 @@ logic_ternary,@Blockly.Blocks['logic_ternary'] = {
    */
   init: function() {
     this.setHelpUrl(Blockly.Msg.LOGIC_TERNARY_HELPURL);
-    this.setColour(20);
+    this.setColour(window.ColorArray.Logic);
     this.appendValueInput('IF')
         .setCheck('Boolean')
         .appendField(Blockly.Msg.LOGIC_TERNARY_CONDITION);
@@ -806,7 +806,7 @@ logic_ternary,@Blockly.Blocks['logic_ternary'] = {
       Blockly.Python.ORDER_CONDITIONAL) || 'None';
   var code = value_then + ' if ' + value_if + ' else ' + value_else;
   return [code, Blockly.Python.ORDER_CONDITIONAL];
-};@,Logic,
+};@,Logic,,,,
 controls_repeat_ext,@Blockly.Blocks['controls_repeat_ext'] = {
   /**
    * Block for repeat n times (external number).
@@ -824,7 +824,7 @@ controls_repeat_ext,@Blockly.Blocks['controls_repeat_ext'] = {
       ],
       "previousStatement": null,
       "nextStatement": null,
-      "colour": 65,
+      "colour": window.ColorArray.Loop,
       "tooltip": Blockly.Msg.CONTROLS_REPEAT_TOOLTIP,
       "helpUrl": Blockly.Msg.CONTROLS_REPEAT_HELPURL
     });
@@ -853,7 +853,7 @@ controls_repeat_ext,@Blockly.Blocks['controls_repeat_ext'] = {
       'count', Blockly.Variables.NAME_TYPE);
   var code = 'for ' + loopVar + ' in range(' + repeats + '):\n' + branch;
   return code;
-};@,Loop,
+};@,Loop,,,,
 controls_whileUntil,@Blockly.Blocks['controls_whileUntil'] = {
   /**
    * Block for 'do while/until' loop.
@@ -864,7 +864,7 @@ controls_whileUntil,@Blockly.Blocks['controls_whileUntil'] = {
         [[Blockly.Msg.CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
          [Blockly.Msg.CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']];
     this.setHelpUrl(Blockly.Msg.CONTROLS_WHILEUNTIL_HELPURL);
-    this.setColour(65);
+    this.setColour(window.ColorArray.Loop);
     this.appendValueInput('BOOL')
         .setCheck('Boolean')
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
@@ -897,7 +897,7 @@ controls_whileUntil,@Blockly.Blocks['controls_whileUntil'] = {
     argument0 = 'not ' + argument0;
   }
   return 'while ' + argument0 + ':\n' + branch;
-};@,Loop,
+};@,Loop,,,,
 controls_for,@Blockly.Blocks['controls_for'] = {
   /**
    * Block for 'for' loop.
@@ -934,7 +934,7 @@ controls_for,@Blockly.Blocks['controls_for'] = {
       "inputsInline": true,
       "previousStatement": null,
       "nextStatement": null,
-      "colour": 65,
+      "colour": window.ColorArray.Loop,
       "helpUrl": Blockly.Msg.CONTROLS_FOR_HELPURL
     });
     this.appendStatementInput('DO')
@@ -1088,7 +1088,7 @@ controls_for,@Blockly.Blocks['controls_for'] = {
         [[Blockly.Msg.CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
          [Blockly.Msg.CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
     this.setHelpUrl(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_HELPURL);
-    this.setColour(65);
+    this.setColour(window.ColorArray.Loop);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'FLOW');
     this.setPreviousStatement(true);
@@ -1142,7 +1142,7 @@ controls_for,@Blockly.Blocks['controls_for'] = {
       return 'continue\n';
   }
   throw 'Unknown flow statement.';
-};@,Loop,
+};@,Loop
 text,@Blockly.Blocks['text'] = {
   /**
    * Block for text value.
@@ -1150,7 +1150,7 @@ text,@Blockly.Blocks['text'] = {
    */
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
-    this.setColour(120);
+    this.setColour(window.ColorArray.Text);
     this.appendDummyInput()
         .appendField(this.newQuote_(true))
         .appendField(new Blockly.FieldTextInput(''), 'TEXT')
@@ -1184,7 +1184,7 @@ text,@Blockly.Blocks['text'] = {
   // Text value.
   var code = Blockly.Python.quote_(block.getFieldValue('TEXT'));
   return [code, Blockly.Python.ORDER_ATOMIC];
-};@,Text,
+};@,Text,,,,
 text_join,@Blockly.Blocks['text_join'] = {
   /**
    * Block for creating a string made up of any number of elements of any type.
@@ -1192,7 +1192,7 @@ text_join,@Blockly.Blocks['text_join'] = {
    */
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_JOIN_HELPURL);
-    this.setColour(120);
+    this.setColour(window.ColorArray.Text);
     this.itemCount_ = 2;
     this.updateShape_();
     this.setOutput(true, 'String');
@@ -1317,7 +1317,7 @@ Blockly.Blocks['text_create_join_container'] = {
    * @@this Blockly.Block
    */
   init: function() {
-    this.setColour(120);
+    this.setColour(window.ColorArray.Text);
     this.appendDummyInput()
         .appendField(Blockly.Msg.TEXT_CREATE_JOIN_TITLE_JOIN);
     this.appendStatementInput('STACK');
@@ -1332,7 +1332,7 @@ Blockly.Blocks['text_create_join_item'] = {
    * @@this Blockly.Block
    */
   init: function() {
-    this.setColour(120);
+    this.setColour(window.ColorArray.Text);
     this.appendDummyInput()
         .appendField(Blockly.Msg.TEXT_CREATE_JOIN_ITEM_TITLE_ITEM);
     this.setPreviousStatement(true);
@@ -1370,7 +1370,7 @@ Blockly.Blocks['text_create_join_item'] = {
         code.join(', ') + ']])';
     return [code, Blockly.Python.ORDER_FUNCTION_CALL];
   }
-};@,Text,
+};@,Text,,,,
 text_append,@Blockly.Blocks['text_append'] = {
   /**
    * Block for appending to a variable in place.
@@ -1378,7 +1378,7 @@ text_append,@Blockly.Blocks['text_append'] = {
    */
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_APPEND_HELPURL);
-    this.setColour(120);
+    this.setColour(window.ColorArray.Text);
     this.appendValueInput('TEXT')
         .appendField(Blockly.Msg.TEXT_APPEND_TO)
         .appendField(new Blockly.FieldVariable(
@@ -1400,7 +1400,7 @@ text_append,@Blockly.Blocks['text_append'] = {
   var argument0 = Blockly.Python.valueToCode(block, 'TEXT',
       Blockly.Python.ORDER_NONE) || '\'\'';
   return varName + ' = str(' + varName + ') + str(' + argument0 + ')\n';
-};@,Text,
+};@,Text,,,,
 text_length,@Blockly.Blocks['text_length'] = {
   /**
    * Block for string length.
@@ -1417,7 +1417,7 @@ text_length,@Blockly.Blocks['text_length'] = {
         }
       ],
       "output": 'Number',
-      "colour": 120,
+      "colour": window.ColorArray.Text,
       "tooltip": Blockly.Msg.TEXT_LENGTH_TOOLTIP,
       "helpUrl": Blockly.Msg.TEXT_LENGTH_HELPURL
     });
@@ -1427,7 +1427,7 @@ text_length,@Blockly.Blocks['text_length'] = {
   var argument0 = Blockly.Python.valueToCode(block, 'VALUE',
       Blockly.Python.ORDER_NONE) || '\'\'';
   return ['len(' + argument0 + ')', Blockly.Python.ORDER_FUNCTION_CALL];
-};@,Text,
+};@,Text,,,,
 text_isEmpty,@
 Blockly.Blocks['text_isEmpty'] = {
   /**
@@ -1445,7 +1445,7 @@ Blockly.Blocks['text_isEmpty'] = {
         }
       ],
       "output": 'Boolean',
-      "colour": 120,
+      "colour": window.ColorArray.Text,
       "tooltip": Blockly.Msg.TEXT_ISEMPTY_TOOLTIP,
       "helpUrl": Blockly.Msg.TEXT_ISEMPTY_HELPURL
     });
@@ -1456,7 +1456,7 @@ Blockly.Blocks['text_isEmpty'] = {
       Blockly.Python.ORDER_NONE) || '\'\'';
   var code = 'not len(' + argument0 + ')';
   return [code, Blockly.Python.ORDER_LOGICAL_NOT];
-};@,Text,
+};@,Text,,,,
 math_number,@Blockly.Blocks['math_number'] = {
   /**
    * Block for numeric value.
@@ -1464,7 +1464,7 @@ math_number,@Blockly.Blocks['math_number'] = {
    */
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_NUMBER_HELPURL);
-    this.setColour(0);
+    this.setColour(window.ColorArray.Math);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('0',
         Blockly.FieldTextInput.numberValidator), 'NUM');
@@ -1493,7 +1493,7 @@ math_number,@Blockly.Blocks['math_number'] = {
             Blockly.Python.ORDER_ATOMIC;
   }
   return [code, order];
-};@,Math,
+};@,Math,,,,
 math_arithmetic,@Blockly.Blocks['math_arithmetic'] = {
   /**
    * Block for basic arithmetic operator.
@@ -1526,7 +1526,7 @@ math_arithmetic,@Blockly.Blocks['math_arithmetic'] = {
       ],
       "inputsInline": true,
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "helpUrl": Blockly.Msg.MATH_ARITHMETIC_HELPURL
     });
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -1565,7 +1565,7 @@ math_arithmetic,@Blockly.Blocks['math_arithmetic'] = {
   // guarantee identical results in all languages.  To do otherwise would
   // require every operator to be wrapped in a function call.  This would kill
   // legibility of the generated code.
-};@,Math,
+};@,Math,,,,
 math_single,@Blockly.Blocks['math_single'] = {
   /**
    * Block for advanced math operators with single operand.
@@ -1595,7 +1595,7 @@ math_single,@Blockly.Blocks['math_single'] = {
         }
       ],
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "helpUrl": Blockly.Msg.MATH_SINGLE_HELPURL
     });
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -1692,7 +1692,7 @@ math_single,@Blockly.Blocks['math_single'] = {
       throw 'Unknown math operator: ' + operator;
   }
   return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
-};@,Math,
+};@,Math,,,,
 math_constant,@Blockly.Blocks['math_constant'] = {
   /**
    * Block for constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
@@ -1716,7 +1716,7 @@ math_constant,@Blockly.Blocks['math_constant'] = {
         }
       ],
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "tooltip": Blockly.Msg.MATH_CONSTANT_TOOLTIP,
       "helpUrl": Blockly.Msg.MATH_CONSTANT_HELPURL
     });
@@ -1738,7 +1738,7 @@ math_constant,@Blockly.Blocks['math_constant'] = {
     Blockly.Python.definitions_['import_math'] = 'import math';
   }
   return CONSTANTS[constant];
-};@,Math,
+};@,Math,,,,
 math_trig,@Blockly.Blocks['math_trig'] = {
   /**
    * Block for trigonometry operators.
@@ -1767,7 +1767,7 @@ math_trig,@Blockly.Blocks['math_trig'] = {
         }
       ],
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "helpUrl": Blockly.Msg.MATH_TRIG_HELPURL
     });
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -1785,7 +1785,7 @@ math_trig,@Blockly.Blocks['math_trig'] = {
       return TOOLTIPS[mode];
     });
   }
-};@,Blockly.Python['math_trig'] = Blockly.Python['math_single'];,Math,
+};@,Blockly.Python['math_trig'] = Blockly.Python['math_single'];,Math,,,,
 math_round,@Blockly.Blocks['math_round'] = {
   /**
    * Block for rounding functions.
@@ -1811,14 +1811,13 @@ math_round,@Blockly.Blocks['math_round'] = {
         }
       ],
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "tooltip": Blockly.Msg.MATH_ROUND_TOOLTIP,
       "helpUrl": Blockly.Msg.MATH_ROUND_HELPURL
     });
   }
-};@,Blockly.Python['math_round'] = Blockly.Python['math_single'];,Math,
-math_modulo,@
-Blockly.Blocks['math_modulo'] = {
+};@,Blockly.Python['math_round'] = Blockly.Python['math_single'];,Math,,,,
+math_modulo,@Blockly.Blocks['math_modulo'] = {
   /**
    * Block for remainder of a division.
    * @@this Blockly.Block
@@ -1840,13 +1839,12 @@ Blockly.Blocks['math_modulo'] = {
       ],
       "inputsInline": true,
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "tooltip": Blockly.Msg.MATH_MODULO_TOOLTIP,
       "helpUrl": Blockly.Msg.MATH_MODULO_HELPURL
     });
   }
-};@,@
-Blockly.Python['math_modulo'] = function(block) {
+};@,@Blockly.Python['math_modulo'] = function(block) {
   // Remainder computation.
   var argument0 = Blockly.Python.valueToCode(block, 'DIVIDEND',
       Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
@@ -1854,7 +1852,7 @@ Blockly.Python['math_modulo'] = function(block) {
       Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
   var code = argument0 + ' % ' + argument1;
   return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
-};@,Math,
+};@,Math,,,,
 math_constrain,@Blockly.Blocks['math_constrain'] = {
   /**
    * Block for constraining a number between two limits.
@@ -1882,7 +1880,7 @@ math_constrain,@Blockly.Blocks['math_constrain'] = {
       ],
       "inputsInline": true,
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "tooltip": Blockly.Msg.MATH_CONSTRAIN_TOOLTIP,
       "helpUrl": Blockly.Msg.MATH_CONSTRAIN_HELPURL
     });
@@ -1896,7 +1894,7 @@ math_constrain,@Blockly.Blocks['math_constrain'] = {
       Blockly.Python.ORDER_NONE) || '0';
   var code = 'random.randint(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
-};@,Math,
+};@,Math,,,,
 math_random_int,@Blockly.Blocks['math_random_int'] = {
   /**
    * Block for random integer between [X] and [Y].
@@ -1919,7 +1917,7 @@ math_random_int,@Blockly.Blocks['math_random_int'] = {
       ],
       "inputsInline": true,
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "tooltip": Blockly.Msg.MATH_RANDOM_INT_TOOLTIP,
       "helpUrl": Blockly.Msg.MATH_RANDOM_INT_HELPURL
     });
@@ -1934,9 +1932,8 @@ math_random_int,@Blockly.Blocks['math_random_int'] = {
       Blockly.Python.ORDER_NONE) || '0';
   var code = 'random.randint(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
-};@,Math,
-math_random_float,@
-Blockly.Blocks['math_random_float'] = {
+};@,Math,,,,
+math_random_float,@Blockly.Blocks['math_random_float'] = {
   /**
    * Block for random fraction between 0 and 1.
    * @@this Blockly.Block
@@ -1945,7 +1942,7 @@ Blockly.Blocks['math_random_float'] = {
     this.jsonInit({
       "message0": Blockly.Msg.MATH_RANDOM_FLOAT_TITLE_RANDOM,
       "output": "Number",
-      "colour": 0,
+      "colour":window.ColorArray.Math,
       "tooltip": Blockly.Msg.MATH_RANDOM_FLOAT_TOOLTIP,
       "helpUrl": Blockly.Msg.MATH_RANDOM_FLOAT_HELPURL
     });
@@ -1954,30 +1951,7 @@ Blockly.Blocks['math_random_float'] = {
   // Random fraction between 0 and 1.
   Blockly.Python.definitions_['import_random'] = 'import random';
   return ['random.random()', Blockly.Python.ORDER_FUNCTION_CALL];
-};@,Math,
-method_noreturn,@Blockly.Blocks['method_noreturn'] = {
-  init: function() {
-    this.appendStatementInput("function")
-        .setCheck(null)
-        .appendField("Name:")
-        .appendField(new Blockly.FieldTextInput("default"), "methode_name");
-    this.appendDummyInput()
-        .appendField("Parameter:")
-        .appendField(new Blockly.FieldTextInput("default"), "parm_name");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(150);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};@,@Blockly.Python['method_noreturn'] = function(block) {
-  var text_methode_name = block.getFieldValue('methode_name');
-  var statements_function = Blockly.Python.statementToCode(block, 'function');
-  var text_parm_name = block.getFieldValue('parm_name');
-  var code = 'def '+text_methode_name+'('+text_parm_name+'):\n';
-  code + statements_function;
-  return code;
-};@,Method,
+};@,Math,,,,
 init_variable,@Blockly.Blocks['init_variable'] = {
   init: function() {
     this.appendDummyInput()
@@ -1985,7 +1959,7 @@ init_variable,@Blockly.Blocks['init_variable'] = {
         .appendField(new Blockly.FieldVariable("item"), "var");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(330);
+    this.setColour(window.ColorArray.Variable);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -1993,4 +1967,2525 @@ init_variable,@Blockly.Blocks['init_variable'] = {
   var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
   var code = 'var(\''+variable_var+'\')\n';
   return code;
-};@,Variable,
+};@,Variable,,,,
+text_indexOf,@Blockly.Blocks['text_indexOf'] = {
+  /**
+   * Block for finding a substring in the text.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var OPERATORS =
+        [[Blockly.Msg.TEXT_INDEXOF_OPERATOR_FIRST, 'FIRST'],
+         [Blockly.Msg.TEXT_INDEXOF_OPERATOR_LAST, 'LAST']];
+    this.setHelpUrl(Blockly.Msg.TEXT_INDEXOF_HELPURL);
+    this.setColour(window.ColorArray.Text);
+    this.setOutput(true, 'Number');
+    this.appendValueInput('VALUE')
+        .setCheck('String')
+        .appendField(Blockly.Msg.TEXT_INDEXOF_INPUT_INTEXT);
+    this.appendValueInput('FIND')
+        .setCheck('String')
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'END');
+    if (Blockly.Msg.TEXT_INDEXOF_TAIL) {
+      this.appendDummyInput().appendField(Blockly.Msg.TEXT_INDEXOF_TAIL);
+    }
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.Msg.TEXT_INDEXOF_TOOLTIP);
+  }
+};@,@Blockly.Python['text_indexOf'] = function(block) {
+  // Search the text for a substring.
+  // Should we allow for non-case sensitive???
+  var operator = block.getFieldValue('END') == 'FIRST' ? 'find' : 'rfind';
+  var argument0 = Blockly.Python.valueToCode(block, 'FIND',
+      Blockly.Python.ORDER_NONE) || '\'\'';
+  var argument1 = Blockly.Python.valueToCode(block, 'VALUE',
+      Blockly.Python.ORDER_MEMBER) || '\'\'';
+  var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
+  return [code, Blockly.Python.ORDER_MEMBER];
+};@,Text,,,,
+text_charAt,@Blockly.Blocks['text_charAt'] = {
+  /**
+   * Block for getting a character from the string.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.WHERE_OPTIONS =
+        [[Blockly.Msg.TEXT_CHARAT_FROM_START, 'FROM_START'],
+         [Blockly.Msg.TEXT_CHARAT_FROM_END, 'FROM_END'],
+         [Blockly.Msg.TEXT_CHARAT_FIRST, 'FIRST'],
+         [Blockly.Msg.TEXT_CHARAT_LAST, 'LAST'],
+         [Blockly.Msg.TEXT_CHARAT_RANDOM, 'RANDOM']];
+    this.setHelpUrl(Blockly.Msg.TEXT_CHARAT_HELPURL);
+    this.setColour(window.ColorArray.Text);
+    this.setOutput(true, 'String');
+    this.appendValueInput('VALUE')
+        .setCheck('String')
+        .appendField(Blockly.Msg.TEXT_CHARAT_INPUT_INTEXT);
+    this.appendDummyInput('AT');
+    this.setInputsInline(true);
+    this.updateAt_(true);
+    this.setTooltip(Blockly.Msg.TEXT_CHARAT_TOOLTIP);
+  },
+  /**
+   * Create XML to represent whether there is an 'AT' input.
+   * @@return {!Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var isAt = this.getInput('AT').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at', isAt);
+    return container;
+  },
+  /**
+   * Parse XML to restore the 'AT' input.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    // Note: Until January 2013 this block did not have mutations,
+    // so 'at' defaults to true.
+    var isAt = (xmlElement.getAttribute('at') != 'false');
+    this.updateAt_(isAt);
+  },
+  /**
+   * Create or delete an input for the numeric index.
+   * @@param {boolean} isAt True if the input should exist.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateAt_: function(isAt) {
+    // Destroy old 'AT' and 'ORDINAL' inputs.
+    this.removeInput('AT');
+    this.removeInput('ORDINAL', true);
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT').setCheck('Number');
+      if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
+        this.appendDummyInput('ORDINAL')
+            .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
+      }
+    } else {
+      this.appendDummyInput('AT');
+    }
+    if (Blockly.Msg.TEXT_CHARAT_TAIL) {
+      this.removeInput('TAIL', true);
+      this.appendDummyInput('TAIL')
+          .appendField(Blockly.Msg.TEXT_CHARAT_TAIL);
+    }
+    var menu = new Blockly.FieldDropdown(this.WHERE_OPTIONS, function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt_(newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setFieldValue(value, 'WHERE');
+        return null;
+      }
+      return undefined;
+    });
+    this.getInput('AT').appendField(menu, 'WHERE');
+  }
+};
+@,@Blockly.Python['text_charAt'] = function(block) {
+  // Get letter at index.
+  // Note: Until January 2013 this block did not have the WHERE input.
+  var where = block.getFieldValue('WHERE') || 'FROM_START';
+  var at = Blockly.Python.valueToCode(block, 'AT',
+      Blockly.Python.ORDER_UNARY_SIGN) || '1';
+  var text = Blockly.Python.valueToCode(block, 'VALUE',
+      Blockly.Python.ORDER_MEMBER) || '\'\'';
+  switch (where) {
+    case 'FIRST':
+      var code = text + '[0]';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    case 'LAST':
+      var code = text + '[-1]';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    case 'FROM_START':
+      // Blockly uses one-based indicies.
+      if (Blockly.isNumber(at)) {
+        // If the index is a naked number, decrement it right now.
+        at = parseInt(at, 10) - 1;
+      } else {
+        // If the index is dynamic, decrement it in code.
+        at = 'int(' + at + ' - 1)';
+      }
+      var code = text + '[' + at + ']';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    case 'FROM_END':
+      var code = text + '[-' + at + ']';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    case 'RANDOM':
+      Blockly.Python.definitions_['import_random'] = 'import random';
+      var functionName = Blockly.Python.provideFunction_(
+          'text_random_letter',
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(text):',
+           '  x = int(random.random() * len(text))',
+           '  return text[x];']);
+      code = functionName + '(' + text + ')';
+      return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+  }
+  throw 'Unhandled option (text_charAt).';
+};
+@,Text,,,,
+text_getSubstring,@Blockly.Blocks['text_getSubstring'] = {
+  /**
+   * Block for getting substring.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this['WHERE_OPTIONS_1'] =
+        [[Blockly.Msg.TEXT_GET_SUBSTRING_START_FROM_START, 'FROM_START'],
+         [Blockly.Msg.TEXT_GET_SUBSTRING_START_FROM_END, 'FROM_END'],
+         [Blockly.Msg.TEXT_GET_SUBSTRING_START_FIRST, 'FIRST']];
+    this['WHERE_OPTIONS_2'] =
+        [[Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_START, 'FROM_START'],
+         [Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_END, 'FROM_END'],
+         [Blockly.Msg.TEXT_GET_SUBSTRING_END_LAST, 'LAST']];
+    this.setHelpUrl(Blockly.Msg.TEXT_GET_SUBSTRING_HELPURL);
+    this.setColour(window.ColorArray.Text);
+    this.appendValueInput('STRING')
+        .setCheck('String')
+        .appendField(Blockly.Msg.TEXT_GET_SUBSTRING_INPUT_IN_TEXT);
+    this.appendDummyInput('AT1');
+    this.appendDummyInput('AT2');
+    if (Blockly.Msg.TEXT_GET_SUBSTRING_TAIL) {
+      this.appendDummyInput('TAIL')
+          .appendField(Blockly.Msg.TEXT_GET_SUBSTRING_TAIL);
+    }
+    this.setInputsInline(true);
+    this.setOutput(true, 'String');
+    this.updateAt_(1, true);
+    this.updateAt_(2, true);
+    this.setTooltip(Blockly.Msg.TEXT_GET_SUBSTRING_TOOLTIP);
+  },
+  /**
+   * Create XML to represent whether there are 'AT' inputs.
+   * @@return {!Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var isAt1 = this.getInput('AT1').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at1', isAt1);
+    var isAt2 = this.getInput('AT2').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at2', isAt2);
+    return container;
+  },
+  /**
+   * Parse XML to restore the 'AT' inputs.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    var isAt1 = (xmlElement.getAttribute('at1') == 'true');
+    var isAt2 = (xmlElement.getAttribute('at2') == 'true');
+    this.updateAt_(1, isAt1);
+    this.updateAt_(2, isAt2);
+  },
+  /**
+   * Create or delete an input for a numeric index.
+   * This block has two such inputs, independant of each other.
+   * @@param {number} n Specify first or second input (1 or 2).
+   * @@param {boolean} isAt True if the input should exist.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateAt_: function(n, isAt) {
+    // Create or delete an input for the numeric index.
+    // Destroy old 'AT' and 'ORDINAL' inputs.
+    this.removeInput('AT' + n);
+    this.removeInput('ORDINAL' + n, true);
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT' + n).setCheck('Number');
+      if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
+        this.appendDummyInput('ORDINAL' + n)
+            .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
+      }
+    } else {
+      this.appendDummyInput('AT' + n);
+    }
+    // Move tail, if present, to end of block.
+    if (n == 2 && Blockly.Msg.TEXT_GET_SUBSTRING_TAIL) {
+      this.removeInput('TAIL', true);
+      this.appendDummyInput('TAIL')
+          .appendField(Blockly.Msg.TEXT_GET_SUBSTRING_TAIL);
+    }
+    var menu = new Blockly.FieldDropdown(this['WHERE_OPTIONS_' + n],
+        function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt_(n, newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setFieldValue(value, 'WHERE' + n);
+        return null;
+      }
+      return undefined;
+    });
+    this.getInput('AT' + n)
+        .appendField(menu, 'WHERE' + n);
+    if (n == 1) {
+      this.moveInputBefore('AT1', 'AT2');
+    }
+  }
+};@,@Blockly.Python['text_getSubstring'] = function(block) {
+  // Get substring.
+  var text = Blockly.Python.valueToCode(block, 'STRING',
+      Blockly.Python.ORDER_MEMBER) || '\'\'';
+  var where1 = block.getFieldValue('WHERE1');
+  var where2 = block.getFieldValue('WHERE2');
+  var at1 = Blockly.Python.valueToCode(block, 'AT1',
+      Blockly.Python.ORDER_ADDITIVE) || '1';
+  var at2 = Blockly.Python.valueToCode(block, 'AT2',
+      Blockly.Python.ORDER_ADDITIVE) || '1';
+  if (where1 == 'FIRST' || (where1 == 'FROM_START' && at1 == '1')) {
+    at1 = '';
+  } else if (where1 == 'FROM_START') {
+    // Blockly uses one-based indicies.
+    if (Blockly.isNumber(at1)) {
+      // If the index is a naked number, decrement it right now.
+      at1 = parseInt(at1, 10) - 1;
+    } else {
+      // If the index is dynamic, decrement it in code.
+      at1 = 'int(' + at1 + ' - 1)';
+    }
+  } else if (where1 == 'FROM_END') {
+    if (Blockly.isNumber(at1)) {
+      at1 = -parseInt(at1, 10);
+    } else {
+      at1 = '-int(' + at1 + ')';
+    }
+  }
+  if (where2 == 'LAST' || (where2 == 'FROM_END' && at2 == '1')) {
+    at2 = '';
+  } else if (where1 == 'FROM_START') {
+    if (Blockly.isNumber(at2)) {
+      at2 = parseInt(at2, 10);
+    } else {
+      at2 = 'int(' + at2 + ')';
+    }
+  } else if (where1 == 'FROM_END') {
+    if (Blockly.isNumber(at2)) {
+      // If the index is a naked number, increment it right now.
+      at2 = 1 - parseInt(at2, 10);
+      if (at2 == 0) {
+        at2 = '';
+      }
+    } else {
+      // If the index is dynamic, increment it in code.
+      // Add special case for -0.
+      Blockly.Python.definitions_['import_sys'] = 'import sys';
+      at2 = 'int(1 - ' + at2 + ') or sys.maxsize';
+    }
+  }
+  var code = text + '[' + at1 + ' : ' + at2 + ']';
+  return [code, Blockly.Python.ORDER_MEMBER];
+};@,Text,,,,
+text_trim,@Blockly.Blocks['text_trim'] = {
+  /**
+   * Block for trimming spaces.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var OPERATORS =
+        [[Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH, 'BOTH'],
+         [Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT, 'LEFT'],
+         [Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT, 'RIGHT']];
+    this.setHelpUrl(Blockly.Msg.TEXT_TRIM_HELPURL);
+    this.setColour(window.ColorArray.Text);
+    this.appendValueInput('TEXT')
+        .setCheck('String')
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
+    this.setOutput(true, 'String');
+    this.setTooltip(Blockly.Msg.TEXT_TRIM_TOOLTIP);
+  }
+};@,@Blockly.Python['text_trim'] = function(block) {
+  // Trim spaces.
+  var OPERATORS = {
+    'LEFT': '.lstrip()',
+    'RIGHT': '.rstrip()',
+    'BOTH': '.strip()'
+  };
+  var operator = OPERATORS[block.getFieldValue('MODE')];
+  var argument0 = Blockly.Python.valueToCode(block, 'TEXT',
+      Blockly.Python.ORDER_MEMBER) || '\'\'';
+  var code = argument0 + operator;
+  return [code, Blockly.Python.ORDER_MEMBER];
+};@,Text,,,,
+controls_forEach,@Blockly.Blocks['controls_forEach'] = {
+  /**
+   * Block for 'for each' loop.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.CONTROLS_FOREACH_TITLE,
+      "args0": [
+        {
+          "type": "field_variable",
+          "name": "VAR",
+          "variable": null
+        },
+        {
+          "type": "input_value",
+          "name": "LIST",
+          "check": "Array"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": window.ColorArray.Loop,
+      "helpUrl": Blockly.Msg.CONTROLS_FOREACH_HELPURL
+    });
+    this.appendStatementInput('DO')
+        .appendField(Blockly.Msg.CONTROLS_FOREACH_INPUT_DO);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return Blockly.Msg.CONTROLS_FOREACH_TOOLTIP.replace('%1',
+          thisBlock.getFieldValue('VAR'));
+    });
+  },
+  customContextMenu: Blockly.Blocks['controls_for'].customContextMenu
+};
+@,@Blockly.Python['controls_forEach'] = function(block) {
+  // For each loop.
+  var variable0 = Blockly.Python.variableDB_.getName(
+      block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var argument0 = Blockly.Python.valueToCode(block, 'LIST',
+      Blockly.Python.ORDER_RELATIONAL) || '[]';
+  var branch = Blockly.Python.statementToCode(block, 'DO');
+  branch = Blockly.Python.addLoopTrap(branch, block.id) ||
+      Blockly.Python.PASS;
+  var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch;
+  return code;
+};@,Loop,,,,
+math_on_list,@Blockly.Blocks['math_on_list'] = {
+  /**
+   * Block for evaluating a list of numbers to return sum, average, min, max,
+   * etc.  Some functions also work on text (min, max, mode, median).
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var OPERATORS =
+        [[Blockly.Msg.MATH_ONLIST_OPERATOR_SUM, 'SUM'],
+         [Blockly.Msg.MATH_ONLIST_OPERATOR_MIN, 'MIN'],
+         [Blockly.Msg.MATH_ONLIST_OPERATOR_MAX, 'MAX'],
+         [Blockly.Msg.MATH_ONLIST_OPERATOR_AVERAGE, 'AVERAGE'],
+         [Blockly.Msg.MATH_ONLIST_OPERATOR_MEDIAN, 'MEDIAN'],
+         [Blockly.Msg.MATH_ONLIST_OPERATOR_MODE, 'MODE'],
+         [Blockly.Msg.MATH_ONLIST_OPERATOR_STD_DEV, 'STD_DEV'],
+         [Blockly.Msg.MATH_ONLIST_OPERATOR_RANDOM, 'RANDOM']];
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
+    this.setHelpUrl(Blockly.Msg.MATH_ONLIST_HELPURL);
+    this.setColour(window.ColorArray.Math);
+    this.setOutput(true, 'Number');
+    var dropdown = new Blockly.FieldDropdown(OPERATORS, function(newOp) {
+      thisBlock.updateType_(newOp);
+    });
+    this.appendValueInput('LIST')
+        .setCheck('Array')
+        .appendField(dropdown, 'OP');
+    this.setTooltip(function() {
+      var mode = thisBlock.getFieldValue('OP');
+      var TOOLTIPS = {
+        'SUM': Blockly.Msg.MATH_ONLIST_TOOLTIP_SUM,
+        'MIN': Blockly.Msg.MATH_ONLIST_TOOLTIP_MIN,
+        'MAX': Blockly.Msg.MATH_ONLIST_TOOLTIP_MAX,
+        'AVERAGE': Blockly.Msg.MATH_ONLIST_TOOLTIP_AVERAGE,
+        'MEDIAN': Blockly.Msg.MATH_ONLIST_TOOLTIP_MEDIAN,
+        'MODE': Blockly.Msg.MATH_ONLIST_TOOLTIP_MODE,
+        'STD_DEV': Blockly.Msg.MATH_ONLIST_TOOLTIP_STD_DEV,
+        'RANDOM': Blockly.Msg.MATH_ONLIST_TOOLTIP_RANDOM
+      };
+      return TOOLTIPS[mode];
+    });
+  },
+  /**
+   * Modify this block to have the correct output type.
+   * @@param {string} newOp Either 'MODE' or some op than returns a number.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateType_: function(newOp) {
+    if (newOp == 'MODE') {
+      this.outputConnection.setCheck('Array');
+    } else {
+      this.outputConnection.setCheck('Number');
+    }
+  },
+  /**
+   * Create XML to represent the output type.
+   * @@return {Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('op', this.getFieldValue('OP'));
+    return container;
+  },
+  /**
+   * Parse XML to restore the output type.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    this.updateType_(xmlElement.getAttribute('op'));
+  }
+};@,@Blockly.Python['math_on_list'] = function(block) {
+  // Math functions for lists.
+  var func = block.getFieldValue('OP');
+  var list = Blockly.Python.valueToCode(block, 'LIST',
+      Blockly.Python.ORDER_NONE) || '[]';
+  var code;
+  switch (func) {
+    case 'SUM':
+      code = 'sum(' + list + ')';
+      break;
+    case 'MIN':
+      code = 'min(' + list + ')';
+      Break;
+    case 'MAX':
+      code = 'max(' + list + ')';
+      break;
+    case 'AVERAGE':
+      Blockly.Python.definitions_['from_numbers_import_Number'] =
+          'from numbers import Number';
+      var functionName = Blockly.Python.provideFunction_(
+          'math_mean',
+          // This operation excludes null and values that aren't int or float:',
+          // math_mean([null, null, "aString", 1, 9]) == 5.0.',
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
+           '  localList = [e for e in myList if isinstance(e, Number)]',
+           '  if not localList: return',
+           '  return float(sum(localList)) / len(localList)']);
+      code = functionName + '(' + list + ')';
+      break;
+    case 'MEDIAN':
+      Blockly.Python.definitions_['from_numbers_import_Number'] =
+          'from numbers import Number';
+      var functionName = Blockly.Python.provideFunction_(
+          'math_median',
+          // This operation excludes null values:
+          // math_median([null, null, 1, 3]) == 2.0.
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
+           '  localList = sorted([e for e in myList if isinstance(e, Number)])',
+           '  if not localList: return',
+           '  if len(localList) % 2 == 0:',
+           '    return (localList[len(localList) // 2 - 1] + ' +
+               'localList[len(localList) // 2]) / 2.0',
+           '  else:',
+           '    return localList[(len(localList) - 1) // 2]']);
+      code = functionName + '(' + list + ')';
+      break;
+    case 'MODE':
+      var functionName = Blockly.Python.provideFunction_(
+          'math_modes',
+          // As a list of numbers can contain more than one mode,
+          // the returned result is provided as an array.
+          // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(some_list):',
+           '  modes = []',
+           '  # Using a lists of [item, count] to keep count rather than dict',
+           '  # to avoid "unhashable" errors when the counted item is ' +
+               'itself a list or dict.',
+           '  counts = []',
+           '  maxCount = 1',
+           '  for item in some_list:',
+           '    found = False',
+           '    for count in counts:',
+           '      if count[0] == item:',
+           '        count[1] += 1',
+           '        maxCount = max(maxCount, count[1])',
+           '        found = True',
+           '    if not found:',
+           '      counts.append([item, 1])',
+           '  for counted_item, item_count in counts:',
+           '    if item_count == maxCount:',
+           '      modes.append(counted_item)',
+           '  return modes']);
+      code = functionName + '(' + list + ')';
+      break;
+    case 'STD_DEV':
+      Blockly.Python.definitions_['import_math'] = 'import math';
+      var functionName = Blockly.Python.provideFunction_(
+          'math_standard_deviation',
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(numbers):',
+           '  n = len(numbers)',
+           '  if n == 0: return',
+           '  mean = float(sum(numbers)) / n',
+           '  variance = sum((x - mean) ** 2 for x in numbers) / n',
+           '  return math.sqrt(variance)']);
+      code = functionName + '(' + list + ')';
+      break;
+    case 'RANDOM':
+      Blockly.Python.definitions_['import_random'] = 'import random';
+      code = 'random.choice(' + list + ')';
+      break;
+    default:
+      throw 'Unknown operator: ' + func;
+  }
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};@,Math,,,,
+lists_create_with,@Blockly.Blocks['lists_create_with'] = {
+  /**
+   * Block for creating a list with any number of elements of any type.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.LISTS_CREATE_WITH_HELPURL);
+    this.setColour(window.ColorArray.List);
+    this.itemCount_ = 3;
+    this.updateShape_();
+    this.setOutput(true, 'Array');
+    this.setMutator(new Blockly.Mutator(['lists_create_with_item']));
+    this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP);
+  },
+  /**
+   * Create XML to represent list inputs.
+   * @@return {!Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('items', this.itemCount_);
+    return container;
+  },
+  /**
+   * Parse XML to restore the list inputs.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
+    this.updateShape_();
+  },
+  /**
+   * Populate the mutator's dialog with this block's components.
+   * @@param {!Blockly.Workspace} workspace Mutator's workspace.
+   * @@return {!Blockly.Block} Root block in mutator.
+   * @@this Blockly.Block
+   */
+  decompose: function(workspace) {
+    var containerBlock = workspace.newBlock('lists_create_with_container');
+    containerBlock.initSvg();
+    var connection = containerBlock.getInput('STACK').connection;
+    for (var i = 0; i < this.itemCount_; i++) {
+      var itemBlock = workspace.newBlock('lists_create_with_item');
+      itemBlock.initSvg();
+      connection.connect(itemBlock.previousConnection);
+      connection = itemBlock.nextConnection;
+    }
+    return containerBlock;
+  },
+  /**
+   * Reconfigure this block based on the mutator dialog's components.
+   * @@param {!Blockly.Block} containerBlock Root block in mutator.
+   * @@this Blockly.Block
+   */
+  compose: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('STACK');
+    // Count number of inputs.
+    var connections = [];
+    while (itemBlock) {
+      connections.push(itemBlock.valueConnection_);
+      itemBlock = itemBlock.nextConnection &&
+          itemBlock.nextConnection.targetBlock();
+    }
+    // Disconnect any children that don't belong.
+    for (var i = 0; i < this.itemCount_; i++) {
+      var connection = this.getInput('ADD' + i).connection.targetConnection;
+      if (connection && connections.indexOf(connection) == -1) {
+        connection.disconnect();
+      }
+    }
+    this.itemCount_ = connections.length;
+    this.updateShape_();
+    // Reconnect any child blocks.
+    for (var i = 0; i < this.itemCount_; i++) {
+      Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i);
+    }
+  },
+  /**
+   * Store pointers to any connected child blocks.
+   * @@param {!Blockly.Block} containerBlock Root block in mutator.
+   * @@this Blockly.Block
+   */
+  saveConnections: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('STACK');
+    var i = 0;
+    while (itemBlock) {
+      var input = this.getInput('ADD' + i);
+      itemBlock.valueConnection_ = input && input.connection.targetConnection;
+      i++;
+      itemBlock = itemBlock.nextConnection &&
+          itemBlock.nextConnection.targetBlock();
+    }
+  },
+  /**
+   * Modify this block to have the correct number of inputs.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateShape_: function() {
+    if (this.itemCount_ && this.getInput('EMPTY')) {
+      this.removeInput('EMPTY');
+    } else if (!this.itemCount_ && !this.getInput('EMPTY')) {
+      this.appendDummyInput('EMPTY')
+          .appendField(Blockly.Msg.LISTS_CREATE_EMPTY_TITLE);
+    }
+    // Add new inputs.
+    for (var i = 0; i < this.itemCount_; i++) {
+      if (!this.getInput('ADD' + i)) {
+        var input = this.appendValueInput('ADD' + i);
+        if (i == 0) {
+          input.appendField(Blockly.Msg.LISTS_CREATE_WITH_INPUT_WITH);
+        }
+      }
+    }
+    // Remove deleted inputs.
+    while (this.getInput('ADD' + i)) {
+      this.removeInput('ADD' + i);
+      i++;
+    }
+  }
+};
+
+Blockly.Blocks['lists_create_with_container'] = {
+  /**
+   * Mutator block for list container.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.setColour(window.ColorArray.List);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.LISTS_CREATE_WITH_CONTAINER_TITLE_ADD);
+    this.appendStatementInput('STACK');
+    this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_CONTAINER_TOOLTIP);
+    this.contextMenu = false;
+  }
+};
+
+Blockly.Blocks['lists_create_with_item'] = {
+  /**
+   * Mutator bolck for adding items.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.setColour(window.ColorArray.List);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TOOLTIP);
+    this.contextMenu = false;
+  }
+};@,@Blockly.Python['lists_create_with'] = function(block) {
+  // Create a list with any number of elements of any type.
+  var code = new Array(block.itemCount_);
+  for (var n = 0; n < block.itemCount_; n++) {
+    code[n] = Blockly.Python.valueToCode(block, 'ADD' + n,
+        Blockly.Python.ORDER_NONE) || 'None';
+  }
+  code = '[' + code.join(', ') + ']';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};@,List,,,,
+lists_repeat,@Blockly.Blocks['lists_repeat'] = {
+  /**
+   * Block for creating a list with one element repeated.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LISTS_REPEAT_TITLE,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ITEM"
+        },
+        {
+          "type": "input_value",
+          "name": "NUM",
+          "check": "Number"
+        }
+      ],
+      "output": "Array",
+      "colour": window.ColorArray.List,
+      "tooltip": Blockly.Msg.LISTS_REPEAT_TOOLTIP,
+      "helpUrl": Blockly.Msg.LISTS_REPEAT_HELPURL
+    });
+  }
+};@,@Blockly.Python['lists_repeat'] = function(block) {
+  // Create a list with one element repeated.
+  var argument0 = Blockly.Python.valueToCode(block, 'ITEM',
+      Blockly.Python.ORDER_NONE) || 'None';
+  var argument1 = Blockly.Python.valueToCode(block, 'NUM',
+      Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
+  var code = '[' + argument0 + '] * ' + argument1;
+  return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
+};
+@,List,,,,
+lists_length,@Blockly.Blocks['lists_length'] = {
+  /**
+   * Block for list length.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LISTS_LENGTH_TITLE,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE",
+          "check": ['String', 'Array']
+        }
+      ],
+      "output": 'Number',
+      "colour": window.ColorArray.List,
+      "tooltip": Blockly.Msg.LISTS_LENGTH_TOOLTIP,
+      "helpUrl": Blockly.Msg.LISTS_LENGTH_HELPURL
+    });
+  }
+};@,@Blockly.Python['lists_length'] = function(block) {
+  // String or array length.
+  var argument0 = Blockly.Python.valueToCode(block, 'VALUE',
+      Blockly.Python.ORDER_NONE) || '[]';
+  return ['len(' + argument0 + ')', Blockly.Python.ORDER_FUNCTION_CALL];
+};@,List,,,,
+lists_isEmpty,@Blockly.Blocks['lists_isEmpty'] = {
+  /**
+   * Block for is the list empty?
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LISTS_ISEMPTY_TITLE,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE",
+          "check": ['String', 'Array']
+        }
+      ],
+      "output": 'Boolean',
+      "colour": window.ColorArray.List,
+      "tooltip": Blockly.Msg.LISTS_ISEMPTY_TOOLTIP,
+      "helpUrl": Blockly.Msg.LISTS_ISEMPTY_HELPURL
+    });
+  }
+};@,@Blockly.Python['lists_isEmpty'] = function(block) {
+  // Is the string null or array empty?
+  var argument0 = Blockly.Python.valueToCode(block, 'VALUE',
+      Blockly.Python.ORDER_NONE) || '[]';
+  var code = 'not len(' + argument0 + ')';
+  return [code, Blockly.Python.ORDER_LOGICAL_NOT];
+};@,List,,,,
+lists_indexOf,@Blockly.Blocks['lists_indexOf'] = {
+  /**
+   * Block for finding an item in the list.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var OPERATORS =
+        [[Blockly.Msg.LISTS_INDEX_OF_FIRST, 'FIRST'],
+         [Blockly.Msg.LISTS_INDEX_OF_LAST, 'LAST']];
+    this.setHelpUrl(Blockly.Msg.LISTS_INDEX_OF_HELPURL);
+    this.setColour(window.ColorArray.List);
+    this.setOutput(true, 'Number');
+    this.appendValueInput('VALUE')
+        .setCheck('Array')
+        .appendField(Blockly.Msg.LISTS_INDEX_OF_INPUT_IN_LIST);
+    this.appendValueInput('FIND')
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'END');
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.Msg.LISTS_INDEX_OF_TOOLTIP);
+  }
+};@,@Blockly.Python['lists_indexOf'] = function(block) {
+  // Find an item in the list.
+  var argument0 = Blockly.Python.valueToCode(block, 'FIND',
+      Blockly.Python.ORDER_NONE) || '[]';
+  var argument1 = Blockly.Python.valueToCode(block, 'VALUE',
+      Blockly.Python.ORDER_MEMBER) || '\'\'';
+  var code;
+  if (block.getFieldValue('END') == 'FIRST') {
+    var functionName = Blockly.Python.provideFunction_(
+        'first_index',
+        ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList, elem):',
+         '  try: theIndex = myList.index(elem) + 1',
+         '  except: theIndex = 0',
+         '  return theIndex']);
+    code = functionName + '(' + argument1 + ', ' + argument0 + ')';
+    return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+  } else {
+    var functionName = Blockly.Python.provideFunction_(
+        'last_index',
+        ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList, elem):',
+         '  try: theIndex = len(myList) - myList[::-1].index(elem)',
+         '  except: theIndex = 0',
+         '  return theIndex']);
+    code = functionName + '(' + argument1 + ', ' + argument0 + ')';
+    return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+  }
+};@,List,,,,
+lists_getIndex,@Blockly.Blocks['lists_getIndex'] = {
+  /**
+   * Block for getting element at index.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var MODE =
+        [[Blockly.Msg.LISTS_GET_INDEX_GET, 'GET'],
+         [Blockly.Msg.LISTS_GET_INDEX_GET_REMOVE, 'GET_REMOVE'],
+         [Blockly.Msg.LISTS_GET_INDEX_REMOVE, 'REMOVE']];
+    this.WHERE_OPTIONS =
+        [[Blockly.Msg.LISTS_GET_INDEX_FROM_START, 'FROM_START'],
+         [Blockly.Msg.LISTS_GET_INDEX_FROM_END, 'FROM_END'],
+         [Blockly.Msg.LISTS_GET_INDEX_FIRST, 'FIRST'],
+         [Blockly.Msg.LISTS_GET_INDEX_LAST, 'LAST'],
+         [Blockly.Msg.LISTS_GET_INDEX_RANDOM, 'RANDOM']];
+    this.setHelpUrl(Blockly.Msg.LISTS_GET_INDEX_HELPURL);
+    this.setColour(window.ColorArray.List);
+    var modeMenu = new Blockly.FieldDropdown(MODE, function(value) {
+      var isStatement = (value == 'REMOVE');
+      this.sourceBlock_.updateStatement_(isStatement);
+    });
+    this.appendValueInput('VALUE')
+        .setCheck('Array')
+        .appendField(Blockly.Msg.LISTS_GET_INDEX_INPUT_IN_LIST);
+    this.appendDummyInput()
+        .appendField(modeMenu, 'MODE')
+        .appendField('', 'SPACE');
+    this.appendDummyInput('AT');
+    if (Blockly.Msg.LISTS_GET_INDEX_TAIL) {
+      this.appendDummyInput('TAIL')
+          .appendField(Blockly.Msg.LISTS_GET_INDEX_TAIL);
+    }
+    this.setInputsInline(true);
+    this.setOutput(true);
+    this.updateAt_(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      var combo = thisBlock.getFieldValue('MODE') + '_' +
+          thisBlock.getFieldValue('WHERE');
+      return Blockly.Msg['LISTS_GET_INDEX_TOOLTIP_' + combo];
+    });
+  },
+  /**
+   * Create XML to represent whether the block is a statement or a value.
+   * Also represent whether there is an 'AT' input.
+   * @@return {Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var isStatement = !this.outputConnection;
+    container.setAttribute('statement', isStatement);
+    var isAt = this.getInput('AT').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at', isAt);
+    return container;
+  },
+  /**
+   * Parse XML to restore the 'AT' input.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    // Note: Until January 2013 this block did not have mutations,
+    // so 'statement' defaults to false and 'at' defaults to true.
+    var isStatement = (xmlElement.getAttribute('statement') == 'true');
+    this.updateStatement_(isStatement);
+    var isAt = (xmlElement.getAttribute('at') != 'false');
+    this.updateAt_(isAt);
+  },
+  /**
+   * Switch between a value block and a statement block.
+   * @@param {boolean} newStatement True if the block should be a statement.
+   *     False if the block should be a value.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateStatement_: function(newStatement) {
+    var oldStatement = !this.outputConnection;
+    if (newStatement != oldStatement) {
+      this.unplug(true, true);
+      if (newStatement) {
+        this.setOutput(false);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+      } else {
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
+        this.setOutput(true);
+      }
+    }
+  },
+  /**
+   * Create or delete an input for the numeric index.
+   * @@param {boolean} isAt True if the input should exist.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateAt_: function(isAt) {
+    // Destroy old 'AT' and 'ORDINAL' inputs.
+    this.removeInput('AT');
+    this.removeInput('ORDINAL', true);
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT').setCheck('Number');
+      if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
+        this.appendDummyInput('ORDINAL')
+            .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
+      }
+    } else {
+      this.appendDummyInput('AT');
+    }
+    var menu = new Blockly.FieldDropdown(this.WHERE_OPTIONS, function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt_(newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setFieldValue(value, 'WHERE');
+        return null;
+      }
+      return undefined;
+    });
+    this.getInput('AT').appendField(menu, 'WHERE');
+    if (Blockly.Msg.LISTS_GET_INDEX_TAIL) {
+      this.moveInputBefore('TAIL', null);
+    }
+  }
+};@,@Blockly.Python['lists_getIndex'] = function(block) {
+  // Get element at index.
+  // Note: Until January 2013 this block did not have MODE or WHERE inputs.
+  var mode = block.getFieldValue('MODE') || 'GET';
+  var where = block.getFieldValue('WHERE') || 'FROM_START';
+  var at = Blockly.Python.valueToCode(block, 'AT',
+      Blockly.Python.ORDER_UNARY_SIGN) || '1';
+  var list = Blockly.Python.valueToCode(block, 'VALUE',
+      Blockly.Python.ORDER_MEMBER) || '[]';
+
+  if (where == 'FIRST') {
+    if (mode == 'GET') {
+      var code = list + '[0]';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    } else {
+      var code = list + '.pop(0)';
+      if (mode == 'GET_REMOVE') {
+        return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+      } else if (mode == 'REMOVE') {
+        return code + '\n';
+      }
+    }
+  } else if (where == 'LAST') {
+    if (mode == 'GET') {
+      var code = list + '[-1]';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    } else {
+      var code = list + '.pop()';
+      if (mode == 'GET_REMOVE') {
+        return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+      } else if (mode == 'REMOVE') {
+        return code + '\n';
+      }
+    }
+  } else if (where == 'FROM_START') {
+    // Blockly uses one-based indicies.
+    if (Blockly.isNumber(at)) {
+      // If the index is a naked number, decrement it right now.
+      at = parseInt(at, 10) - 1;
+    } else {
+      // If the index is dynamic, decrement it in code.
+      at = 'int(' + at + ' - 1)';
+    }
+    if (mode == 'GET') {
+      var code = list + '[' + at + ']';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    } else {
+      var code = list + '.pop(' + at + ')';
+      if (mode == 'GET_REMOVE') {
+        return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+      } else if (mode == 'REMOVE') {
+        return code + '\n';
+      }
+    }
+  } else if (where == 'FROM_END') {
+    if (mode == 'GET') {
+      var code = list + '[-' + at + ']';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    } else {
+      var code = list + '.pop(-' + at + ')';
+      if (mode == 'GET_REMOVE') {
+        return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+      } else if (mode == 'REMOVE') {
+        return code + '\n';
+      }
+    }
+  } else if (where == 'RANDOM') {
+    Blockly.Python.definitions_['import_random'] = 'import random';
+    if (mode == 'GET') {
+      code = 'random.choice(' + list + ')';
+      return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+    } else {
+      var functionName = Blockly.Python.provideFunction_(
+          'lists_remove_random_item',
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
+           '  x = int(random.random() * len(myList))',
+           '  return myList.pop(x)']);
+      code = functionName + '(' + list + ')';
+      if (mode == 'GET_REMOVE') {
+        return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+      } else if (mode == 'REMOVE') {
+        return code + '\n';
+      }
+    }
+  }
+  throw 'Unhandled combination (lists_getIndex).';
+};@,List,,,,
+lists_setIndex,@Blockly.Blocks['lists_setIndex'] = {
+  /**
+   * Block for setting the element at index.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var MODE =
+        [[Blockly.Msg.LISTS_SET_INDEX_SET, 'SET'],
+         [Blockly.Msg.LISTS_SET_INDEX_INSERT, 'INSERT']];
+    this.WHERE_OPTIONS =
+        [[Blockly.Msg.LISTS_GET_INDEX_FROM_START, 'FROM_START'],
+         [Blockly.Msg.LISTS_GET_INDEX_FROM_END, 'FROM_END'],
+         [Blockly.Msg.LISTS_GET_INDEX_FIRST, 'FIRST'],
+         [Blockly.Msg.LISTS_GET_INDEX_LAST, 'LAST'],
+         [Blockly.Msg.LISTS_GET_INDEX_RANDOM, 'RANDOM']];
+    this.setHelpUrl(Blockly.Msg.LISTS_SET_INDEX_HELPURL);
+    this.setColour(window.ColorArray.List);
+    this.appendValueInput('LIST')
+        .setCheck('Array')
+        .appendField(Blockly.Msg.LISTS_SET_INDEX_INPUT_IN_LIST);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown(MODE), 'MODE')
+        .appendField('', 'SPACE');
+    this.appendDummyInput('AT');
+    this.appendValueInput('TO')
+        .appendField(Blockly.Msg.LISTS_SET_INDEX_INPUT_TO);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(Blockly.Msg.LISTS_SET_INDEX_TOOLTIP);
+    this.updateAt_(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      var combo = thisBlock.getFieldValue('MODE') + '_' +
+          thisBlock.getFieldValue('WHERE');
+      return Blockly.Msg['LISTS_SET_INDEX_TOOLTIP_' + combo];
+    });
+  },
+  /**
+   * Create XML to represent whether there is an 'AT' input.
+   * @@return {Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var isAt = this.getInput('AT').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at', isAt);
+    return container;
+  },
+  /**
+   * Parse XML to restore the 'AT' input.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    // Note: Until January 2013 this block did not have mutations,
+    // so 'at' defaults to true.
+    var isAt = (xmlElement.getAttribute('at') != 'false');
+    this.updateAt_(isAt);
+  },
+  /**
+   * Create or delete an input for the numeric index.
+   * @@param {boolean} isAt True if the input should exist.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateAt_: function(isAt) {
+    // Destroy old 'AT' and 'ORDINAL' input.
+    this.removeInput('AT');
+    this.removeInput('ORDINAL', true);
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT').setCheck('Number');
+      if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
+        this.appendDummyInput('ORDINAL')
+            .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
+      }
+    } else {
+      this.appendDummyInput('AT');
+    }
+    var menu = new Blockly.FieldDropdown(this.WHERE_OPTIONS, function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt_(newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setFieldValue(value, 'WHERE');
+        return null;
+      }
+      return undefined;
+    });
+    this.moveInputBefore('AT', 'TO');
+    if (this.getInput('ORDINAL')) {
+      this.moveInputBefore('ORDINAL', 'TO');
+    }
+
+    this.getInput('AT').appendField(menu, 'WHERE');
+  }
+};@,@Blockly.Python['lists_setIndex'] = function(block) {
+  // Set element at index.
+  // Note: Until February 2013 this block did not have MODE or WHERE inputs.
+  var list = Blockly.Python.valueToCode(block, 'LIST',
+      Blockly.Python.ORDER_MEMBER) || '[]';
+  var mode = block.getFieldValue('MODE') || 'GET';
+  var where = block.getFieldValue('WHERE') || 'FROM_START';
+  var at = Blockly.Python.valueToCode(block, 'AT',
+      Blockly.Python.ORDER_NONE) || '1';
+  var value = Blockly.Python.valueToCode(block, 'TO',
+      Blockly.Python.ORDER_NONE) || 'None';
+  // Cache non-trivial values to variables to prevent repeated look-ups.
+  // Closure, which accesses and modifies 'list'.
+  function cacheList() {
+    if (list.match(/^\w+$/)) {
+      return '';
+    }
+    var listVar = Blockly.Python.variableDB_.getDistinctName(
+        'tmp_list', Blockly.Variables.NAME_TYPE);
+    var code = listVar + ' = ' + list + '\n';
+    list = listVar;
+    return code;
+  }
+  if (where == 'FIRST') {
+    if (mode == 'SET') {
+      return list + '[0] = ' + value + '\n';
+    } else if (mode == 'INSERT') {
+      return list + '.insert(0, ' + value + ')\n';
+    }
+  } else if (where == 'LAST') {
+    if (mode == 'SET') {
+      return list + '[-1] = ' + value + '\n';
+    } else if (mode == 'INSERT') {
+      return list + '.append(' + value + ')\n';
+    }
+  } else if (where == 'FROM_START') {
+    // Blockly uses one-based indicies.
+    if (Blockly.isNumber(at)) {
+      // If the index is a naked number, decrement it right now.
+      at = parseInt(at, 10) - 1;
+    } else {
+      // If the index is dynamic, decrement it in code.
+      at = 'int(' + at + ' - 1)';
+    }
+    if (mode == 'SET') {
+      return list + '[' + at + '] = ' + value + '\n';
+    } else if (mode == 'INSERT') {
+      return list + '.insert(' + at + ', ' + value + ')\n';
+    }
+  } else if (where == 'FROM_END') {
+    if (mode == 'SET') {
+      return list + '[-' + at + '] = ' + value + '\n';
+    } else if (mode == 'INSERT') {
+      return list + '.insert(-' + at + ', ' + value + ')\n';
+    }
+  } else if (where == 'RANDOM') {
+    Blockly.Python.definitions_['import_random'] = 'import random';
+    var code = cacheList();
+    var xVar = Blockly.Python.variableDB_.getDistinctName(
+        'tmp_x', Blockly.Variables.NAME_TYPE);
+    code += xVar + ' = int(random.random() * len(' + list + '))\n';
+    if (mode == 'SET') {
+      code += list + '[' + xVar + '] = ' + value + '\n';
+      return code;
+    } else if (mode == 'INSERT') {
+      code += list + '.insert(' + xVar + ', ' + value + ')\n';
+      return code;
+    }
+  }
+  throw 'Unhandled combination (lists_setIndex).';
+};@,List,,,,
+lists_getSublist,@Blockly.Blocks['lists_getSublist'] = {
+  /**
+   * Block for getting sublist.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this['WHERE_OPTIONS_1'] =
+        [[Blockly.Msg.LISTS_GET_SUBLIST_START_FROM_START, 'FROM_START'],
+         [Blockly.Msg.LISTS_GET_SUBLIST_START_FROM_END, 'FROM_END'],
+         [Blockly.Msg.LISTS_GET_SUBLIST_START_FIRST, 'FIRST']];
+    this['WHERE_OPTIONS_2'] =
+        [[Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_START, 'FROM_START'],
+         [Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_END, 'FROM_END'],
+         [Blockly.Msg.LISTS_GET_SUBLIST_END_LAST, 'LAST']];
+    this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
+    this.setColour(window.ColorArray.List);
+    this.appendValueInput('LIST')
+        .setCheck('Array')
+        .appendField(Blockly.Msg.LISTS_GET_SUBLIST_INPUT_IN_LIST);
+    this.appendDummyInput('AT1');
+    this.appendDummyInput('AT2');
+    if (Blockly.Msg.LISTS_GET_SUBLIST_TAIL) {
+      this.appendDummyInput('TAIL')
+          .appendField(Blockly.Msg.LISTS_GET_SUBLIST_TAIL);
+    }
+    this.setInputsInline(true);
+    this.setOutput(true, 'Array');
+    this.updateAt_(1, true);
+    this.updateAt_(2, true);
+    this.setTooltip(Blockly.Msg.LISTS_GET_SUBLIST_TOOLTIP);
+  },
+  /**
+   * Create XML to represent whether there are 'AT' inputs.
+   * @@return {Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var isAt1 = this.getInput('AT1').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at1', isAt1);
+    var isAt2 = this.getInput('AT2').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at2', isAt2);
+    return container;
+  },
+  /**
+   * Parse XML to restore the 'AT' inputs.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    var isAt1 = (xmlElement.getAttribute('at1') == 'true');
+    var isAt2 = (xmlElement.getAttribute('at2') == 'true');
+    this.updateAt_(1, isAt1);
+    this.updateAt_(2, isAt2);
+  },
+  /**
+   * Create or delete an input for a numeric index.
+   * This block has two such inputs, independant of each other.
+   * @@param {number} n Specify first or second input (1 or 2).
+   * @@param {boolean} isAt True if the input should exist.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateAt_: function(n, isAt) {
+    // Create or delete an input for the numeric index.
+    // Destroy old 'AT' and 'ORDINAL' inputs.
+    this.removeInput('AT' + n);
+    this.removeInput('ORDINAL' + n, true);
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT' + n).setCheck('Number');
+      if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
+        this.appendDummyInput('ORDINAL' + n)
+            .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
+      }
+    } else {
+      this.appendDummyInput('AT' + n);
+    }
+    var menu = new Blockly.FieldDropdown(this['WHERE_OPTIONS_' + n],
+        function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt_(n, newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setFieldValue(value, 'WHERE' + n);
+        return null;
+      }
+      return undefined;
+    });
+    this.getInput('AT' + n)
+        .appendField(menu, 'WHERE' + n);
+    if (n == 1) {
+      this.moveInputBefore('AT1', 'AT2');
+      if (this.getInput('ORDINAL1')) {
+        this.moveInputBefore('ORDINAL1', 'AT2');
+      }
+    }
+    if (Blockly.Msg.LISTS_GET_SUBLIST_TAIL) {
+      this.moveInputBefore('TAIL', null);
+    }
+  }
+};@,@Blockly.Python['lists_getSublist'] = function(block) {
+  // Get sublist.
+  var list = Blockly.Python.valueToCode(block, 'LIST',
+      Blockly.Python.ORDER_MEMBER) || '[]';
+  var where1 = block.getFieldValue('WHERE1');
+  var where2 = block.getFieldValue('WHERE2');
+  var at1 = Blockly.Python.valueToCode(block, 'AT1',
+      Blockly.Python.ORDER_ADDITIVE) || '1';
+  var at2 = Blockly.Python.valueToCode(block, 'AT2',
+      Blockly.Python.ORDER_ADDITIVE) || '1';
+  if (where1 == 'FIRST' || (where1 == 'FROM_START' && at1 == '1')) {
+    at1 = '';
+  } else if (where1 == 'FROM_START') {
+    // Blockly uses one-based indicies.
+    if (Blockly.isNumber(at1)) {
+      // If the index is a naked number, decrement it right now.
+      at1 = parseInt(at1, 10) - 1;
+    } else {
+      // If the index is dynamic, decrement it in code.
+      at1 = 'int(' + at1 + ' - 1)';
+    }
+  } else if (where1 == 'FROM_END') {
+    if (Blockly.isNumber(at1)) {
+      at1 = -parseInt(at1, 10);
+    } else {
+      at1 = '-int(' + at1 + ')';
+    }
+  }
+  if (where2 == 'LAST' || (where2 == 'FROM_END' && at2 == '1')) {
+    at2 = '';
+  } else if (where1 == 'FROM_START') {
+    if (Blockly.isNumber(at2)) {
+      at2 = parseInt(at2, 10);
+    } else {
+      at2 = 'int(' + at2 + ')';
+    }
+  } else if (where1 == 'FROM_END') {
+    if (Blockly.isNumber(at2)) {
+      // If the index is a naked number, increment it right now.
+      // Add special case for -0.
+      at2 = 1 - parseInt(at2, 10);
+      if (at2 == 0) {
+        at2 = '';
+      }
+    } else {
+      // If the index is dynamic, increment it in code.
+      Blockly.Python.definitions_['import_sys'] = 'import sys';
+      at2 = 'int(1 - ' + at2 + ') or sys.maxsize';
+    }
+  }
+  var code = list + '[' + at1 + ' : ' + at2 + ']';
+  return [code, Blockly.Python.ORDER_MEMBER];
+};@,List,,,,
+lists_split,@Blockly.Blocks['lists_split'] = {
+  /**
+   * Block for splitting text into a list, or joining a list into text.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
+    var dropdown = new Blockly.FieldDropdown(
+        [[Blockly.Msg.LISTS_SPLIT_LIST_FROM_TEXT, 'SPLIT'],
+         [Blockly.Msg.LISTS_SPLIT_TEXT_FROM_LIST, 'JOIN']],
+        function(newMode) {
+          thisBlock.updateType_(newMode);
+        });
+    this.setHelpUrl(Blockly.Msg.LISTS_SPLIT_HELPURL);
+    this.setColour(window.ColorArray.List);
+    this.appendValueInput('INPUT')
+        .setCheck('String')
+        .appendField(dropdown, 'MODE');
+    this.appendValueInput('DELIM')
+        .setCheck('String')
+        .appendField(Blockly.Msg.LISTS_SPLIT_WITH_DELIMITER);
+    this.setInputsInline(true);
+    this.setOutput(true, 'Array');
+    this.setTooltip(function() {
+      var mode = thisBlock.getFieldValue('MODE');
+      if (mode == 'SPLIT') {
+        return Blockly.Msg.LISTS_SPLIT_TOOLTIP_SPLIT;
+      } else if (mode == 'JOIN') {
+        return Blockly.Msg.LISTS_SPLIT_TOOLTIP_JOIN;
+      }
+      throw 'Unknown mode: ' + mode;
+    });
+  },
+  /**
+   * Modify this block to have the correct input and output types.
+   * @@param {string} newMode Either 'SPLIT' or 'JOIN'.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateType_: function(newMode) {
+    if (newMode == 'SPLIT') {
+      this.outputConnection.setCheck('Array');
+      this.getInput('INPUT').setCheck('String');
+    } else {
+      this.outputConnection.setCheck('String');
+      this.getInput('INPUT').setCheck('Array');
+    }
+  },
+  /**
+   * Create XML to represent the input and output types.
+   * @@return {!Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('mode', this.getFieldValue('MODE'));
+    return container;
+  },
+  /**
+   * Parse XML to restore the input and output types.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    this.updateType_(xmlElement.getAttribute('mode'));
+  }
+};@,@Blockly.Python['lists_split'] = function(block) {
+  // Block for splitting text into a list, or joining a list into text.
+  var mode = block.getFieldValue('MODE');
+  if (mode == 'SPLIT') {
+    var value_input = Blockly.Python.valueToCode(block, 'INPUT',
+        Blockly.Python.ORDER_MEMBER) || '\'\'';
+    var value_delim = Blockly.Python.valueToCode(block, 'DELIM',
+        Blockly.Python.ORDER_NONE);
+    var code = value_input + '.split(' + value_delim + ')';
+  } else if (mode == 'JOIN') {
+    var value_input = Blockly.Python.valueToCode(block, 'INPUT',
+        Blockly.Python.ORDER_NONE) || '[]';
+    var value_delim = Blockly.Python.valueToCode(block, 'DELIM',
+        Blockly.Python.ORDER_MEMBER) || '\'\'';
+    var code = value_delim + '.join(' + value_input + ')';
+  } else {
+    throw 'Unknown mode: ' + mode;
+  }
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};@,List,,,,
+colour_picker,@Blockly.Blocks['colour_picker'] = {
+  /**
+   * Block for colour picker.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_colour",
+          "name": "COLOUR",
+          "colour": "#ff0000"
+        }
+      ],
+      "output": "Colour",
+      "colour": window.ColorArray.Colour,
+      "helpUrl": Blockly.Msg.COLOUR_PICKER_HELPURL
+    });
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    // Colour block is trivial.  Use tooltip of parent block if it exists.
+    this.setTooltip(function() {
+      var parent = thisBlock.getParent();
+      return (parent && parent.getInputsInline() && parent.tooltip) ||
+          Blockly.Msg.COLOUR_PICKER_TOOLTIP;
+    });
+  }
+};
+@,@Blockly.Python['colour_picker'] = function(block) {
+  // Colour picker.
+  var code = '\'' + block.getFieldValue('COLOUR') + '\'';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};@,Colour,,,,
+colour_random,@Blockly.Blocks['colour_random'] = {
+  /**
+   * Block for random colour.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.COLOUR_RANDOM_TITLE,
+      "output": "Colour",
+      "colour": window.ColorArray.Colour,
+      "tooltip": Blockly.Msg.COLOUR_RANDOM_TOOLTIP,
+      "helpUrl": Blockly.Msg.COLOUR_RANDOM_HELPURL
+    });
+  }
+};@,@Blockly.Python['colour_random'] = function(block) {
+  // Generate a random colour.
+  Blockly.Python.definitions_['import_random'] = 'import random';
+  var code = '\'#%06x\' % random.randint(0, 2**24 - 1)';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};@,Colour,,,,
+colour_rgb,@Blockly.Blocks['colour_rgb'] = {
+  /**
+   * Block for composing a colour from RGB components.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.COLOUR_RGB_HELPURL);
+    this.setColour(window.ColorArray.Colour);
+    this.appendValueInput('RED')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.COLOUR_RGB_TITLE)
+        .appendField(Blockly.Msg.COLOUR_RGB_RED);
+    this.appendValueInput('GREEN')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.COLOUR_RGB_GREEN);
+    this.appendValueInput('BLUE')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.COLOUR_RGB_BLUE);
+    this.setOutput(true, 'Colour');
+    this.setTooltip(Blockly.Msg.COLOUR_RGB_TOOLTIP);
+  }
+};@,@Blockly.Python['colour_rgb'] = function(block) {
+  // Compose a colour from RGB components expressed as percentages.
+  var functionName = Blockly.Python.provideFunction_(
+      'colour_rgb',
+      [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(r, g, b):',
+        '  r = round(min(100, max(0, r)) * 2.55)',
+        '  g = round(min(100, max(0, g)) * 2.55)',
+        '  b = round(min(100, max(0, b)) * 2.55)',
+        '  return \'#%02x%02x%02x\' % (r, g, b)']);
+  var r = Blockly.Python.valueToCode(block, 'RED',
+                                     Blockly.Python.ORDER_NONE) || 0;
+  var g = Blockly.Python.valueToCode(block, 'GREEN',
+                                     Blockly.Python.ORDER_NONE) || 0;
+  var b = Blockly.Python.valueToCode(block, 'BLUE',
+                                     Blockly.Python.ORDER_NONE) || 0;
+  var code = functionName + '(' + r + ', ' + g + ', ' + b + ')';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};@,Colour,,,,
+colour_blend,@Blockly.Blocks['colour_blend'] = {
+  /**
+   * Block for blending two colours together.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.COLOUR_BLEND_HELPURL);
+    this.setColour(window.ColorArray.Colour);
+    this.appendValueInput('COLOUR1')
+        .setCheck('Colour')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.COLOUR_BLEND_TITLE)
+        .appendField(Blockly.Msg.COLOUR_BLEND_COLOUR1);
+    this.appendValueInput('COLOUR2')
+        .setCheck('Colour')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.COLOUR_BLEND_COLOUR2);
+    this.appendValueInput('RATIO')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.COLOUR_BLEND_RATIO);
+    this.setOutput(true, 'Colour');
+    this.setTooltip(Blockly.Msg.COLOUR_BLEND_TOOLTIP);
+  }
+};@,@Blockly.Python['colour_blend'] = function(block) {
+  // Blend two colours together.
+  var functionName = Blockly.Python.provideFunction_(
+      'colour_blend',
+      ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ +
+          '(colour1, colour2, ratio):',
+       '  r1, r2 = int(colour1[1:3], 16), int(colour2[1:3], 16)',
+       '  g1, g2 = int(colour1[3:5], 16), int(colour2[3:5], 16)',
+       '  b1, b2 = int(colour1[5:7], 16), int(colour2[5:7], 16)',
+       '  ratio = min(1, max(0, ratio))',
+       '  r = round(r1 * (1 - ratio) + r2 * ratio)',
+       '  g = round(g1 * (1 - ratio) + g2 * ratio)',
+       '  b = round(b1 * (1 - ratio) + b2 * ratio)',
+       '  return \'#%02x%02x%02x\' % (r, g, b)']);
+  var colour1 = Blockly.Python.valueToCode(block, 'COLOUR1',
+      Blockly.Python.ORDER_NONE) || '\'#000000\'';
+  var colour2 = Blockly.Python.valueToCode(block, 'COLOUR2',
+      Blockly.Python.ORDER_NONE) || '\'#000000\'';
+  var ratio = Blockly.Python.valueToCode(block, 'RATIO',
+      Blockly.Python.ORDER_NONE) || 0;
+  var code = functionName + '(' + colour1 + ', ' + colour2 + ', ' + ratio + ')';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};@,Colour,,,,
+procedures_defnoreturn,@Blockly.Blocks['procedures_defnoreturn'] = {
+  /**
+   * Block for defining a procedure with no return value.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var nameField = new Blockly.FieldTextInput(
+        Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE,
+        Blockly.Procedures.rename);
+    nameField.setSpellcheck(false);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE)
+        .appendField(nameField, 'NAME')
+        .appendField('', 'PARAMS');
+    this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
+    if (Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT) {
+      this.setCommentText(Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT);
+    }
+    this.setColour(window.ColorArray.Method);
+    this.setTooltip(Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP);
+    this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL);
+    this.arguments_ = [];
+    this.setStatements_(true);
+    this.statementConnection_ = null;
+  },
+  /**
+   * Initialization of the block has completed, clean up anything that may be
+   * inconsistent as a result of the XML loading.
+   * @@this Blockly.Block
+   */
+  validate: function () {
+    var name = Blockly.Procedures.findLegalName(
+        this.getFieldValue('NAME'), this);
+    this.setFieldValue(name, 'NAME');
+  },
+  /**
+   * Add or remove the statement block from this function definition.
+   * @@param {boolean} hasStatements True if a statement block is needed.
+   * @@this Blockly.Block
+   */
+  setStatements_: function(hasStatements) {
+    if (this.hasStatements_ === hasStatements) {
+      return;
+    }
+    if (hasStatements) {
+      this.appendStatementInput('STACK')
+          .appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_DO);
+      if (this.getInput('RETURN')) {
+        this.moveInputBefore('STACK', 'RETURN');
+      }
+    } else {
+      this.removeInput('STACK', true);
+    }
+    this.hasStatements_ = hasStatements;
+  },
+  /**
+   * Update the display of parameters for this procedure definition block.
+   * Display a warning if there are duplicately named parameters.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateParams_: function() {
+    // Check for duplicated arguments.
+    var badArg = false;
+    var hash = {};
+    for (var i = 0; i < this.arguments_.length; i++) {
+      if (hash['arg_' + this.arguments_[i].toLowerCase()]) {
+        badArg = true;
+        break;
+      }
+      hash['arg_' + this.arguments_[i].toLowerCase()] = true;
+    }
+    if (badArg) {
+      this.setWarningText(Blockly.Msg.PROCEDURES_DEF_DUPLICATE_WARNING);
+    } else {
+      this.setWarningText(null);
+    }
+    // Merge the arguments into a human-readable list.
+    var paramString = '';
+    if (this.arguments_.length) {
+      paramString = Blockly.Msg.PROCEDURES_BEFORE_PARAMS +
+          ' ' + this.arguments_.join(', ');
+    }
+    // The params field is deterministic based on the mutation,
+    // no need to fire a change event.
+    Blockly.Events.disable();
+    this.setFieldValue(paramString, 'PARAMS');
+    Blockly.Events.enable();
+  },
+  /**
+   * Create XML to represent the argument inputs.
+   * @@param {=boolean} opt_paramIds If true include the IDs of the parameter
+   *     quarks.  Used by Blockly.Procedures.mutateCallers for reconnection.
+   * @@return {!Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function(opt_paramIds) {
+    var container = document.createElement('mutation');
+    if (opt_paramIds) {
+      container.setAttribute('name', this.getFieldValue('NAME'));
+    }
+    for (var i = 0; i < this.arguments_.length; i++) {
+      var parameter = document.createElement('arg');
+      parameter.setAttribute('name', this.arguments_[i]);
+      if (opt_paramIds && this.paramIds_) {
+        parameter.setAttribute('paramId', this.paramIds_[i]);
+      }
+      container.appendChild(parameter);
+    }
+
+    // Save whether the statement input is visible.
+    if (!this.hasStatements_) {
+      container.setAttribute('statements', 'false');
+    }
+    return container;
+  },
+  /**
+   * Parse XML to restore the argument inputs.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    this.arguments_ = [];
+    for (var i = 0, childNode; childNode = xmlElement.childNodes[i]; i++) {
+      if (childNode.nodeName.toLowerCase() == 'arg') {
+        this.arguments_.push(childNode.getAttribute('name'));
+      }
+    }
+    this.updateParams_();
+    Blockly.Procedures.mutateCallers(this);
+
+    // Show or hide the statement input.
+    this.setStatements_(xmlElement.getAttribute('statements') !== 'false');
+  },
+  /**
+   * Populate the mutator's dialog with this block's components.
+   * @@param {!Blockly.Workspace} workspace Mutator's workspace.
+   * @@return {!Blockly.Block} Root block in mutator.
+   * @@this Blockly.Block
+   */
+  decompose: function(workspace) {
+    var containerBlock = workspace.newBlock('procedures_mutatorcontainer');
+    containerBlock.initSvg();
+
+    // Check/uncheck the allow statement box.
+    if (this.getInput('RETURN')) {
+      containerBlock.setFieldValue(this.hasStatements_ ? 'TRUE' : 'FALSE',
+                                   'STATEMENTS');
+    } else {
+      containerBlock.getInput('STATEMENT_INPUT').setVisible(false);
+    }
+
+    // Parameter list.
+    var connection = containerBlock.getInput('STACK').connection;
+    for (var i = 0; i < this.arguments_.length; i++) {
+      var paramBlock = workspace.newBlock('procedures_mutatorarg');
+      paramBlock.initSvg();
+      paramBlock.setFieldValue(this.arguments_[i], 'NAME');
+      // Store the old location.
+      paramBlock.oldLocation = i;
+      connection.connect(paramBlock.previousConnection);
+      connection = paramBlock.nextConnection;
+    }
+    // Initialize procedure's callers with blank IDs.
+    Blockly.Procedures.mutateCallers(this);
+    return containerBlock;
+  },
+  /**
+   * Reconfigure this block based on the mutator dialog's components.
+   * @@param {!Blockly.Block} containerBlock Root block in mutator.
+   * @@this Blockly.Block
+   */
+  compose: function(containerBlock) {
+    // Parameter list.
+    this.arguments_ = [];
+    this.paramIds_ = [];
+    var paramBlock = containerBlock.getInputTargetBlock('STACK');
+    while (paramBlock) {
+      this.arguments_.push(paramBlock.getFieldValue('NAME'));
+      this.paramIds_.push(paramBlock.id);
+      paramBlock = paramBlock.nextConnection &&
+          paramBlock.nextConnection.targetBlock();
+    }
+    this.updateParams_();
+    Blockly.Procedures.mutateCallers(this);
+
+    // Show/hide the statement input.
+    var hasStatements = containerBlock.getFieldValue('STATEMENTS');
+    if (hasStatements !== null) {
+      hasStatements = hasStatements == 'TRUE';
+      if (this.hasStatements_ != hasStatements) {
+        if (hasStatements) {
+          this.setStatements_(true);
+          // Restore the stack, if one was saved.
+          Blockly.Mutator.reconnect(this.statementConnection_, this, 'STACK');
+          this.statementConnection_ = null;
+        } else {
+          // Save the stack, then disconnect it.
+          var stackConnection = this.getInput('STACK').connection;
+          this.statementConnection_ = stackConnection.targetConnection;
+          if (this.statementConnection_) {
+            var stackBlock = stackConnection.targetBlock();
+            stackBlock.unplug();
+            stackBlock.bumpNeighbours_();
+          }
+          this.setStatements_(false);
+        }
+      }
+    }
+  },
+  /**
+   * Dispose of any callers.
+   * @@this Blockly.Block
+   */
+  dispose: function() {
+    var name = this.getFieldValue('NAME');
+    Blockly.Procedures.disposeCallers(name, this.workspace);
+    // Call parent's destructor.
+    this.constructor.prototype.dispose.apply(this, arguments);
+  },
+  /**
+   * Return the signature of this procedure definition.
+   * @@return {!Array} Tuple containing three elements:
+   *     - the name of the defined procedure,
+   *     - a list of all its arguments,
+   *     - that it DOES NOT have a return value.
+   * @@this Blockly.Block
+   */
+  getProcedureDef: function() {
+    return [this.getFieldValue('NAME'), this.arguments_, false];
+  },
+  /**
+   * Return all variables referenced by this block.
+   * @@return {!Array.<string>} List of variable names.
+   * @@this Blockly.Block
+   */
+  getVars: function() {
+    return this.arguments_;
+  },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @@param {string} oldName Previous name of variable.
+   * @@param {string} newName Renamed variable.
+   * @@this Blockly.Block
+   */
+  renameVar: function(oldName, newName) {
+    var change = false;
+    for (var i = 0; i < this.arguments_.length; i++) {
+      if (Blockly.Names.equals(oldName, this.arguments_[i])) {
+        this.arguments_[i] = newName;
+        change = true;
+      }
+    }
+    if (change) {
+      this.updateParams_();
+      // Update the mutator's variables if the mutator is open.
+      if (this.mutator.isVisible()) {
+        var blocks = this.mutator.workspace_.getAllBlocks();
+        for (var i = 0, block; block = blocks[i]; i++) {
+          if (block.type == 'procedures_mutatorarg' &&
+              Blockly.Names.equals(oldName, block.getFieldValue('NAME'))) {
+            block.setFieldValue(newName, 'NAME');
+          }
+        }
+      }
+    }
+  },
+  /**
+   * Add custom menu options to this block's context menu.
+   * @@param {!Array} options List of menu options to add to.
+   * @@this Blockly.Block
+   */
+  customContextMenu: function(options) {
+    // Add option to create caller.
+    var option = {enabled: true};
+    var name = this.getFieldValue('NAME');
+    option.text = Blockly.Msg.PROCEDURES_CREATE_DO.replace('%1', name);
+    var xmlMutation = goog.dom.createDom('mutation');
+    xmlMutation.setAttribute('name', name);
+    for (var i = 0; i < this.arguments_.length; i++) {
+      var xmlArg = goog.dom.createDom('arg');
+      xmlArg.setAttribute('name', this.arguments_[i]);
+      xmlMutation.appendChild(xmlArg);
+    }
+    var xmlBlock = goog.dom.createDom('block', null, xmlMutation);
+    xmlBlock.setAttribute('type', this.callType_);
+    option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
+    options.push(option);
+
+    // Add options to create getters for each parameter.
+    if (!this.isCollapsed()) {
+      for (var i = 0; i < this.arguments_.length; i++) {
+        var option = {enabled: true};
+        var name = this.arguments_[i];
+        option.text = Blockly.Msg.VARIABLES_SET_CREATE_GET.replace('%1', name);
+        var xmlField = goog.dom.createDom('field', null, name);
+        xmlField.setAttribute('name', 'VAR');
+        var xmlBlock = goog.dom.createDom('block', null, xmlField);
+        xmlBlock.setAttribute('type', 'variables_get');
+        option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
+        options.push(option);
+      }
+    }
+  },
+  callType_: 'procedures_callnoreturn' 
+};Blockly.Blocks['procedures_mutatorcontainer'] = {
+  /**
+   * Mutator block for procedure container.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE);
+    this.appendStatementInput('STACK');
+    this.appendDummyInput('STATEMENT_INPUT')
+        .appendField(Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS)
+        .appendField(new Blockly.FieldCheckbox('TRUE'), 'STATEMENTS');
+    this.setColour(window.ColorArray.Method);
+    this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP);
+    this.contextMenu = false;
+  }
+};
+
+Blockly.Blocks['procedures_mutatorarg'] = {
+  /**
+   * Mutator block for procedure argument.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.PROCEDURES_MUTATORARG_TITLE)
+        .appendField(new Blockly.FieldTextInput('x', this.validator_), 'NAME');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(window.ColorArray.Method);
+    this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP);
+    this.contextMenu = false;
+  },
+  /**
+   * Obtain a valid name for the procedure.
+   * Merge runs of whitespace.  Strip leading and trailing whitespace.
+   * Beyond this, all names are legal.
+   * @@param {string} newVar User-supplied name.
+   * @@return {?string} Valid name, or null if a name was not specified.
+   * @@private
+   * @@this Blockly.Block
+   */
+  validator_: function(newVar) {
+    newVar = newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
+    return newVar || null;
+  }
+};
+
+Blockly.Blocks['procedures_callnoreturn'] = {
+  /**
+   * Block for calling a procedure with no return value.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.appendDummyInput('TOPROW')
+        .appendField(this.id, 'NAME');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(window.ColorArray.Method);
+    // Tooltip is set in renameProcedure.
+    this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL);
+    this.arguments_ = [];
+    this.quarkConnections_ = {};
+    this.quarkIds_ = null;
+  },
+  /**
+   * Returns the name of the procedure this block calls.
+   * @@return {string} Procedure name.
+   * @@this Blockly.Block
+   */
+  getProcedureCall: function() {
+    // The NAME field is guaranteed to exist, null will never be returned.
+    return /** @@type {string} */ (this.getFieldValue('NAME'));
+  },
+  /**
+   * Notification that a procedure is renaming.
+   * If the name matches this block's procedure, rename it.
+   * @@param {string} oldName Previous name of procedure.
+   * @@param {string} newName Renamed procedure.
+   * @@this Blockly.Block
+   */
+  renameProcedure: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getProcedureCall())) {
+      this.setFieldValue(newName, 'NAME');
+      this.setTooltip(
+          (this.outputConnection ? Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP :
+           Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP)
+          .replace('%1', newName));
+    }
+  },
+  /**
+   * Notification that the procedure's parameters have changed.
+   * @@param {!Array.<string>} paramNames New param names, e.g. ['x', 'y', 'z'].
+   * @@param {!Array.<string>} paramIds IDs of params (consistent for each
+   *     parameter through the life of a mutator, regardless of param renaming),
+   *     e.g. ['piua', 'f8b_', 'oi.o'].
+   * @@private
+   * @@this Blockly.Block
+   */
+  setProcedureParameters_: function(paramNames, paramIds) {
+    // Data structures:
+    // this.arguments = ['x', 'y']
+    //     Existing param names.
+    // this.quarkConnections_ {piua: null, f8b_: Blockly.Connection}
+    //     Look-up of paramIds to connections plugged into the call block.
+    // this.quarkIds_ = ['piua', 'f8b_']
+    //     Existing param IDs.
+    // Note that quarkConnections_ may include IDs that no longer exist, but
+    // which might reappear if a param is reattached in the mutator.
+    var defBlock = Blockly.Procedures.getDefinition(this.getProcedureCall(),
+        this.workspace);
+    var mutatorOpen = defBlock && defBlock.mutator &&
+        defBlock.mutator.isVisible();
+    if (!mutatorOpen) {
+      this.quarkConnections_ = {};
+      this.quarkIds_ = null;
+    }
+    if (!paramIds) {
+      // Reset the quarks (a mutator is about to open).
+      return;
+    }
+    if (goog.array.equals(this.arguments_, paramNames)) {
+      // No change.
+      this.quarkIds_ = paramIds;
+      return;
+    }
+    if (paramIds.length != paramNames.length) {
+      throw 'Error: paramNames and paramIds must be the same length.';
+    }
+    this.setCollapsed(false);
+    if (!this.quarkIds_) {
+      // Initialize tracking for this block.
+      this.quarkConnections_ = {};
+      if (paramNames.join('\n') == this.arguments_.join('\n')) {
+        // No change to the parameters, allow quarkConnections_ to be
+        // populated with the existing connections.
+        this.quarkIds_ = paramIds;
+      } else {
+        this.quarkIds_ = [];
+      }
+    }
+    // Switch off rendering while the block is rebuilt.
+    var savedRendered = this.rendered;
+    this.rendered = false;
+    // Update the quarkConnections_ with existing connections.
+    for (var i = 0; i < this.arguments_.length; i++) {
+      var input = this.getInput('ARG' + i);
+      if (input) {
+        var connection = input.connection.targetConnection;
+        this.quarkConnections_[this.quarkIds_[i]] = connection;
+        if (mutatorOpen && connection &&
+            paramIds.indexOf(this.quarkIds_[i]) == -1) {
+          // This connection should no longer be attached to this block.
+          connection.disconnect();
+          connection.getSourceBlock().bumpNeighbours_();
+        }
+      }
+    }
+    // Rebuild the block's arguments.
+    this.arguments_ = [].concat(paramNames);
+    this.updateShape_();
+    this.quarkIds_ = paramIds;
+    // Reconnect any child blocks.
+    if (this.quarkIds_) {
+      for (var i = 0; i < this.arguments_.length; i++) {
+        var quarkId = this.quarkIds_[i];
+        if (quarkId in this.quarkConnections_) {
+          var connection = this.quarkConnections_[quarkId];
+          if (!Blockly.Mutator.reconnect(connection, this, 'ARG' + i)) {
+            // Block no longer exists or has been attached elsewhere.
+            delete this.quarkConnections_[quarkId];
+          }
+        }
+      }
+    }
+    // Restore rendering and show the changes.
+    this.rendered = savedRendered;
+    if (this.rendered) {
+      this.render();
+    }
+  },
+  /**
+   * Modify this block to have the correct number of arguments.
+   * @@private
+   * @@this Blockly.Block
+   */
+  updateShape_: function() {
+    for (var i = 0; i < this.arguments_.length; i++) {
+      var field = this.getField('ARGNAME' + i);
+      if (field) {
+        // Ensure argument name is up to date.
+        // The argument name field is deterministic based on the mutation,
+        // no need to fire a change event.
+        Blockly.Events.disable();
+        field.setValue(this.arguments_[i]);
+        Blockly.Events.enable();
+      } else {
+        // Add new input.
+        field = new Blockly.FieldLabel(this.arguments_[i]);
+        var input = this.appendValueInput('ARG' + i)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(field, 'ARGNAME' + i);
+        input.init();
+      }
+    }
+    // Remove deleted inputs.
+    while (this.getInput('ARG' + i)) {
+      this.removeInput('ARG' + i);
+      i++;
+    }
+    // Add 'with:' if there are parameters, remove otherwise.
+    var topRow = this.getInput('TOPROW');
+    if (topRow) {
+      if (this.arguments_.length) {
+        if (!this.getField('WITH')) {
+          topRow.appendField(Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS, 'WITH');
+          topRow.init();
+        }
+      } else {
+        if (this.getField('WITH')) {
+          topRow.removeField('WITH');
+        }
+      }
+    }
+  },
+  /**
+   * Create XML to represent the (non-editable) name and arguments.
+   * @@return {!Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('name', this.getProcedureCall());
+    for (var i = 0; i < this.arguments_.length; i++) {
+      var parameter = document.createElement('arg');
+      parameter.setAttribute('name', this.arguments_[i]);
+      container.appendChild(parameter);
+    }
+    return container;
+  },
+  /**
+   * Parse XML to restore the (non-editable) name and parameters.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    var name = xmlElement.getAttribute('name');
+    this.renameProcedure(this.getProcedureCall(), name);
+    var args = [];
+    var paramIds = [];
+    for (var i = 0, childNode; childNode = xmlElement.childNodes[i]; i++) {
+      if (childNode.nodeName.toLowerCase() == 'arg') {
+        args.push(childNode.getAttribute('name'));
+        paramIds.push(childNode.getAttribute('paramId'));
+      }
+    }
+    this.setProcedureParameters_(args, paramIds);
+  },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @@param {string} oldName Previous name of variable.
+   * @@param {string} newName Renamed variable.
+   * @@this Blockly.Block
+   */
+  renameVar: function(oldName, newName) {
+    for (var i = 0; i < this.arguments_.length; i++) {
+      if (Blockly.Names.equals(oldName, this.arguments_[i])) {
+        this.arguments_[i] = newName;
+        this.getField('ARGNAME' + i).setValue(newName);
+      }
+    }
+  },
+  /**
+   * Add menu option to find the definition block for this call.
+   * @@param {!Array} options List of menu options to add to.
+   * @@this Blockly.Block
+   */
+  customContextMenu: function(options) {
+    var option = {enabled: true};
+    option.text = Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF;
+    var name = this.getProcedureCall();
+    var workspace = this.workspace;
+    option.callback = function() {
+      var def = Blockly.Procedures.getDefinition(name, workspace);
+      def && def.select();
+    };
+    options.push(option);
+  }
+};@,@Blockly.Python['procedures_defnoreturn'] = function(block) {
+  // Define a procedure with a return value.
+  // First, add a 'global' statement for every variable that is assigned.
+  var globals = Blockly.Variables.allVariables(block);
+  for (var i = globals.length - 1; i >= 0; i--) {
+    var varName = globals[i];
+    if (block.arguments_.indexOf(varName) == -1) {
+      globals[i] = Blockly.Python.variableDB_.getName(varName,
+          Blockly.Variables.NAME_TYPE);
+    } else {
+      // This variable is actually a parameter name.  Do not include it in
+      // the list of globals, thus allowing it be of local scope.
+      globals.splice(i, 1);
+    }
+  }
+  globals = globals.length ? '  global ' + globals.join(', ') + '\n' : '';
+  var funcName = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'),
+      Blockly.Procedures.NAME_TYPE);
+  var branch = Blockly.Python.statementToCode(block, 'STACK');
+  if (Blockly.Python.STATEMENT_PREFIX) {
+    branch = Blockly.Python.prefixLines(
+        Blockly.Python.STATEMENT_PREFIX.replace(/%1/g,
+        '\'' + block.id + '\''), Blockly.Python.INDENT) + branch;
+  }
+  if (Blockly.Python.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '"' + block.id + '"') + branch;
+  }
+  var returnValue = Blockly.Python.valueToCode(block, 'RETURN',
+      Blockly.Python.ORDER_NONE) || '';
+  if (returnValue) {
+    returnValue = '  return ' + returnValue + '\n';
+  } else if (!branch) {
+    branch = Blockly.Python.PASS;
+  }
+  var args = [];
+  for (var x = 0; x < block.arguments_.length; x++) {
+    args[x] = Blockly.Python.variableDB_.getName(block.arguments_[x],
+        Blockly.Variables.NAME_TYPE);
+  }
+  var code = 'def ' + funcName + '(' + args.join(', ') + '):\n' +
+      globals + branch + returnValue;
+  code = Blockly.Python.scrub_(block, code);
+  Blockly.Python.definitions_[funcName] = code;
+  return null;
+};Blockly.Python['procedures_callnoreturn'] = function(block) {
+  // Call a procedure with no return value.
+  var funcName = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'),
+      Blockly.Procedures.NAME_TYPE);
+  var args = [];
+  for (var x = 0; x < block.arguments_.length; x++) {
+    args[x] = Blockly.Python.valueToCode(block, 'ARG' + x,
+        Blockly.Python.ORDER_NONE) || 'None';
+  }
+  var code = funcName + '(' + args.join(', ') + ')\n';
+  return code;
+};@,Method,,,,
+procedures_defreturn,@Blockly.Blocks['procedures_defreturn'] = {
+  /**
+   * Block for defining a procedure with a return value.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var nameField = new Blockly.FieldTextInput(
+        Blockly.Msg.PROCEDURES_DEFRETURN_PROCEDURE,
+        Blockly.Procedures.rename);
+    nameField.setSpellcheck(false);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_TITLE)
+        .appendField(nameField, 'NAME')
+        .appendField('', 'PARAMS');
+    this.appendValueInput('RETURN')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
+    this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
+    if (Blockly.Msg.PROCEDURES_DEFRETURN_COMMENT) {
+      this.setCommentText(Blockly.Msg.PROCEDURES_DEFRETURN_COMMENT);
+    }
+    this.setColour(window.ColorArray.Method);
+    this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP);
+    this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL);
+    this.arguments_ = [];
+    this.setStatements_(true);
+    this.statementConnection_ = null;
+  },
+  setStatements_: Blockly.Blocks['procedures_defnoreturn'].setStatements_,
+  validate: Blockly.Blocks['procedures_defnoreturn'].validate,
+  updateParams_: Blockly.Blocks['procedures_defnoreturn'].updateParams_,
+  mutationToDom: Blockly.Blocks['procedures_defnoreturn'].mutationToDom,
+  domToMutation: Blockly.Blocks['procedures_defnoreturn'].domToMutation,
+  decompose: Blockly.Blocks['procedures_defnoreturn'].decompose,
+  compose: Blockly.Blocks['procedures_defnoreturn'].compose,
+  dispose: Blockly.Blocks['procedures_defnoreturn'].dispose,
+  /**
+   * Return the signature of this procedure definition.
+   * @@return {!Array} Tuple containing three elements:
+   *     - the name of the defined procedure,
+   *     - a list of all its arguments,
+   *     - that it DOES have a return value.
+   * @@this Blockly.Block
+   */
+  getProcedureDef: function() {
+    return [this.getFieldValue('NAME'), this.arguments_, true];
+  },
+  getVars: Blockly.Blocks['procedures_defnoreturn'].getVars,
+  renameVar: Blockly.Blocks['procedures_defnoreturn'].renameVar,
+  customContextMenu: Blockly.Blocks['procedures_defnoreturn'].customContextMenu,
+  callType_: 'procedures_callreturn'
+};Blockly.Blocks['procedures_callreturn'] = {
+  /**
+   * Block for calling a procedure with a return value.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.appendDummyInput('TOPROW')
+        .appendField('', 'NAME');
+    this.setOutput(true);
+    this.setColour(window.ColorArray.Method);
+    // Tooltip is set in domToMutation.
+    this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL);
+    this.arguments_ = [];
+    this.quarkConnections_ = {};
+    this.quarkIds_ = null;
+  },
+  getProcedureCall: Blockly.Blocks['procedures_callnoreturn'].getProcedureCall,
+  renameProcedure: Blockly.Blocks['procedures_callnoreturn'].renameProcedure,
+  setProcedureParameters_:
+      Blockly.Blocks['procedures_callnoreturn'].setProcedureParameters_,
+  updateShape_: Blockly.Blocks['procedures_callnoreturn'].updateShape_,
+  mutationToDom: Blockly.Blocks['procedures_callnoreturn'].mutationToDom,
+  domToMutation: Blockly.Blocks['procedures_callnoreturn'].domToMutation,
+  renameVar: Blockly.Blocks['procedures_callnoreturn'].renameVar,
+  customContextMenu: Blockly.Blocks['procedures_callnoreturn'].customContextMenu
+};@,@Blockly.Python['procedures_defreturn'] =
+    Blockly.Python['procedures_defnoreturn'];
+Blockly.Python['procedures_callreturn'] = function(block) {   
+    var funcName = Blockly.Python.variableDB_.getName(block.getFieldValue('NAME'),       
+    Blockly.Procedures.NAME_TYPE);   
+    var args = [];   
+    for (var x = 0; x < block.arguments_.length; x++) {     
+        args[x] = Blockly.Python.valueToCode(block, 'ARG' + x,         
+    Blockly.Python.ORDER_NONE) || 'None';   }   
+    var code = funcName + '(' + args.join(', ') + ')';   
+    return [code, Blockly.Python.ORDER_FUNCTION_CALL]; 
+};@,Method,,,,
+procedures_ifreturn,@Blockly.Blocks['procedures_ifreturn'] = {
+  /**
+   * Block for conditionally returning a value from a procedure.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.appendValueInput('CONDITION')
+        .setCheck('Boolean')
+        .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
+    this.appendValueInput('VALUE')
+        .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(window.ColorArray.Method);
+    this.setTooltip(Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP);
+    this.setHelpUrl(Blockly.Msg.PROCEDURES_IFRETURN_HELPURL);
+    this.hasReturnValue_ = true;
+  },
+  /**
+   * Create XML to represent whether this block has a return value.
+   * @@return {!Element} XML storage element.
+   * @@this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('value', Number(this.hasReturnValue_));
+    return container;
+  },
+  /**
+   * Parse XML to restore whether this block has a return value.
+   * @@param {!Element} xmlElement XML storage element.
+   * @@this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    var value = xmlElement.getAttribute('value');
+    this.hasReturnValue_ = (value == 1);
+    if (!this.hasReturnValue_) {
+      this.removeInput('VALUE');
+      this.appendDummyInput('VALUE')
+        .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
+    }
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if this flow block is not nested inside a loop.
+   * @@param {!Blockly.Events.Abstract} e Change event.
+   * @@this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a procedure?
+    var block = this;
+    do {
+      if (this.FUNCTION_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      // If needed, toggle whether this block has a return value.
+      if (block.type == 'procedures_defnoreturn' && this.hasReturnValue_) {
+        this.removeInput('VALUE');
+        this.appendDummyInput('VALUE')
+          .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
+        this.hasReturnValue_ = false;
+      } else if (block.type == 'procedures_defreturn' &&
+                 !this.hasReturnValue_) {
+        this.removeInput('VALUE');
+        this.appendValueInput('VALUE')
+          .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
+        this.hasReturnValue_ = true;
+      }
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.PROCEDURES_IFRETURN_WARNING);
+    }
+  },
+  /**
+   * List of block types that are functions and thus do not need warnings.
+   * To add a new function type add this to your code:
+   * Blockly.Blocks['procedures_ifreturn'].FUNCTION_TYPES.push('custom_func');
+   */
+  FUNCTION_TYPES: ['procedures_defnoreturn', 'procedures_defreturn']
+};
+@,@Blockly.Python['procedures_ifreturn'] = function(block) {
+  var condition = Blockly.Python.valueToCode(block, 'CONDITION',
+      Blockly.Python.ORDER_NONE) || 'False';
+  var code = 'if ' + condition + ':\n';
+  if (block.hasReturnValue_) {
+    var value = Blockly.Python.valueToCode(block, 'VALUE',
+        Blockly.Python.ORDER_NONE) || 'None';
+    code += '  return ' + value + '\n';
+  } else {
+    code += '  return\n';
+  }
+  return code;
+};@,Method,,,,
+lists_create_empty,@Blockly.Blocks['lists_create_empty'] = {
+  /**
+   * Block for creating an empty list.
+   * The 'list_create_with' block is preferred as it is more flexible.
+   * <block type="lists_create_with">
+   *   <mutation items="0"></mutation>
+   * </block>
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.LISTS_CREATE_EMPTY_TITLE,
+      "output": "Array",
+      "colour": window.ColorArray.List,
+      "tooltip": Blockly.Msg.LISTS_CREATE_EMPTY_TOOLTIP,
+      "helpUrl": Blockly.Msg.LISTS_CREATE_EMPTY_HELPURL
+    });
+  }
+};
+@,@Blockly.Python['lists_create_empty'] = function(block) {
+  // Create an empty list.
+  return ['[]', Blockly.Python.ORDER_ATOMIC];
+};@,List,,,,
+exec_variable,@Blockly.Blocks['exec_variable'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Execute Variable Function")
+        .appendField(new Blockly.FieldVariable("item"), "var");
+    this.appendValueInput("input")
+        .setCheck(null)
+        .appendField("to");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(window.ColorArray.Variable);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};@,@Blockly.Python['exec_variable'] = function(block) {
+  var variable_var = Blockly.Python.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
+  var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
+  var code = variable_var+'.'+value_input+'\n';
+  return code;
+};@,Variable,,,,

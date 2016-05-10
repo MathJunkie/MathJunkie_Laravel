@@ -111,6 +111,14 @@ class ScriptCtrl extends Controller
                 $xml .= '</category>';
             }
             $xml .= '</xml>';
+            $color = category_color::all();
+            $color_script = '<script>';
+            $color_script .= 'window.ColorArray= {};';
+            foreach ($color as $c){
+                $color_script .= 'window.ColorArray[\'' . $c->name .'\'] = '.$c->color.';';
+            }
+            $color_script .= '</script>';
+            $xml = $color_script.$xml;
             $content = [];
             $content['xml'] = $xml;
             $content['structure'] = $structure;
