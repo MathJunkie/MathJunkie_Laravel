@@ -14,7 +14,7 @@ class CreateCategoryColor extends Migration
     {
         Schema::create('category_color', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->integer('color');
         });
     }
