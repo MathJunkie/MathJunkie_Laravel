@@ -16,7 +16,6 @@ class CreateCategoryColor extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->integer('color');
-            $table->nullableTimestamps();
         });
     }
 

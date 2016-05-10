@@ -8,5 +8,5 @@ class Category_color extends Model
 {
     protected $table = 'category_color';
     public $timestamps = false;
-    protected $fillable = ['structure,color'];
+    protected $fillable = ['name,color'];
 }
