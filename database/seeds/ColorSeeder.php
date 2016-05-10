@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Category_color;
 class ColorSeeder extends Seeder
 {
     /**
@@ -34,10 +33,10 @@ class ColorSeeder extends Seeder
                 "color" => "20"),
         ];
         foreach ($colors as $key => $value){
-            $color = new Category_color;
-            $color->name = $value["name"];
-            $color->color = $value["color"];
-            $color->save();
+            DB::table('category_color')->insert([
+                'name' => $value["name"],
+                'color' => $value["color"],
+            ]);
         }
     }
 }
