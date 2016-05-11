@@ -1824,7 +1824,7 @@ math_trig,@Blockly.Blocks['math_trig'] = {
       return TOOLTIPS[mode];
     });
   }
-};@,Blockly.Python['math_trig'] = Blockly.Python['math_single'];,Math,,,,
+};@,@Blockly.Python['math_trig'] = Blockly.Python['math_single'];@,Math,,,,
 math_round,@Blockly.Blocks['math_round'] = {
   /**
    * Block for rounding functions.
@@ -1855,7 +1855,7 @@ math_round,@Blockly.Blocks['math_round'] = {
       "helpUrl": Blockly.Msg.MATH_ROUND_HELPURL
     });
   }
-};@,Blockly.Python['math_round'] = Blockly.Python['math_single'];,Math,,,,
+};@,@Blockly.Python['math_round'] = Blockly.Python['math_single'];@,Math,,,,
 math_modulo,@Blockly.Blocks['math_modulo'] = {
   /**
    * Block for remainder of a division.

@@ -32,6 +32,7 @@ class ScriptCtrl extends Controller
             {
                 $script = new Script();
                 $script->name = $request->search;
+                $script->structure = "<xml><block type=\"input_list\" deletable=\"false\"><next><block type=\"statement_list\" deletable=\"false\"></block></next></block></xml>";
                 Auth::user()->scripts()->save($script);
                 return Redirect::to('script/'.$script->id);
             }
@@ -91,7 +92,9 @@ class ScriptCtrl extends Controller
             }
            $keys = array_keys($xml_array);
            foreach ($keys as $key){
-               if ($key !== "Method" && $key !== "Variable"){
+               if ($key === "Method" || $key === "Variable" || $key === "Base"){
+                   continue;
+               }
                $color = Category_color::where('name','=',$key)->first();
 
                if (empty($color)){
@@ -110,7 +113,6 @@ class ScriptCtrl extends Controller
                         $xml .= '<block type="'.$item.'"></block>';
                     }
                 }
-               }
                 $xml .= '</category>';
             }
             $xml .= '<sep></sep>';
@@ -183,8 +185,8 @@ class ScriptCtrl extends Controller
     {
         $script = Script::find($id);
         if ($script->user_id == Auth::user()->id) {
-            foreach ($script->kommentar as $comment){
-                $comment->delete();
+            foreach ($script->comments as $comment){
+                    $comment->delete();
             }
             $script->delete();
         }
