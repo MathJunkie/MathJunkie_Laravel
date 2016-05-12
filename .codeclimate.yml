@@ -1,0 +1,46 @@
+---
+engines:
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+      - php
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  phpmd:
+    enabled: true
+  phpcodesniffer:
+    enabled: true
+    config:
+      standard: "PSR1,PSR2"
+    checks:
+      Squiz Functions MultiLineFunctionDeclaration BraceOnSameLine:
+        enabled: false
+
+ratings:
+  paths:
+  - "**.css"
+  - "**.js"
+  - "**.php"
+exclude_paths:
+  - tests/*
+  - vendor/*
+  - public/font/*
+  - public/fonts/*
+  - public/images/*
+  - public/media/*
+  - public/js/Blockly/*
+  - public/js/Editor/*
+  - public/js/materialize.min.js
+  - public/js/jquery.min.js
+  - public/js/enhsplitter.js
+  - public/js/log.js
+  - public/js/slide.js
+  - public/css/jquery.webui-popover.min.css
+  - public/css/materialize.min.css
+  - public/css/splitter.css
