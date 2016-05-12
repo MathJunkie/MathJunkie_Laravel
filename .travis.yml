@@ -26,4 +26,4 @@ script:
   - vendor/bin/behat --config behat.yml
   - phpunit --coverage-clover build/logs/clover.xml
 after_script:
-  - vendor/bin/test-reporter
+  - CODECLIMATE_REPO_TOKEN=ea38ff2c19d0e7030f8acb35caa9963972a00d503c80641bce6bccf2e9ab7f33 ./vendor/bin/test-reporter
