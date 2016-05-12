@@ -2,23 +2,34 @@ language: php
 php:
   - 7
 sudo: false
+
+addons:
+    code_climate:
+        repo_token: ea38ff2c19d0e7030f8acb35caa9963972a00d503c80641bce6bccf2e9ab7f33
+
 jdk: openjdk7
+
+before_install:
+  - composer self-update
+  - composer update --no-scripts
+  - composer update
+
 install:
   - travis_retry wget -q https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.6.zip
   - unzip -qq sonar-scanner-2.6.zip
+
 before_script:
   - echo "sonar.host.url=http://sonarqube.it.dh-karlsruhe.de" >> sonar-scanner-2.6/conf/sonar-scanner.properties
   - mv .env.behat.travis .env.behat
   - mv .env.travis .env
   - chmod -R 777 storage
   - touch storage/database.sqlite
-  - composer self-update
-  - composer update --no-scripts
-  - composer update
   - php artisan migrate --seed --force
 
 script:
-  - phpunit tests/
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml tests/
   - vendor/bin/phpspec run -v
   - vendor/bin/behat --config behat.yml
-  - sonar-scanner-2.6/bin/sonar-scanner
+
+after_script:
+  - vendor/bin/test-reporter
