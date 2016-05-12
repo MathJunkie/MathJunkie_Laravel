@@ -16,7 +16,7 @@ before_script:
   - chmod -R 777 storage
   - touch storage/database.sqlite
   - composer self-update
-  - composer require codeclimate/php-test-reporter:@dev --dev
+  - composer require codeclimate/php-test-reporter --dev
   - composer update --no-scripts
   - composer update
   - php artisan migrate --seed --force
