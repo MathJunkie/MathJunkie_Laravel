@@ -4,6 +4,7 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/materialize.min.css') }}"  media="screen,projection"/>
     <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/splitter.css') }}"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/jquery.webui-popover.min.css') }}"  media="screen,projection"/>
     <!--<link type="text/css" rel="stylesheet" href="{{ URL::asset('css/script/builder.css') }}"  media="screen,projection"/>-->
     <!--Let browser know website is optimized for mobile-->
@@ -20,14 +21,11 @@
     </div>
     @include('template/header_builder')
 
-    <form style="position:absolute; left:0; top:64px; width: 100%; height: calc(100vh - 64px);" id="structure" class="row" action="{{Request::url()}}" method="post">
-        <div id="blockly" style="height: 100%; width: 100%"></div>
-            <!--?????-->
-        <input type="hidden" name="function" id="hidden_function">
-        <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
-    </form>
-    <form id="code" style="position:absolute; top: calc(100vh + 64px); left: 0; width: 100%; height: calc(100vh - 64px);">
+    <div style="position:absolute; left:0; top:64px; width: 100%; height: calc(100vh - 64px);" id="structure" class="row">
+        <div id="blockly" style="height: 100%;"></div>
+        <div id="blockly_codePreview" style="height: 100%;"></div>
+    </div>
+    <form id="code" style="position:absolute; top: calc(100vh + 64px); left: 0; width: 100%; height: calc(100vh - 64px);" action="{{Request::url()}}" method="post">
         <div style="margin-top:5%; height: 100%">
             <pre id="sageCodeSave" style="height: 75%;">{{ $script->function }}</pre>
 
@@ -36,6 +34,9 @@
                     <input name="description" id="desc" type="text" value="{{$script->description}}"/>
                     <label for="desc">Beschreibung</label>
                 </div>
+                <input type="hidden" name="function" id="hidden_function">
+                <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <input type="submit" id="saveBtn" class="teal accent-4 btn col s12" value="Save"/>
             </div>
         </div>
@@ -58,6 +59,7 @@
     {!! $content['xml'] !!}
     <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/enhsplitter.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/slide.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery.webui-popover.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
@@ -73,19 +75,10 @@
         {!! $content['function'] !!}
     </script>
     <script type="text/javascript" charset="utf-8" src="{{ URL::asset('js/Editor/ace.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/Editor/ext-language_tools.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/Editor.js') }}"></script>
     <script>
-        ace.require("ace/ext/language_tools");
-        var editor = ace.edit("sageCodeSave");
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/python");
-        editor.setOptions({
-            fontSize: "11pt",
-            showInvisibles: true,
-            enableBasicAutocompletion: true,
-            enableSnippets: true,
-            enableLiveAutocompletion: true
-        });
+        var f = new Factory();
+        var editor = f.createEditor("sageCodeSave","python");
         editor.commands.addCommand({
             name: "insertgenerated",
             bindKey: {
@@ -96,6 +89,10 @@
                 editor.setValue(editor.getValue()+"\n"+$('#hidden_function').val()); }
         });
         window.Codeeditor = editor;
+
+        editor = f.createEditor("blockly_codePreview","python");
+        editor.setReadOnly(true);
+        window.Codepreview = editor;
     </script>
     @include('template/include_comments')
 
@@ -104,6 +101,7 @@
         function updateCode(){
             var code = Blockly.Python.workspaceToCode(Blockly.getMainWorkspace());
             $('#hidden_function').val(code);
+            window.Codepreview.setValue(code);
         }
 
         $(document).ready(function() {
@@ -179,6 +177,7 @@
                 url:'#settingsMenu'
             });
 
+
             $('#settingsMenu').hide();
 
             $('select').not('.disabled').material_select();
@@ -187,6 +186,16 @@
             });
             $('#fontsize').change(function(){
                 window.Codeeditor.setFontSize($(this).val()+"px");
+            });
+        });
+
+        jQuery(function ($) {
+            $('#structure').enhsplitter({
+                invisible: true,
+                position: '90%',
+                onDragEnd: function () {
+                    window.Codepreview.resize();
+                }
             });
         });
 
