@@ -24,5 +24,4 @@ script:
   - phpunit tests/
   - vendor/bin/phpspec run -v
   - vendor/bin/behat --config behat.yml
-after_script:
-  - /vendor/bin/test-reporter
+  - vendor/bin/test-reporter
