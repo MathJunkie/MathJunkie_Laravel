@@ -27,7 +27,7 @@ before_script:
   - php artisan migrate --seed --force
 
 script:
-  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml --whitelist tests/
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml tests/
   - vendor/bin/phpspec run -v
   - vendor/bin/behat --config behat.yml
 
