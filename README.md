@@ -1,6 +1,9 @@
 # MathJunkie_Laravel
 Laravel adoptation of our project
 
-[![Build Status](https://travis-ci.org/MathJunkie/MathJunkie_Laravel.svg?branch=master)](https://travis-ci.org/MathJunkie/MathJunkie_Laravel)
+# Project Status
 
-[![Coverage Status](https://img.shields.io/badge/Coverage-24.1%25-orange.svg)](http://193.196.7.25/overview?id=5405)
+[![Build Status](https://travis-ci.org/MathJunkie/MathJunkie_Laravel.svg?branch=master)](https://travis-ci.org/MathJunkie/MathJunkie_Laravel)
+[![Code Climate](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel/badges/gpa.svg)](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel)
+[![Test Coverage](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel/badges/coverage.svg)](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel/coverage)
+[![Issue Count](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel/badges/issue_count.svg)](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel)
