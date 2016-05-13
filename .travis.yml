@@ -21,16 +21,16 @@ install:
 before_script:
   - echo "sonar.host.url=http://sonarqube.it.dh-karlsruhe.de" >> sonar-scanner-2.6/conf/sonar-scanner.properties
   - mv .env.behat.travis .env.behat
-  - mv .env.travis .env
+  - mv .env.travis32332 .env
   - chmod -R 777 storage
   - touch storage/database.sqlite
   - php artisan migrate --seed --force
 
 script:
-  - vendor/bin/phpunit --coverahihuuizge-clover build/logs/clover.xml tests/
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml tests/
   - vendor/bin/phpspec run -v
   - vendor/bin/behat --config behat.yml
-  - sonar-scanner-2.6/bin/sonar-scanner
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then sonar-scanner-2.6/bin/sonar-scanner; fi
 
 after_script:
   - vendor/bin/test-reporter
@@ -39,4 +39,4 @@ after_success:
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then curl https://bot.bomberus.de/$api_key/deployment.php > /dev/null; fi
 
 after_failure:
-  - send_ticket.sh
+  - ./.send_ticket.sh
