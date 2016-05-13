@@ -39,4 +39,4 @@ after_success:
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then curl https://bot.bomberus.de/$api_key/deployment.php > /dev/null; fi
 
 after_failure:
-  - ./send_ticket.sh
+  - send_ticket.sh
