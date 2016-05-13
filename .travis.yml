@@ -23,11 +23,11 @@ before_script:
   - mv .env.behat.travis .env.behat
   - mv .env.travis .env
   - chmod -R 777 storage
-  - touch storage/database2.sqlite
+  - touch storage/database.sqlite
   - php artisan migrate --seed --force
 
 script:
-  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml tests/
+  - vendor/bin/phpunit --coverahihuuizge-clover build/logs/clover.xml tests/
   - vendor/bin/phpspec run -v
   - vendor/bin/behat --config behat.yml
   - sonar-scanner-2.6/bin/sonar-scanner
