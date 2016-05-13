@@ -30,10 +30,13 @@ script:
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml tests/
   - vendor/bin/phpspec run -v
   - vendor/bin/behat --config behat.yml
-  - sonar-scanner-2.6/bin/sonar-scanner
 
 after_script:
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then sonar-scanner-2.6/bin/sonar-scanner; fi
   - vendor/bin/test-reporter
 
 after_success:
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then curl https://bot.bomberus.de/$api_key/deployment.php > /dev/null; fi
+
+after_failure:
+  - ./.send_ticket.sh
