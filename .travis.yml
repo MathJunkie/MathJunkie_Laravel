@@ -9,22 +9,7 @@ addons:
 
 jdk: openjdk7
 
-before_install:
-  - composer self-update
-  - composer update --no-scripts
-  - composer update
 
-install:
-  - travis_retry wget -q https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.6.zip
-  - unzip -qq sonar-scanner-2.6.zip
-
-before_script:
-  - echo "sonar.host.url=http://sonarqube.it.dh-karlsruhe.de" >> sonar-scanner-2.6/conf/sonar-scanner.properties
-  - mv .env.behat.travis .env.behat
-  - mv .env.travis32332 .env
-  - chmod -R 777 storage
-  - touch storage/database.sqlite
-  - php artisan migrate --seed --force
 
 script:
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml tests/
