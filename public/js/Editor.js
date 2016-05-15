@@ -7,7 +7,7 @@ function Factory() {
         var editor = ace.edit(id);
         if(type === "javascript"){
             new JavascriptEditor(editor);
-        } else if(type === "phyton"){
+        } else if(type === "python"){
             new PhytonEditor(editor);
         }
         editor.setTheme("ace/theme/monokai");

@@ -35,7 +35,7 @@
                     <label for="desc">Beschreibung</label>
                 </div>
                 <input type="hidden" name="function" id="hidden_function">
-                <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
+                <input type="hidden" name="xml" id="xmlhidden_input" value='{{ $script->structure }}'>
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <input type="submit" id="saveBtn" class="teal accent-4 btn col s12" value="Save"/>
             </div>

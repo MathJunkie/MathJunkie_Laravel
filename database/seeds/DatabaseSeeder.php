@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(BlockSeeder::class);
+        $this->call(ScriptSeeder::class);
         $this->call(ColorSeeder::class);
 
         //Create standard Blocks

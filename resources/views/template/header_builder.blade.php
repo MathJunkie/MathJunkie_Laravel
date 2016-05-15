@@ -35,11 +35,11 @@
         </div>
     </nav>
 </div>
-
+@if(empty($isView))
 <div id='slider' class="white">
     <iframe src="https://wiki.bomberus.de" height="100%" width="500"></iframe>
 </div>
-
+@endif
 <div id="slide-out" class="grey side-nav darken-3">
 
 </div>
