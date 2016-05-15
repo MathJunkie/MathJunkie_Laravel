@@ -1,0 +1,314 @@
+Mandelbrot,@<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="input_list" id="XcV:HY+/@@CV/~3}[O*08" deletable="false" x="-1563" y="-487">
+    <statement name="NAME">
+      <block type="input_slider" id="m?Dxr_c5U0|?23.0]]|#">
+        <field name="var">expo</field>
+        <field name="min">-10</field>
+        <field name="max">10</field>
+        <field name="step">0.1</field>
+        <field name="titel">expo</field>
+        <next>
+          <block type="input_slider" id="+KR:/|*_9+^xSMYjS,+A">
+            <field name="var">iterations</field>
+            <field name="min">1</field>
+            <field name="max">100</field>
+            <field name="step">1</field>
+            <field name="titel">iterations</field>
+            <next>
+              <block type="input_rangeslider" id="=rs#.+WZv3)y6Y}U19|C">
+                <field name="var">zoom_x</field>
+                <field name="min">-2</field>
+                <field name="max">2</field>
+                <field name="step">0.01</field>
+                <field name="titel">zoom_x</field>
+                <next>
+                  <block type="input_rangeslider" id="#o1Lle,6!1!=9HjOoybs">
+                    <field name="var">zoom_y</field>
+                    <field name="min">-2</field>
+                    <field name="max">2</field>
+                    <field name="step">0.01</field>
+                    <field name="titel">zoom_y</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="statement_list" id="38XlsG.@@aqqb2BUPp]V/" deletable="false">
+        <statement name="NAME">
+          <block type="variable_init" id="D0Rc]@@[d1p5UC[ERjvvU">
+            <field name="variable">z</field>
+            <next>
+              <block type="variable_init" id="[Cq;#[D).S4Xw?ZcA`b,">
+                <field name="variable">c</field>
+                <next>
+                  <block type="function_set" id="M(c;G,_#}0g!c4`uo1e%">
+                    <field name="function_name">f</field>
+                    <field name="parameters">z,c</field>
+                    <value name="input">
+                      <block type="math_arithmetic" id="/YZLl,3lpq|mj1^^cWs9">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="math_arithmetic" id="Jsm^z9s(C`td1IWhh_xp">
+                            <field name="OP">POWER</field>
+                            <value name="A">
+                              <block type="variables_get" id="DNQ=m[Nu9[97GUG,/_YD">
+                                <field name="VAR">z</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="|b8HgKZ1A-C}m,t3OIZ`">
+                                <field name="VAR">expo</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="C~y`:ULiCbl)H-#B5%p;">
+                            <field name="VAR">c</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="function_set" id="16.C0LSXjll|VNCIpS!}">
+                        <field name="function_name">ff_m</field>
+                        <field name="parameters"></field>
+                        <value name="input">
+                          <block type="function_get" id="|FFD*tyK:e)%vku4Qmt(">
+                            <field name="function_name">fast_callable</field>
+                            <field name="params">f, vars=[z,c],domain=CDF</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_repeat_ext" id="8ckXr5;c/k[)}~BO{3.;">
+                            <value name="TIMES">
+                              <block type="math_arithmetic" id="Vv_p|qyvovsA}Ay(pSqk">
+                                <field name="OP">DIVIDE</field>
+                                <value name="A">
+                                  <block type="variables_get" id="M^Z.)5AdF%OnYblJ-;4O">
+                                    <field name="VAR">iterations</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="VMc7[g1KTa=Ejj2x}D-U">
+                                    <field name="NUM">3</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO">
+                              <block type="function_set" id="#V8AE5004^%^LtMR^DBN">
+                                <field name="function_name">f</field>
+                                <field name="parameters">z,c</field>
+                                <value name="input">
+                                  <block type="math_arithmetic" id="iwO%@@klLalj56Ifos^,R">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <block type="math_arithmetic" id=")6W.i}0@@tQE|]q^q9xU{">
+                                        <field name="OP">POWER</field>
+                                        <value name="A">
+                                          <block type="function_get" id="X!}9~kyYewpBBw(l#7gW">
+                                            <field name="function_name">f</field>
+                                            <field name="params">z,c</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="variables_get" id="Z2([e,J^a[8o)m~O18yd">
+                                            <field name="VAR">expo</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get" id="(Zlbq[@@c/J7]uR,|^0}P">
+                                        <field name="VAR">c</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="function_set" id="ap?7z;Q:_{+=JauT]d`h">
+                                <field name="function_name">ff</field>
+                                <field name="parameters"></field>
+                                <value name="input">
+                                  <block type="function_get" id="#)dP2+44Fc0?fn+(?oo5">
+                                    <field name="function_name">fast_callable</field>
+                                    <field name="params">f, vars=[z,c],domain=CDF</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="function_inline_method" id="Pv*_c{]3,to+`PC9^lBn">
+                                    <field name="method_name">mandel</field>
+                                    <field name="params">z</field>
+                                    <statement name="method">
+                                      <block type="variables_set" id="z+a`I}Wy7@@(vaJ_X1l4]">
+                                        <field name="VAR">c</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get" id="y2pY/Shrq6][mM}rj~.3">
+                                            <field name="VAR">z</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="controls_repeat_ext" id="5/HpuuleP38l,ckYe?vg">
+                                            <value name="TIMES">
+                                              <block type="variables_get" id="1@@LG6]u/5}l^%9xj3tN+">
+                                                <field name="VAR">iterations</field>
+                                              </block>
+                                            </value>
+                                            <statement name="DO">
+                                              <block type="variables_set" id="U0cG?h`S=!:xIb{:vg@@4">
+                                                <field name="VAR">z</field>
+                                                <value name="VALUE">
+                                                  <block type="function_get" id="g=N;hZPu%[oy2^UoXnoa">
+                                                    <field name="function_name">ff_m</field>
+                                                    <field name="params">z,c</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="controls_if" id="It^F~dM6q;riAO4d1z8s">
+                                                    <value name="IF0">
+                                                      <block type="logic_compare" id="||J%_]HhK0Oh`toVTLzc">
+                                                        <field name="OP">GT</field>
+                                                        <value name="A">
+                                                          <block type="math_single" id="5uQD7i-Il*;lx,n^PTRC">
+                                                            <field name="OP">ABS</field>
+                                                            <value name="NUM">
+                                                              <block type="variables_get" id="j/!sg`|KRJ5)zx~;TY@@H">
+                                                                <field name="VAR">z</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <block type="math_number" id="91|q-4LH@@zOn%er8IBmX">
+                                                            <field name="NUM">2</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="function_return" id="~Y6`48`s|]R5N/:w[)Kv">
+                                                        <value name="NAME">
+                                                          <block type="variables_get" id="yx:?nwvh2x=}QDj]8dNo">
+                                                            <field name="VAR">z</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="function_return" id="p*p2?-iM{5_`}];U7+i3">
+                                                <value name="NAME">
+                                                  <block type="variables_get" id="]|`:@@Iy]Et0*)-iYWzt?">
+                                                    <field name="VAR">z</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="text_print" id="=,WHDKzxi.%udsKfT(h@@">
+                                        <value name="TEXT">
+                                          <block type="text_join" id="`~2HB)Ek@@]o6AF^zmG}d">
+                                            <mutation items="3"></mutation>
+                                            <value name="ADD0">
+                                              <block type="text" id="HCxexlY8`+[DO%GRQx}W">
+                                                <field name="TEXT">z = z^</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD1">
+                                              <block type="variables_get" id="Ihl(U-b[viKko5zrxLmH">
+                                                <field name="VAR">expo</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD2">
+                                              <block type="text" id="^DS@@i#X@@|fJY/)jAMpi8">
+                                                <field name="TEXT">+c</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="function_set" id="p}[np%qjN5Nm?(c7*r[,">
+                                            <field name="function_name">func</field>
+                                            <field name="parameters"></field>
+                                            <value name="input">
+                                              <block type="function_get" id="R_BdRR]w:Ne)4j0Dti`B">
+                                                <field name="function_name">mandel</field>
+                                                <field name="params"></field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="function_set" id="ft?Fjf3X#[q`[SN[Nl9s">
+                                                <field name="function_name">p</field>
+                                                <field name="parameters"></field>
+                                                <value name="input">
+                                                  <block type="function_get" id="9}seDzDLa%S^G+R`}_SR">
+                                                    <field name="function_name">complex_plot</field>
+                                                    <field name="params">func, zoom_x,zoom_y, plot_points=200, dpi=100</field>
+                                                  </block>
+                                                </value>
+                                               
+<next>
+                                                  <block type="function_execute" id="BAp@@z*FvI:@@k+=u#(Cl:">
+                                                    <field name="function_name">p</field>
+                                                    <field name="method_name">show</field>
+                                                    <field name="param">frame=True, aspect_ratio=1</field>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>@,@@@interact
+def _(expo=('expo',slider(-10,10,0.1)),iterations=('iterations',slider(1,100,1)),zoom_x=('zoom_x',range_slider(-2,2,0.01)),zoom_y=('zoom_y',range_slider(-2,2,0.01))):
+  var('z')
+  var('c')
+  f(z,c) = (z ^ expo + c)
+  ff_m = (fast_callable(f, vars=[z,c],domain=CDF))
+  for count in range(int(iterations / 3)):
+    f(z,c) = ((f(z,c)) ^ expo + c)
+  ff = (fast_callable(f, vars=[z,c],domain=CDF))
+  def mandel(z):
+    c = z
+    for count2 in range(int(iterations)):
+      z = ff_m(z,c)
+      if abs(z) > 2:
+        return z
+    return z
+
+  print(''.join([str(temp_value) for temp_value in ['z = z^', expo, '+c']]))
+  func = (mandel)
+  p = (complex_plot(func, zoom_x,zoom_y, plot_points=200, dpi=100))
+  p.show(frame=True, aspect_ratio=1)@,Displays the famous fractal

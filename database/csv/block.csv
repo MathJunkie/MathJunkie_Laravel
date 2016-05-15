@@ -264,21 +264,33 @@ variables_get,@Blockly.Blocks['variables_get'] = {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };@,Variable,Get the value of a variable,,,
 text_print,@Blockly.Blocks['text_print'] = {
-    init: function() {
-        this.appendValueInput("print")
-            .setCheck(null)
-            .appendField("Print");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(window.ColorArray.Text);
-        this.setTooltip('');
-        this.setHelpUrl('http://www.example.com/');
-    }
-};@,@Blockly.Python['text_print'] = function(block) {
-    var value_print = Blockly.Python.valueToCode(block, 'print', Blockly.Python.ORDER_ATOMIC);
-
-    var code = 'print '+value_print+'\n';
-    return code;
+  /**
+   * Block for print statement.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.TEXT_PRINT_TITLE,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": window.ColorArray.Text,
+      "tooltip": Blockly.Msg.TEXT_PRINT_TOOLTIP,
+      "helpUrl": Blockly.Msg.TEXT_PRINT_HELPURL
+    });
+  }
+};
+@,@
+Blockly.Python['text_print'] = function(block) {
+  // Print statement.
+  var argument0 = Blockly.Python.valueToCode(block, 'TEXT',
+      Blockly.Python.ORDER_NONE) || '\'\'';
+  return 'print(' + argument0 + ')\n';
 };@,Text,Output a value of a variable,,,
 variables_set,@Blockly.Blocks['variables_set'] = {
     /**
@@ -937,6 +949,71 @@ controls_whileUntil,@Blockly.Blocks['controls_whileUntil'] = {
   }
   return 'while ' + argument0 + ':\n' + branch;
 };@,Loop,,,,
+controls_flow_statements,@Blockly.Blocks['controls_flow_statements'] = {
+  /**
+   * Block for flow statements: continue, break.
+   * @@this Blockly.Block
+   */
+  init: function() {
+    var OPERATORS =
+        [[Blockly.Msg.CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
+         [Blockly.Msg.CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
+    this.setHelpUrl(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_HELPURL);
+    this.setColour(window.ColorArray.Loop);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'FLOW');
+    this.setPreviousStatement(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      var op = thisBlock.getFieldValue('FLOW');
+      var TOOLTIPS = {
+        'BREAK': Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,
+        'CONTINUE': Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE
+      };
+      return TOOLTIPS[op];
+    });
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if this flow block is not nested inside a loop.
+   * @@param {!Blockly.Events.Abstract} e Change event.
+   * @@this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  /**
+   * List of block types that are loops and thus do not need warnings.
+   * To add a new loop type add this to your code:
+   * Blockly.Blocks['controls_flow_statements'].LOOP_TYPES.push('custom_loop');
+   */
+  LOOP_TYPES: ['controls_repeat', 'controls_repeat_ext', 'controls_forEach',
+      'controls_for', 'controls_whileUntil']
+};@,@Blockly.Python['controls_flow_statements'] = function(block) {
+  // Flow statements: continue, break.
+  switch (block.getFieldValue('FLOW')) {
+    case 'BREAK':
+      return 'break\n';
+    case 'CONTINUE':
+      return 'continue\n';
+  }
+  throw 'Unknown flow statement.';
+};@,Loop,,,,
 controls_for,@Blockly.Blocks['controls_for'] = {
   /**
    * Block for 'for' loop.
@@ -1117,71 +1194,7 @@ controls_for,@Blockly.Blocks['controls_for'] = {
   }
   code += 'for ' + variable0 + ' in ' + range + ':\n' + branch;
   return code;
-};@,Loop,controls_flow_statements,@Blockly.Blocks['controls_flow_statements'] = {
-  /**
-   * Block for flow statements: continue, break.
-   * @@this Blockly.Block
-   */
-  init: function() {
-    var OPERATORS =
-        [[Blockly.Msg.CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
-         [Blockly.Msg.CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
-    this.setHelpUrl(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_HELPURL);
-    this.setColour(window.ColorArray.Loop);
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown(OPERATORS), 'FLOW');
-    this.setPreviousStatement(true);
-    // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    this.setTooltip(function() {
-      var op = thisBlock.getFieldValue('FLOW');
-      var TOOLTIPS = {
-        'BREAK': Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,
-        'CONTINUE': Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE
-      };
-      return TOOLTIPS[op];
-    });
-  },
-  /**
-   * Called whenever anything on the workspace changes.
-   * Add warning if this flow block is not nested inside a loop.
-   * @@param {!Blockly.Events.Abstract} e Change event.
-   * @@this Blockly.Block
-   */
-  onchange: function(e) {
-    var legal = false;
-    // Is the block nested in a loop?
-    var block = this;
-    do {
-      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
-        legal = true;
-        break;
-      }
-      block = block.getSurroundParent();
-    } while (block);
-    if (legal) {
-      this.setWarningText(null);
-    } else {
-      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
-    }
-  },
-  /**
-   * List of block types that are loops and thus do not need warnings.
-   * To add a new loop type add this to your code:
-   * Blockly.Blocks['controls_flow_statements'].LOOP_TYPES.push('custom_loop');
-   */
-  LOOP_TYPES: ['controls_repeat', 'controls_repeat_ext', 'controls_forEach',
-      'controls_for', 'controls_whileUntil']
-};@,@Blockly.Python['controls_flow_statements'] = function(block) {
-  // Flow statements: continue, break.
-  switch (block.getFieldValue('FLOW')) {
-    case 'BREAK':
-      return 'break\n';
-    case 'CONTINUE':
-      return 'continue\n';
-  }
-  throw 'Unknown flow statement.';
-};@,Loop
+};@,Loop,,,,Loop
 text,@Blockly.Blocks['text'] = {
   /**
    * Block for text value.
@@ -1467,8 +1480,7 @@ text_length,@Blockly.Blocks['text_length'] = {
       Blockly.Python.ORDER_NONE) || '\'\'';
   return ['len(' + argument0 + ')', Blockly.Python.ORDER_FUNCTION_CALL];
 };@,Text,,,,
-text_isEmpty,@
-Blockly.Blocks['text_isEmpty'] = {
+text_isEmpty,@Blockly.Blocks['text_isEmpty'] = {
   /**
    * Block for is the string null?
    * @@this Blockly.Block
@@ -1590,7 +1602,7 @@ math_arithmetic,@Blockly.Blocks['math_arithmetic'] = {
     'MINUS': [' - ', Blockly.Python.ORDER_ADDITIVE],
     'MULTIPLY': [' * ', Blockly.Python.ORDER_MULTIPLICATIVE],
     'DIVIDE': [' / ', Blockly.Python.ORDER_MULTIPLICATIVE],
-    'POWER': [' ** ', Blockly.Python.ORDER_EXPONENTIATION]
+    'POWER': [' ^ ', Blockly.Python.ORDER_EXPONENTIATION]
   };
   var tuple = OPERATORS[block.getFieldValue('OP')];
   var operator = tuple[0];
@@ -1664,7 +1676,6 @@ math_single,@Blockly.Blocks['math_single'] = {
         Blockly.Python.ORDER_UNARY_SIGN) || '0';
     return ['-' + code, Blockly.Python.ORDER_UNARY_SIGN];
   }
-  Blockly.Python.definitions_['import_math'] = 'import math';
   if (operator == 'SIN' || operator == 'COS' || operator == 'TAN') {
     arg = Blockly.Python.valueToCode(block, 'NUM',
         Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
@@ -1676,40 +1687,40 @@ math_single,@Blockly.Blocks['math_single'] = {
   // wrapping the code.
   switch (operator) {
     case 'ABS':
-      code = 'math.fabs(' + arg + ')';
+      code = 'abs(' + arg + ')';
       break;
     case 'ROOT':
-      code = 'math.sqrt(' + arg + ')';
+      code = 'sqrt(' + arg + ')';
       break;
     case 'LN':
-      code = 'math.log(' + arg + ')';
+      code = 'log(' + arg + ')';
       break;
     case 'LOG10':
-      code = 'math.log10(' + arg + ')';
+      code = 'log10(' + arg + ')';
       break;
     case 'EXP':
-      code = 'math.exp(' + arg + ')';
+      code = 'exp(' + arg + ')';
       break;
     case 'POW10':
-      code = 'math.pow(10,' + arg + ')';
+      code = 'pow(10,' + arg + ')';
       break;
     case 'ROUND':
       code = 'round(' + arg + ')';
       break;
     case 'ROUNDUP':
-      code = 'math.ceil(' + arg + ')';
+      code = 'ceil(' + arg + ')';
       break;
     case 'ROUNDDOWN':
-      code = 'math.floor(' + arg + ')';
+      code = 'floor(' + arg + ')';
       break;
     case 'SIN':
-      code = 'math.sin(' + arg + ' / 180.0 * math.pi)';
+      code = 'sin(' + arg + ' / 180.0 * math.pi)';
       break;
     case 'COS':
-      code = 'math.cos(' + arg + ' / 180.0 * math.pi)';
+      code = 'cos(' + arg + ' / 180.0 * math.pi)';
       break;
     case 'TAN':
-      code = 'math.tan(' + arg + ' / 180.0 * math.pi)';
+      code = 'tan(' + arg + ' / 180.0 * math.pi)';
       break;
   }
   if (code) {
@@ -1719,13 +1730,13 @@ math_single,@Blockly.Blocks['math_single'] = {
   // wrapping the code.
   switch (operator) {
     case 'ASIN':
-      code = 'math.asin(' + arg + ') / math.pi * 180';
+      code = 'asin(' + arg + ') / math.pi * 180';
       break;
     case 'ACOS':
-      code = 'math.acos(' + arg + ') / math.pi * 180';
+      code = 'acos(' + arg + ') / math.pi * 180';
       break;
     case 'ATAN':
-      code = 'math.atan(' + arg + ') / math.pi * 180';
+      code = 'atan(' + arg + ') / math.pi * 180';
       break;
     default:
       throw 'Unknown math operator: ' + operator;
@@ -1824,7 +1835,7 @@ math_trig,@Blockly.Blocks['math_trig'] = {
       return TOOLTIPS[mode];
     });
   }
-};@,@Blockly.Python['math_trig'] = Blockly.Python['math_single'];@,Math,,,,
+};@,Blockly.Python['math_trig'] = Blockly.Python['math_single'];,Math,,,,
 math_round,@Blockly.Blocks['math_round'] = {
   /**
    * Block for rounding functions.
@@ -1855,7 +1866,7 @@ math_round,@Blockly.Blocks['math_round'] = {
       "helpUrl": Blockly.Msg.MATH_ROUND_HELPURL
     });
   }
-};@,@Blockly.Python['math_round'] = Blockly.Python['math_single'];@,Math,,,,
+};@,Blockly.Python['math_round'] = Blockly.Python['math_single'];,Math,,,,
 math_modulo,@Blockly.Blocks['math_modulo'] = {
   /**
    * Block for remainder of a division.
@@ -4492,3 +4503,130 @@ lists_create_empty,@Blockly.Blocks['lists_create_empty'] = {
   // Create an empty list.
   return ['[]', Blockly.Python.ORDER_ATOMIC];
 };@,List,,,,
+function_set,@Blockly.Blocks['function_set'] = {
+  init: function() {
+    this.appendValueInput("input")
+        .setCheck(null)
+        .appendField("Set Function")
+        .appendField(new Blockly.FieldTextInput("f"), "function_name");
+    this.appendDummyInput()
+        .appendField("with Parameter")
+        .appendField(new Blockly.FieldTextInput(""), "parameters");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};@,@Blockly.Python['function_set'] = function(block) {
+  var text_function_name = block.getFieldValue('function_name');
+  var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
+  var text_parameters = block.getFieldValue('parameters');
+  // TODO: Assemble Python into code variable.
+  var code = text_function_name;
+  if (text_parameters.length > 0)
+    code = code + "(" + text_parameters + ")";
+  return code + " = "+ value_input +"\n";
+};@,MathFunction,,,,
+function_get,@Blockly.Blocks['function_get'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Function")
+        .appendField(new Blockly.FieldTextInput("f"), "function_name");
+    this.appendDummyInput()
+        .appendField("with Parameters:")
+        .appendField(new Blockly.FieldTextInput("x"), "params");
+    this.setOutput(true);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};@,@Blockly.Python['function_get'] = function(block) {
+  var text_function_name = block.getFieldValue('function_name');
+  var text_params = block.getFieldValue('params');
+  var code = text_function_name;
+  if (text_params.length > 0)
+    code = code + "(" + text_params + ")";
+  return [code, Blockly.Python.ORDER_NONE];
+};@,MathFunction,,,,
+function_execute,@Blockly.Blocks['function_execute'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Function:")
+        .appendField(new Blockly.FieldTextInput("f"), "function_name");
+    this.appendDummyInput()
+        .appendField("execute Method")
+        .appendField(new Blockly.FieldTextInput("method"), "method_name")
+        .appendField("with")
+        .appendField(new Blockly.FieldTextInput(""), "param");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};@,@Blockly.Python['function_execute'] = function(block) {
+  var text_function_name = block.getFieldValue('function_name');
+  var text_method_name = block.getFieldValue('method_name');
+  var text_param = block.getFieldValue('param');
+  var code = text_function_name;
+  code = code + "." + text_method_name;
+  code = code + "(" + text_param + ")";
+  return code;
+};@,MathFunction,,,,
+variable_init,@Blockly.Blocks['variable_init'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Init Variables:")
+        .appendField(new Blockly.FieldVariable("v"), "variable");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};@,@Blockly.Python['variable_init'] = function(block) {
+  var variable_variable = Blockly.Python.variableDB_.getName(block.getFieldValue('variable'), Blockly.Variables.NAME_TYPE);
+  var code = "var('"+ variable_variable +"')\n";
+  return code;
+};@,MathFunction,,,,
+function_inline_method,@Blockly.Blocks['function_inline_method'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Name: ")
+        .appendField(new Blockly.FieldTextInput("method"), "method_name")
+        .appendField("with")
+        .appendField(new Blockly.FieldTextInput("x"), "params");
+    this.appendStatementInput("method")
+        .setCheck(null);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};@,@Blockly.Python['function_inline_method'] = function(block) {
+  var text_method_name = block.getFieldValue('method_name');
+  var text_params = block.getFieldValue('params');
+  var statements_method = Blockly.Python.statementToCode(block, 'method');
+  var code = 'def '+text_method_name+"("+text_params+"):\n";
+  code = code + statements_method + "\n";
+  return code;
+};@,MathFunction,,,,
+function_return,@Blockly.Blocks['function_return'] = {
+  init: function() {
+    this.appendValueInput("NAME")
+        .setCheck(null)
+        .appendField("Return");
+    this.setPreviousStatement(true);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};@,@Blockly.Python['function_return'] = function(block) {
+  var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = 'return '+value_name+'\n';
+  return code;
+};@,MathFunction,,,,
