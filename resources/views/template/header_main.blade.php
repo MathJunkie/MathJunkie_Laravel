@@ -16,7 +16,7 @@
             @else
             <a class="btn waves-effect waves-light right" href="{{ Request::root() }}/login" type="submit" style="position: relative; bottom: 15px; text-align: center; min-width:150px;">Sign in</a>
             @endif
-            <a class="btn-floating btn waves-effect waves-light red right"></a>
+            <a id="home_comment_btn" class="btn-floating btn waves-effect waves-light @if(empty($hasComment)) green @else red @endif right"></a>
             <a href="{{Request::root()}}/admin" class="right brand-logo" style="position: relative; bottom: 15px; margin-left: 20px; margin-right: 10px;">MathJunkie</a>
         </div>
     </nav>

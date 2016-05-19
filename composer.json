@@ -19,7 +19,8 @@
     "behat/behat": "^3.0",
     "behat/mink": "^1.7",
     "behat/mink-extension": "^2.1",
-    "laracasts/behat-laravel-extension": "^1.0"
+    "laracasts/behat-laravel-extension": "^1.0",
+    "codeclimate/php-test-reporter": "^0.3.2"
   },
   "autoload": {
     "classmap": [
@@ -46,10 +47,8 @@
       "php artisan optimize"
     ],
     "post-root-package-install": [
-      "php -r \"copy('.env.example', '.env');\""
     ],
     "post-create-project-cmd": [
-      "php artisan key:generate"
     ]
   },
   "config": {

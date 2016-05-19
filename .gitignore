@@ -1,3 +1,5 @@
+/storage/database.sqlite
+/.phpunit
 /.idea
 /MathJunkie_Laravel.iml
 *.iml

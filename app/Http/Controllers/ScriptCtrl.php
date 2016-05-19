@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category_color;
 use App\Script;
 use App\Block;
 use Illuminate\Http\Request;
@@ -10,33 +11,12 @@ use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\Response;
 use View;
-use Log;
 
 class ScriptCtrl extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function index()
-    {
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -52,6 +32,7 @@ class ScriptCtrl extends Controller
             {
                 $script = new Script();
                 $script->name = $request->search;
+                $script->structure = "<xml><block type=\"input_list\" deletable=\"false\"><next><block type=\"statement_list\" deletable=\"false\"></block></next></block></xml>";
                 Auth::user()->scripts()->save($script);
                 return Redirect::to('script/'.$script->id);
             }
@@ -109,11 +90,22 @@ class ScriptCtrl extends Controller
                 ];
                 $xml_array = array_merge_recursive($xml_array,$temp);
             }
-            $keys = array_keys($xml_array);
-            foreach ($keys as $key){
-                $xml .= '<category name="'.$key.'">';
+           $keys = array_keys($xml_array);
+           foreach ($keys as $key){
+               if ($key === "Method" || $key === "Variable" || $key === "Base"){
+                   continue;
+               }
+               $color = Category_color::where('name','=',$key)->first();
+
+               if (empty($color)){
+                   $xml .= '<category name="'.$key.'" >';
+               }
+               else{
+                   $xml .= '<category colour="'.$color->color.'" name="'.$key.'">';
+               }
                 $b_item = $xml_array[$key];
-                if (!is_array($b_item)){
+
+               if (!is_array($b_item)){
                     $xml .= '<block type="'.$b_item.'"></block>';
                 }
                 else{
@@ -123,7 +115,18 @@ class ScriptCtrl extends Controller
                 }
                 $xml .= '</category>';
             }
+            $xml .= '<sep></sep>';
+            $xml .= '<category name="Variables" colour = "'.Category_color::where('name','=','Variable')->first()->color.'" custom="VARIABLE"></category>
+                     <category name="Functions" colour = "'.Category_color::where('name','=','Method')->first()->color.'"custom="PROCEDURE"></category>';
             $xml .= '</xml>';
+            $color = category_color::all();
+            $color_script = '<script>';
+            $color_script .= 'window.ColorArray= {};';
+            foreach ($color as $c){
+                $color_script .= 'window.ColorArray[\'' . $c->name .'\'] = '.$c->color.';';
+            }
+            $color_script .= '</script>';
+            $xml = $color_script.$xml;
             $content = [];
             $content['xml'] = $xml;
             $content['structure'] = $structure;
@@ -132,6 +135,7 @@ class ScriptCtrl extends Controller
             return View::make('script.builder')->with('content',$content)->with('script',$script);
         }
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -156,8 +160,8 @@ class ScriptCtrl extends Controller
 
     public function getList(Request $request)
     {
-        $script = Script::where('name','like', $request->search.'%')
-            ->orWhere('description','like', $request->search.'%')->get();
+        $script = Script::where('name','like', '%'.$request->search.'%')
+            ->orWhere('description','like', '%'.$request->search.'%')->get();
 
         $resp = array();
         foreach ($script as $item){
@@ -181,8 +185,8 @@ class ScriptCtrl extends Controller
     {
         $script = Script::find($id);
         if ($script->user_id == Auth::user()->id) {
-            foreach ($script->kommentar as $comment){
-                $comment->delete();
+            foreach ($script->comments as $comment){
+                    $comment->delete();
             }
             $script->delete();
         }

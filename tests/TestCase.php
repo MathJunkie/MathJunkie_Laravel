@@ -1,5 +1,6 @@
 <?php
 
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -9,11 +10,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected $baseUrl = 'http://localhost';
 
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
+    
+    /** @test */
     public function createApplication()
     {
         $app = require __DIR__ . '/../bootstrap/app.php';
@@ -21,5 +19,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+        Artisan::call('migrate',array('--force' => true));
+        Artisan::call('db:seed',array('--force' => true));
+    }
+
+    public function tearDown()
+    {
+        Artisan::call('migrate:reset',array('--force' => true));
+        parent::tearDown();
     }
 }

@@ -1,54 +1,67 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" xmlns="http://www.w3.org/1999/html">
 <head>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/materialize.min.css') }}"  media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/splitter.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/jquery.webui-popover.min.css') }}"  media="screen,projection"/>
     <!--<link type="text/css" rel="stylesheet" href="{{ URL::asset('css/script/builder.css') }}"  media="screen,projection"/>-->
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="utf-8">
     <title>Script Builder</title>
 </head>
-<body>
+<body style="overflow-y:hidden">
+
+    <div id="preview_modal" class="modal">
+        <div class="modal-content">
+            <div id="preview_update" class="btn">Update</div>
+        </div>
+    </div>
     @include('template/header_builder')
 
-    <form class="sidebar row" action="{{Request::url()}}" method="post">
-        <div style="position: relative; width: 100%; height: 100%;">
-            <div style="position: relative; width: 50%; height: 100%; float: left;">
-                <div id="blockly" style="position: relative; height: 90vh;"></div>
-            </div>
-            <div style="position: relative; width: 50%; height: 100%; float: right;">
-                <ul class="tabs row">
-                    <li class="tab col s6 red accent-2"><a href="#tabSageCode" style="color: white;">Generated</a> </li>
-                    <li class="tab col s6 teal darken-1"><a href="#tabSageCodeSave" style="color: white;">Saved</a> </li>
-                </ul>
-                <div id="tabSageCode" style="position: relative; height: 66vh;">
-                    <textarea readonly id="sageCode" class="white" style="position: relative; height: 100%;"></textarea>
-                </div>
-                <div id="tabSageCodeSave" style="position: relative; height: 66vh;">
-                    <textarea name="function" id="sageCodeSave" class="white" style="position: relative; height: 100%;">{{ $script->function }}</textarea>
-                </div>
-                <div id="btnSageCode" class="btn waves-effect btn-flat teal accent-3" style="position: relative; bottom: 0px;">Copy to Saved</div>
-                <div class="row white">
-                    <div class="input-field col s12">
-                        <input name="description" id="desc" type="text" value="{{$script->description}}"/>
-                        <label for="desc">Beschreibung</label>
-                    </div>
-                    <input type="submit" id="saveBtn" class="teal accent-4 btn col s12" value="Save"/>
-                </div>
-            </div>
+    <div style="position:absolute; left:0; top:64px; width: 100%; height: calc(100vh - 64px);" id="structure" class="row">
+        <div id="blockly" style="height: 100%;"></div>
+        <div id="blockly_codePreview" style="height: 100%;"></div>
+    </div>
+    <form id="code" style="position:absolute; top: calc(100vh + 64px); left: 0; width: 100%; height: calc(100vh - 64px);" action="{{Request::url()}}" method="post">
+        <div style="margin-top:5%; height: 100%">
+            <pre id="sageCodeSave" style="height: 75%;">{{ $script->function }}</pre>
 
-            <!--?????-->
-            <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-
+            <div class="row white" style="height: 15%">
+                <div class="input-field col s12">
+                    <input name="description" id="desc" type="text" value="{{$script->description}}"/>
+                    <label for="desc">Beschreibung</label>
+                </div>
+                <input type="hidden" name="function" id="hidden_function">
+                <input type="hidden" name="xml" id="xmlhidden_input" value="{{ $script->structure }}">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <input type="submit" id="saveBtn" class="teal accent-4 btn col s12" value="Save"/>
+            </div>
         </div>
     </form>
+    <a id="modal_preview_trigger" class="btn btn-floating mdi-navigation-refresh" href="#preview_modal" style="position:absolute; right: 60px; top: calc(120%);"></a>
+    <div id="settingsMenuBtn" class="btn btn-floating mdi-action-settings" style="position:absolute; right: 20px; top: calc(120%);"></div>
+    <div id="settingsMenu" class="row">
+        @include('template/editor_themeSelector')
+
+        <div class="input-field col s12">
+            <input type="number" id="fontsize" value="13">
+            <label for="fontsize">Font Size</label>
+        </div>
+
+
+    </div>
 
     @include('template/footer_main')
 
     {!! $content['xml'] !!}
     <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/enhsplitter.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/slide.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jquery.webui-popover.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/Blockly/blockly_compressed.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/Blockly/de.js') }}"></script>
@@ -61,30 +74,61 @@
         'use strict';
         {!! $content['function'] !!}
     </script>
+    <script type="text/javascript" charset="utf-8" src="{{ URL::asset('js/Editor/ace.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/Editor.js') }}"></script>
+    <script>
+        var f = new Factory();
+        var editor = f.createEditor("sageCodeSave","python");
+        editor.commands.addCommand({
+            name: "insertgenerated",
+            bindKey: {
+                mac:        "Command-I",
+                win:        "Ctrl-I"
+            },
+            exec: function(editor) {
+                editor.setValue(editor.getValue()+"\n"+$('#hidden_function').val()); }
+        });
+        window.Codeeditor = editor;
+
+        editor = f.createEditor("blockly_codePreview","python");
+        editor.setReadOnly(true);
+        window.Codepreview = editor;
+    </script>
     @include('template/include_comments')
+
     <script type="text/javascript">
 
         function updateCode(){
-            var mainWorkspace = Blockly.getMainWorkspace();
-            var code = Blockly.Python.workspaceToCode(mainWorkspace);
-            $('#sageCode').val(code);
+            var code = Blockly.Python.workspaceToCode(Blockly.getMainWorkspace());
+            $('#hidden_function').val(code);
+            window.Codepreview.setValue(code);
         }
 
         $(document).ready(function() {
             //Comment
 
+            $('#preview_update').click(function(){
+                $('.compute').remove();
+                $('.modal-content').append('<div class="compute"></div>');
+                $('.compute').append('<script type="text/x-sage">'+window.Codeeditor.getValue()+'</' + 'script>');
+                $(function () {
+                    // Make *any* div with class 'compute' a Sage cell
+                    sagecell.makeSagecell({inputLocation: '.compute',
+                    evalButtonText: 'Evaluate',
+                    autoeval: true,
+                    template:       sagecell.templates.minimal,
+                    hide: ["evalButton","permalink","editor"]});
+                });
+            });
+            $('#modal_preview_trigger').leanModal();
 
             $('form').submit(function(){
 
                 var dom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
                 $('#xmlhidden_input').val('');
                 $('#xmlhidden_input').val(Blockly.Xml.domToPrettyText(dom));
+                $('#hidden_function').val(window.Codeeditor.getValue());
                 return true;
-            });
-
-
-            $('#btnSageCode').click(function(){
-                $('#sageCodeSave').val($('#sageCode').val());
             });
 
             var toolbox = document.getElementById('toolbox');
@@ -119,6 +163,40 @@
                 mainWorkspace.clearUndo();
             }
             mainWorkspace.addChangeListener(updateCode);
+
+            $('#settingsMenuBtn').webuiPopover({
+                width:400,
+                title:"Settings",
+                height:200,
+                padding:false,
+                offsetTop: 50,
+                dismissible: false,
+                closeable:true,
+                placement:'left',
+                animation:'pop',
+                url:'#settingsMenu'
+            });
+
+
+            $('#settingsMenu').hide();
+
+            $('select').not('.disabled').material_select();
+            $('.themeSelector').on('change', function(e) {
+                window.Codeeditor.setTheme($('.themeSelector').val());
+            });
+            $('#fontsize').change(function(){
+                window.Codeeditor.setFontSize($(this).val()+"px");
+            });
+        });
+
+        jQuery(function ($) {
+            $('#structure').enhsplitter({
+                invisible: true,
+                position: '90%',
+                onDragEnd: function () {
+                    window.Codepreview.resize();
+                }
+            });
         });
 
     </script>

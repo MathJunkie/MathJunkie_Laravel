@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\User;
 class BlockSeeder extends Seeder
 {
     /**
@@ -15,17 +15,13 @@ class BlockSeeder extends Seeder
         if (($handle = fopen(base_path()."/database/csv/block.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 0, ",","@")) !== FALSE) {
                 //$this->command->info(print_r($data));
-                $admin = \DB::table('users')->first();
-                DB::table('block')->insert([
-                    'name' => $data[0],
-                    'user_id' => $admin->id,
+                $admin = User::first();
+                $admin->blocks()->create(
+                    ['name' => $data[0],
                     'function' => $data[2],
                     'structure' => $data[1],
                     'category' => $data[3],
-                    'description' => $data[4],
-                    'updated_at' => time(),
-                    'created_at' => time(),
-                ]);
+                    'description' => $data[4]]);
             }
             fclose($handle);
         }

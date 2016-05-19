@@ -34,6 +34,7 @@ var mainWorkspace = null;
  * @type {Blockly.Workspace}
  */
 var previewWorkspace = null;
+var slaveWorkspace = null;
 
 /**
  * Name of block if not named.
@@ -79,7 +80,7 @@ function updateLanguage() {
   }
   blockType = blockType.replace(/\W/g, '_').replace(/^(\d)/, '_\\1');
   var code = formatJavaScript_(blockType, rootBlock);
-  injectCode(code, 'blockCode');
+  injectCode(code, 'structure_hidden');
   updatePreview();
 }
 
@@ -198,8 +199,8 @@ function formatJavaScript_(blockType, rootBlock) {
   code.push("  init: function() {");
   // Generate inputs.
   var TYPES = {'input_value': 'appendValueInput',
-               'input_statement': 'appendStatementInput',
-               'input_dummy': 'appendDummyInput'};
+    'input_statement': 'appendStatementInput',
+    'input_dummy': 'appendDummyInput'};
   var contentsBlock = rootBlock.getInputTargetBlock('INPUTS');
   while (contentsBlock) {
     if (!contentsBlock.disabled && !contentsBlock.getInheritedDisabled()) {
@@ -423,7 +424,7 @@ function getFieldsJson_(block) {
           var options = [];
           for (var i = 0; i < block.optionCount_; i++) {
             options[i] = [block.getFieldValue('USER' + i),
-                block.getFieldValue('CPU' + i)];
+              block.getFieldValue('CPU' + i)];
           }
           if (options.length) {
             fields.push({
@@ -523,7 +524,7 @@ function updateGenerator(block) {
   var language = 'Python';
   var code = [];
   code.push("Blockly." + language + "['" + block.type +
-            "'] = function(block) {");
+      "'] = function(block) {");
 
   // Generate getters for any fields or inputs.
   for (var i = 0, input; input = block.inputList[i]; i++) {
@@ -535,41 +536,41 @@ function updateGenerator(block) {
       if (field instanceof Blockly.FieldVariable) {
         // Subclass of Blockly.FieldDropdown, must test first.
         code.push(makeVar('variable', name) +
-                  " = Blockly." + language +
-                  ".variableDB_.getName(block.getFieldValue('" + name +
-                  "'), Blockly.Variables.NAME_TYPE);");
+            " = Blockly." + language +
+            ".variableDB_.getName(block.getFieldValue('" + name +
+            "'), Blockly.Variables.NAME_TYPE);");
       } else if (field instanceof Blockly.FieldAngle) {
         // Subclass of Blockly.FieldTextInput, must test first.
         code.push(makeVar('angle', name) +
-                  " = block.getFieldValue('" + name + "');");
+            " = block.getFieldValue('" + name + "');");
       } else if (Blockly.FieldDate && field instanceof Blockly.FieldDate) {
         // Blockly.FieldDate may not be compiled into Blockly.
         code.push(makeVar('date', name) +
-                  " = block.getFieldValue('" + name + "');");
+            " = block.getFieldValue('" + name + "');");
       } else if (field instanceof Blockly.FieldColour) {
         code.push(makeVar('colour', name) +
-                  " = block.getFieldValue('" + name + "');");
+            " = block.getFieldValue('" + name + "');");
       } else if (field instanceof Blockly.FieldCheckbox) {
         code.push(makeVar('checkbox', name) +
-                  " = block.getFieldValue('" + name + "') == 'TRUE';");
+            " = block.getFieldValue('" + name + "') == 'TRUE';");
       } else if (field instanceof Blockly.FieldDropdown) {
         code.push(makeVar('dropdown', name) +
-                  " = block.getFieldValue('" + name + "');");
+            " = block.getFieldValue('" + name + "');");
       } else if (field instanceof Blockly.FieldTextInput) {
         code.push(makeVar('text', name) +
-                  " = block.getFieldValue('" + name + "');");
+            " = block.getFieldValue('" + name + "');");
       }
     }
     var name = input.name;
     if (name) {
       if (input.type == Blockly.INPUT_VALUE) {
         code.push(makeVar('value', name) +
-                  " = Blockly." + language + ".valueToCode(block, '" + name +
-                  "', Blockly." + language + ".ORDER_ATOMIC);");
+            " = Blockly." + language + ".valueToCode(block, '" + name +
+            "', Blockly." + language + ".ORDER_ATOMIC);");
       } else if (input.type == Blockly.NEXT_STATEMENT) {
         code.push(makeVar('statements', name) +
-                  " = Blockly." + language + ".statementToCode(block, '" +
-                  name + "');");
+            " = Blockly." + language + ".statementToCode(block, '" +
+            name + "');");
       }
     }
   }
@@ -591,7 +592,7 @@ function updateGenerator(block) {
   }
   code.push("};");
 
-  injectCode(code.join('\n'), 'sageCode');
+  injectCode(code.join('\n'), 'function_hidden');
 }
 
 /**
@@ -608,23 +609,39 @@ function updatePreview() {
   if (oldDir != newDir) {
     if (previewWorkspace) {
       previewWorkspace.dispose();
+      if (document.getElementById('selPreview').checked) {
+        slaveWorkspace.dispose();
+      }
     }
     var rtl = newDir == 'rtl';
     previewWorkspace = Blockly.inject('preview',
         {rtl: rtl,
-         media: '../../media/',
-         scrollbars: true});
+          media: '../../media/',
+          scrollbars: true,
+          zoom: {
+            controls: true,
+            wheel: false
+          }});
     oldDir = newDir;
   }
   previewWorkspace.clear();
+  if (document.getElementById('selPreview').checked) {
+    slaveWorkspace.clear();
+  }
 
   // Fetch the code and determine its format (JSON or JavaScript).
 
-  if (document.getElementById('selPreview').checked)
-    var code = document.getElementById('blockCodeSave').value;
+  if (document.getElementById('selPreview').checked){
+    var code = window.Structeditor.getValue();
+    eval(code);
+    //jQuery.globalEval(code);
+  }
   else
-    var code = document.getElementById('blockCode').value;
-    // If the code is JSON, it will parse, otherwise treat as JS.
+  {
+    var code = document.getElementById('structure_hidden').value;
+    //eval("if (Blockly.Blocks['"+window.BlockName+"']) Blockly.Blocks['"+window.BlockName+"'] = {}");
+  }
+  // If the code is JSON, it will parse, otherwise treat as JS.
   var format = 'JavaScript';
   if (!code.trim()) {
     // Nothing to render.  Happens while cloud storage is loading.
@@ -655,31 +672,49 @@ function updatePreview() {
     }
 
     // Look for a block on Blockly.Blocks that does not match the backup.
-    var blockType = null;
-    for (var type in Blockly.Blocks) {
-      if (typeof Blockly.Blocks[type].init == 'function' &&
-          Blockly.Blocks[type] != backupBlocks[type]) {
-        blockType = type;
-        break;
-      }
-    }
-    if (!blockType) {
-      return;
-    }
+    /*var blockType = null;
+     for (var type in Blockly.Blocks) {
+     if (typeof Blockly.Blocks[type].init == 'function' &&
+     Blockly.Blocks[type] != backupBlocks[type]) {
+     blockType = type;
+     break;
+     }
+     }
+     if (!blockType) {
+     return;
+     }*/
 
     // Create the preview block.
-    var previewBlock = previewWorkspace.newBlock(blockType);
+    //var previewBlock = previewWorkspace.newBlock(blockType);
+    var previewBlock = previewWorkspace.newBlock(window.BlockName);
     previewBlock.initSvg();
     previewBlock.render();
     previewBlock.setMovable(false);
     previewBlock.setDeletable(false);
     previewBlock.moveBy(15, 10);
-    previewWorkspace.clearUndo();
+
+    if (!document.getElementById('selPreview').checked){
+      previewBlock = slaveWorkspace.newBlock(window.BlockName);
+      previewBlock.initSvg();
+      previewBlock.render();
+      previewBlock.setMovable(false);
+      previewBlock.setDeletable(false);
+      previewBlock.moveBy(15, 10);
+      previewWorkspace.clearUndo();
+      slaveWorkspace.clearUndo();
+    }
 
     updateGenerator(previewBlock);
   } finally {
     Blockly.Blocks = backupBlocks;
   }
+
+  previewWorkspace.addChangeListener(function(){
+    if (document.getElementById('selPreview').checked){
+      eval(window.Codeeditor.getValue());
+      document.getElementById('previewCode').innerHTML = Blockly.Python.workspaceToCode(previewWorkspace);
+    }
+  });
 }
 
 /**
@@ -707,7 +742,6 @@ function getRootBlock() {
   }
   return null;
 }
-
 /**
  * Disable the link button if the format is 'Manual', enable otherwise.
  */
@@ -720,17 +754,13 @@ function disableEnableLink() {
  * Initialize Blockly and layout.  Called on page load.
  */
 function init() {
-
-  document.getElementById('blockCode')
-      .addEventListener('change', updatePreview);
-  document.getElementById('blockCode')
-      .addEventListener('keyup', updatePreview);
   document.getElementById('selPreview')
       .addEventListener('change', updatePreview);
-
-  document.getElementById('blockCodeSave')
+  document.getElementById('structure_hidden')
       .addEventListener('change', updatePreview);
   document.getElementById('blockCodeSave')
+      .addEventListener('keyup', updatePreview);
+  document.getElementById('sageCodeSave')
       .addEventListener('keyup', updatePreview);
 }
 
@@ -741,14 +771,16 @@ $(document).ready(function() {
 
   $('#btnBlockCode').click(
       function() {
-        $('#blockCodeSave').val( $('#blockCode').val());
+        window.Structeditor.setValue($('#blockCode').val());
       }
   );
 
   $('#btnSageCode').click(
       function() {
-        $('#sageCodeSave').val( $('#sageCode').val());
+        window.Codeeditor.setValue($('#sageCode').val());
       }
   );
+
+  updatePreview();
 
 });
