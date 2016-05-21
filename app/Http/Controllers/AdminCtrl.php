@@ -21,46 +21,50 @@ class AdminCtrl extends Controller
                          ->take(5)
                          ->get();
 
-        return View::make('admin.index')->with('blocks',$blocks)->with('scripts',$scripts)->with('hasComment',app('App\Http\Controllers\CommentCtrl')->hasComment(2));
+        return View::make('admin.index')->with('blocks',$blocks)
+                                        ->with('scripts',$scripts)
+                                        ->with('hasComment',app('App\Http\Controllers\CommentCtrl')
+                                        ->hasComment(2));
 
     }
 
-    public function getNews($isScript) {
-        $return = '';
-        if($isScript == 2 || $isScript == 1){
-            $empty = true;
-            $return .= '<h5>Scripts</h5>';
-            $html = '';
-            foreach (Auth::user()->scripts as $script){
-                $empty = false;
-                $count_new = app('App\Http\Controllers\CommentCtrl')->getNew($script->id,true);
-                if ($count_new > 0){
-                    $html .= '<li>'.$count_new.' new comments: <a href="'.URL::to('/script/'.$script->id).'">'.$script->name.'</a></li>';
-                }
-            }
-            if (!$empty)
-                $return .='<ul style="list-style: none">'.$html.'</ul>';
-            else
-                $return .= 'No new comments';
+    public function print_News($type) {
+        $empty = true;
+        $return = '<h5>'.ucfirst($type).'</h5>';
+        if ( $type === "script" ){
+            $obj = Auth::user()->scripts;
         }
-        if($isScript == 2 || $isScript == 0){
-            $empty = true;
-            $return .= '<h5>Blocks</h5>';
-            $html = '';
-            foreach (Auth::user()->blocks as $block){
-                $empty = false;
-                $count_new = app('App\Http\Controllers\CommentCtrl')->getNew($block->id,false);
-                if ($count_new > 0){
-                    $html .= '<li>'.$count_new.' new comments: <a href="'.URL::to('/block/'.$block->id).'">'.$block->name.'</a></li>';
-                }
+        else {
+            $obj = Auth::user()->blocks;
+        }
+        $html = '';
+        foreach ( $obj as $o ){
+            $CountNew = app('App\Http\Controllers\CommentCtrl')->getNew($o->id, true);
+            if ($CountNew == 0){
+                continue;
             }
-
-
-            if (!$empty)
-                $return .='<ul style="list-style: none">'.$html.'</ul>';
-            else
-                $return .= 'No new comments';
+            $empty = false;
+            $html .= '<li>'.$CountNew.' new comments: '.
+                         '<a href="'.URL::to('/'.$type.'/'.$o->id).'">'.$o->name.'</a>'.
+                     '</li>';
+        }
+        if ( $empty  === false) {
+            $return .='<ul style="list-style: none">'.$html.'</ul>';
+        }
+        else {
+            $return .= 'No new comments';
         }
         return $return;
+    }
+
+    public function getNews( $isScript ) {
+        switch ($isScript) {
+            case 0:
+                return $this->print_News("block");
+            case 1:
+                return $this->print_News("script");
+            default:
+                return $this->print_News("block").$this->print_News("script");
+        }
     }
 }

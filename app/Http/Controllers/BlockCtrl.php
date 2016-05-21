@@ -57,7 +57,7 @@ class BlockCtrl extends Controller
             return Redirect::to('block')->withErrors('Could not find the block');
         }
         else{
-            return View::make('block.builder')->with('block',$block);
+            return View::make('block.builder')->with('block', $block);
         }
     }
 
@@ -82,26 +82,15 @@ class BlockCtrl extends Controller
             $block->xml = $request->xml;
             $block->save();
         }
-        else
+        else {
             return back()->withErrors('You have no privileges to edit anothers script');
+        }
         return Redirect::to('block');
     }
 
     public function getList(Request $request)
     {
-        $block = Block::where('name','like', '%'.$request->search.'%')
-                 ->orWhere('description','like', '%'.$request->search.'%')->get();
-
-        $resp = array();
-        foreach ($block as $item){
-            $entry = [
-                "description" => $item->description,
-                "name" => $item->name,
-                "id" => $item->id,
-            ];
-            array_push($resp,$entry);
-        }
-        return response()->json($resp);
+        return response()->json($this->getSearchJson("Block", $request->search));
     }
 
     /**
@@ -112,13 +101,6 @@ class BlockCtrl extends Controller
      */
     public function destroy($id)
     {
-        $block = Block::find($id);
-        if ($block->user_id == Auth::user()->id){
-            foreach ($block->comments as $comment){
-                $comment->delete();
-            }
-            $block->delete();
-        }
-        return Redirect::to('block');
+        $this->destroyObj("block", $id);
     }
 }
