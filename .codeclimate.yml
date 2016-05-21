@@ -55,3 +55,4 @@ exclude_paths:
   - public/css/jquery.webui-popover.min.css
   - public/css/materialize.min.css
   - public/css/splitter.css
+  - public/js/jquery.webui-popover.min.js
