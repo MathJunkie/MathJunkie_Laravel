@@ -24,6 +24,8 @@ engines:
     config:
       standard: "PSR1,PSR2"
     checks:
+      Naming/ShortVariable:
+        enabled: false
       Squiz Functions MultiLineFunctionDeclaration BraceOnSameLine:
         enabled: false
       Generic ControlStructures InlineControlStructure NotAllowed:
@@ -31,6 +33,18 @@ engines:
       Squiz ControlStructures ControlSignature SpaceAfterKeyword:
         enabled: false
       PSR1 Classes ClassDeclaration MissingNamespace:
+        enabled: false
+      PSR2 ControlStructures ControlStructureSpacing SpaceBeforeCloseBrace:
+        enabled: false
+      Squiz ControlStructures ControlSignature SpaceAfterCloseParenthesis:
+        enabled: false
+      PSR2 ControlStructures ControlStructureSpacing SpacingAfterOpenBrace:
+        enabled: false
+      Squiz ControlStructures ControlSignature SpaceAfterCloseBrace:
+        enabled: false
+      Squiz Functions FunctionDeclarationArgumentSpacing SpacingBeforeClose:
+        enabled: false
+      Squiz ControlStructures ForEachLoopDeclaration SpaceAfterOpen:
         enabled: false
 
 ratings:
