@@ -28,7 +28,7 @@ class AdminCtrl extends Controller
 
     }
 
-    public function print_News($type) {
+    public function printNews($type) {
         $empty = true;
         $return = '<h5>'.ucfirst($type).'</h5>';
         if ( $type === "script" ){
@@ -39,12 +39,12 @@ class AdminCtrl extends Controller
         }
         $html = '';
         foreach ( $obj as $o ){
-            $CountNew = app('App\Http\Controllers\CommentCtrl')->getNew($o->id, true);
-            if ($CountNew == 0){
+            $countNew = app('App\Http\Controllers\CommentCtrl')->getNew($o->id, true);
+            if ($countNew == 0){
                 continue;
             }
             $empty = false;
-            $html .= '<li>'.$CountNew.' new comments: '.
+            $html .= '<li>'.$countNew.' new comments: '.
                          '<a href="'.URL::to('/'.$type.'/'.$o->id).'">'.$o->name.'</a>'.
                      '</li>';
         }
@@ -60,11 +60,11 @@ class AdminCtrl extends Controller
     public function getNews( $isScript ) {
         switch ($isScript) {
             case 0:
-                return $this->print_News("block");
+                return $this->printNews("block");
             case 1:
-                return $this->print_News("script");
+                return $this->printNews("script");
             default:
-                return $this->print_News("block").$this->print_News("script");
+                return $this->printNews("block").$this->printNews("script");
         }
     }
 }
