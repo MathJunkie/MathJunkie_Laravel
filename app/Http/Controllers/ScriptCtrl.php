@@ -25,8 +25,8 @@ class ScriptCtrl extends Controller
      */
     public function store(Request $request)
     {
-        $script = Script::where('name','=',$request->search)->first();
-        if (empty($script)) {
+        $script = Script::where('name', '=', $request->search)->first();
+        if ( empty($script) ) {
             //richtig
             if (Auth::check())
             {
@@ -56,11 +56,11 @@ class ScriptCtrl extends Controller
     public function show($id)
     {
         $script = Script::find($id);
-        if (empty($script)){
+        if (empty($script)) {
             return Redirect::to('script')->withErrors('Could not find the script');
         }
         else {
-            return View::make('script.view')->with('script',$script)->with('isView',true);
+            return View::make('script.view')->with('script', $script)->with('isView', true);
         }
     }
 
@@ -88,10 +88,10 @@ class ScriptCtrl extends Controller
                 $temp = [
                     $item->category => $item->name,
                 ];
-                $xml_array = array_merge_recursive($xml_array,$temp);
+                $xml_array = array_merge_recursive($xml_array, $temp);
             }
            $keys = array_keys($xml_array);
-           foreach ($keys as $key){
+           foreach ($keys as $key) {
                if ($key === "Method" || $key === "Variable" || $key === "Base"){
                    continue;
                }
@@ -105,19 +105,19 @@ class ScriptCtrl extends Controller
                }
                 $b_item = $xml_array[$key];
 
-               if (!is_array($b_item)){
+               if (!is_array($b_item)) {
                     $xml .= '<block type="'.$b_item.'"></block>';
                 }
                 else{
-                    foreach ($b_item as $item){
+                    foreach ($b_item as $item) {
                         $xml .= '<block type="'.$item.'"></block>';
                     }
                 }
                 $xml .= '</category>';
             }
             $xml .= '<sep></sep>';
-            $xml .= '<category name="Variables" colour = "'.Category_color::where('name','=','Variable')->first()->color.'" custom="VARIABLE"></category>
-                     <category name="Functions" colour = "'.Category_color::where('name','=','Method')->first()->color.'"custom="PROCEDURE"></category>';
+            $xml .= '<category name="Variables" colour = "'.Category_color::where('name', '=', 'Variable')->first()->color.'" custom="VARIABLE"></category>
+                     <category name="Functions" colour = "'.Category_color::where('name', '=', 'Method')->first()->color.'"custom="PROCEDURE"></category>';
             $xml .= '</xml>';
             $color = category_color::all();
             $color_script = '<script>';
@@ -132,7 +132,8 @@ class ScriptCtrl extends Controller
             $content['structure'] = $structure;
             $content['function'] = $function;
 
-            return View::make('script.builder')->with('content',$content)->with('script',$script);
+            return View::make('script.builder')->with('content', $content)
+                                               ->with('script', $script);
         }
     }
 
@@ -160,19 +161,7 @@ class ScriptCtrl extends Controller
 
     public function getList(Request $request)
     {
-        $script = Script::where('name','like', '%'.$request->search.'%')
-            ->orWhere('description','like', '%'.$request->search.'%')->get();
-
-        $resp = array();
-        foreach ($script as $item){
-            $entry = [
-                "description" => $item->description,
-                "name" => $item->name,
-                "id" => $item->id,
-            ];
-            array_push($resp,$entry);
-        }
-        return response()->json($resp);
+        return response()->json($this->getSearchJson("Script", $request->search));
     }
 
     /**
@@ -183,14 +172,6 @@ class ScriptCtrl extends Controller
      */
     public function destroy($id)
     {
-        $script = Script::find($id);
-        if ($script->user_id == Auth::user()->id) {
-            foreach ($script->comments as $comment){
-                    $comment->delete();
-            }
-            $script->delete();
-        }
-
-        return Redirect::to('script');
+        $this->destroyObj("script", $id);
     }
 }

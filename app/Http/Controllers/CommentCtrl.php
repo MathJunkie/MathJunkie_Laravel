@@ -27,34 +27,36 @@ class CommentCtrl extends Controller
             $kommentar->seen = false;
             $kommentar->text = $request->text;
             $kommentar->user_id = Auth::user()->id;
-            if ($request->isScript)
+            if ($request->isScript === true) {
                 $db = Script::find($request->idScript);
-            else
+            }
+            else {
                 $db = Block::find($request->idScript);
-
-            if (empty($db))
+            }
+            if (empty($db) === true) {
                 return "nope";
+            }
 
             $db->comments()->save($kommentar);
         }
     }
 
-    public function getNew($id,$isScript)
+    public function getNew($id, $isScript)
     {
         if ($isScript)
             $db = Script::find($id);
         else
             $db = Block::find($id);
 
-        if (empty($db)){
+        if (empty($db) === true){
             return "0";
         }
 
         $kommentare = $db->comments;
 
         $countNew = 0;
-        foreach ($kommentare as $comment){
-            if (!$comment->seen){
+        foreach ($kommentare as $comment) {
+            if (!$comment->seen) {
                 $countNew++;
             }
         }
@@ -64,12 +66,11 @@ class CommentCtrl extends Controller
 
     public function setSeen($id){
         $kommentar = Kommentar::find($id);
-        if (empty($kommentar)){
+        if (empty($kommentar) === true) {
             return "Nope";
         }
         else{
-            if ($kommentar->commentable->user_id == Auth::user()->id)
-            {
+            if ( $kommentar->commentable->user_id == Auth::user()->id ) {
                 $kommentar->seen = true;
                 $kommentar->save();
             }
@@ -81,34 +82,34 @@ class CommentCtrl extends Controller
     //           1 - script
     //           2 - both
 
-    public function hasComment($isScript){
-        if ($isScript == 2 || $isScript == 0){
-            foreach (Auth::user()->blocks as $block){
-                $count_new = app('App\Http\Controllers\CommentCtrl')->getNew($block->id,false);
-                if ($count_new > 0)
+    public function hasComment($isScript) {
+        if ( $isScript == 2 || $isScript == 0 ) {
+            foreach (Auth::user()->blocks as $block) {
+                $CountNew = app('App\Http\Controllers\CommentCtrl')->getNew($block->id, false);
+                if ($CountNew > 0)
                     return true;
             }
         }
 
-        if ($isScript == 2 || $isScript == 1){
-            foreach (Auth::user()->scripts as $script){
-                $count_new = app('App\Http\Controllers\CommentCtrl')->getNew($script->id,true);
-                if ($count_new > 0)
+        if ( $isScript == 2 || $isScript == 1 ) {
+            foreach (Auth::user()->scripts as $script) {
+                $CountNew = app('App\Http\Controllers\CommentCtrl')->getNew($script->id, true);
+                if ($CountNew > 0)
                     return true;
             }
         }
         return false;
     }
 
-    public function getBlockSection($id){
-        return $this->makeCommentSection($id,false);
+    public function getBlockSection($id) {
+        return $this->makeCommentSection($id, false);
     }
 
-    public function getScriptSection($id){
-        return $this->makeCommentSection($id,true);
+    public function getScriptSection($id) {
+        return $this->makeCommentSection($id, true);
     }
 
-    public function makeCommentSection($id,$isScript){
+    public function makeCommentSection($id,$isScript) {
         if ($isScript)
             $db = Script::find($id);
         else
@@ -121,25 +122,26 @@ class CommentCtrl extends Controller
         $kommentare = $db->comments;
 
         $countNew = 0;
-        foreach ($kommentare as $comment){
-            if (!$comment->seen){
+        foreach ($kommentare as $comment) {
+            if ($comment->seen === false){
                 $countNew++;
             }
         }
 
-        $is_scriptowner = false;
+        $IsScriptOwner= false;
         if (Auth::check()){
-            $is_scriptowner = Auth::user()->id == $db->user_id;
+            $IsScriptOwner= Auth::user()->id == $db->user_id;
         }
 
-        if ($isScript){
+        $type = 'block';
+        if ($isScript === true) {
             $type = 'script';
         }
-        else{
-            $type = 'block';
-        }
         
-        return View::make('comment.section')->with('type',$type)->with('kommentar',$kommentare)->with('id',$id)->with('is_scriptowner',$is_scriptowner);
+        return View::make('comment.section')->with('type', $type)
+                                            ->with('kommentar', $kommentare)
+                                            ->with('id', $id)
+                                            ->with('is_scriptowner', $IsScriptOwner);
     }
 
     /**
@@ -152,12 +154,11 @@ class CommentCtrl extends Controller
     public function update(Request $request, $id)
     {
         $kommentar = Kommentar::find($id);
-        if (empty($kommentar)){
+        if (empty($kommentar)) {
             return "Nope";
         }
-        else{
-            if ($kommentar->user_id == Auth::user()->id)
-            {
+        else {
+            if ($kommentar->user_id == Auth::user()->id) {
                 $kommentar->text = $request->text;
                 $kommentar->save();
             }
@@ -173,12 +174,12 @@ class CommentCtrl extends Controller
     public function destroy($id)
     {
         $kommentar = Kommentar::find($id);
-        if (empty($kommentar))
+        if ( empty($kommentar) === true)
             return 'Nope';
-        elseif ($kommentar->user_id == Auth::user()->id) {
+        elseif ($kommentar->user_id == Auth::user()->id ) {
             $kommentar->delete();
         }
-        else{
+        else {
             return response()->withErrors('Only owned comments can be deleted');
         }
     }

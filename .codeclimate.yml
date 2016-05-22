@@ -14,12 +14,37 @@ engines:
     enabled: true
   phpmd:
     enabled: true
+    checks:
+      CleanCode/StaticAccess:
+        enabled: false
+      CleanCode/ElseExpression:
+        enabled: false
   phpcodesniffer:
     enabled: true
     config:
       standard: "PSR1,PSR2"
     checks:
+      Naming/ShortVariable:
+        enabled: false
       Squiz Functions MultiLineFunctionDeclaration BraceOnSameLine:
+        enabled: false
+      Generic ControlStructures InlineControlStructure NotAllowed:
+        enabled: false
+      Squiz ControlStructures ControlSignature SpaceAfterKeyword:
+        enabled: false
+      PSR1 Classes ClassDeclaration MissingNamespace:
+        enabled: false
+      PSR2 ControlStructures ControlStructureSpacing SpaceBeforeCloseBrace:
+        enabled: false
+      Squiz ControlStructures ControlSignature SpaceAfterCloseParenthesis:
+        enabled: false
+      PSR2 ControlStructures ControlStructureSpacing SpacingAfterOpenBrace:
+        enabled: false
+      Squiz ControlStructures ControlSignature SpaceAfterCloseBrace:
+        enabled: false
+      Squiz Functions FunctionDeclarationArgumentSpacing SpacingBeforeClose:
+        enabled: false
+      Squiz ControlStructures ForEachLoopDeclaration SpaceAfterOpen:
         enabled: false
 
 ratings:
@@ -44,3 +69,4 @@ exclude_paths:
   - public/css/jquery.webui-popover.min.css
   - public/css/materialize.min.css
   - public/css/splitter.css
+  - public/js/jquery.webui-popover.min.js
