@@ -85,16 +85,16 @@ class CommentCtrl extends Controller
     public function hasComment($isScript) {
         if ( $isScript == 2 || $isScript == 0 ) {
             foreach (Auth::user()->blocks as $block) {
-                $CountNew = app('App\Http\Controllers\CommentCtrl')->getNew($block->id, false);
-                if ($CountNew > 0)
+                $countNew = app('App\Http\Controllers\CommentCtrl')->getNew($block->id, false);
+                if ($countNew > 0)
                     return true;
             }
         }
 
         if ( $isScript == 2 || $isScript == 1 ) {
             foreach (Auth::user()->scripts as $script) {
-                $CountNew = app('App\Http\Controllers\CommentCtrl')->getNew($script->id, true);
-                if ($CountNew > 0)
+                $countNew = app('App\Http\Controllers\CommentCtrl')->getNew($script->id, true);
+                if ($countNew > 0)
                     return true;
             }
         }
@@ -128,9 +128,9 @@ class CommentCtrl extends Controller
             }
         }
 
-        $IsScriptOwner= false;
+        $isScriptOwner= false;
         if (Auth::check()){
-            $IsScriptOwner= Auth::user()->id == $db->user_id;
+            $isScriptOwner= Auth::user()->id == $db->user_id;
         }
 
         $type = 'block';
@@ -141,7 +141,7 @@ class CommentCtrl extends Controller
         return View::make('comment.section')->with('type', $type)
                                             ->with('kommentar', $kommentare)
                                             ->with('id', $id)
-                                            ->with('is_scriptowner', $IsScriptOwner);
+                                            ->with('is_scriptowner', $isScriptOwner);
     }
 
     /**
