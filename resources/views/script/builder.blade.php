@@ -3,7 +3,7 @@
 <head>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/materialize.min.css') }}"  media="screen,projection"/>
-    <link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">
+    <!--<link rel="stylesheet" type="text/css" href="https://sagecell.sagemath.org/static/sagecell_embed.css">-->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/splitter.css') }}"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('css/jquery.webui-popover.min.css') }}"  media="screen,projection"/>
     <!--<link type="text/css" rel="stylesheet" href="{{ URL::asset('css/script/builder.css') }}"  media="screen,projection"/>-->
@@ -17,6 +17,9 @@
     <div id="preview_modal" class="modal">
         <div class="modal-content">
             <div id="preview_update" class="btn">Update</div>
+            <iframe id='sageOutput' seamless frameborder="0" style="overflow: hidden; height: 400px; width: 400px; position: absolute;" height="400px" width="400px">
+            </iframe>
+
         </div>
     </div>
     @include('template/header_builder')
@@ -58,7 +61,6 @@
 
     {!! $content['xml'] !!}
     <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script type="text/javascript" src="{{ URL::asset('js/enhsplitter.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/slide.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/jquery.webui-popover.min.js') }}"></script>
@@ -66,6 +68,7 @@
     <script type="text/javascript" src="{{ URL::asset('js/Blockly/blockly_compressed.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/Blockly/de.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/Blockly/python.js') }}"></script>
+    <!--<script type="text/javascript" src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>-->
     <script>
         'use strict';
         {!! $content['structure'] !!}
@@ -105,20 +108,31 @@
         }
 
         $(document).ready(function() {
-            //Comment
+            var output = $('#sageOutput') ;
+
+            var insertScript = function(src){
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = src;
+                $(output).contents().find('head')[0].appendChild(script);
+            };
+
+            var insertSageScript = function(){
+                var script = document.createElement('script');
+                script.type = 'text/x-sage';
+                script.innerHTML = window.Codeeditor.getValue();
+                $(output).contents().find('.compute')[0].appendChild(script);
+            };
 
             $('#preview_update').click(function(){
-                $('.compute').remove();
-                $('.modal-content').append('<div class="compute"></div>');
-                $('.compute').append('<script type="text/x-sage">'+window.Codeeditor.getValue()+'</' + 'script>');
-                $(function () {
-                    // Make *any* div with class 'compute' a Sage cell
-                    sagecell.makeSagecell({inputLocation: '.compute',
-                    evalButtonText: 'Evaluate',
-                    autoeval: true,
-                    template:       sagecell.templates.minimal,
-                    hide: ["evalButton","permalink","editor"]});
-                });
+
+                $('#sageOutput').contents().find("html").html("");
+                insertScript("https://sagecell.sagemath.org/static/jquery.min.js");
+                insertScript("https://sagecell.sagemath.org/static/embedded_sagecell.js");
+                output.contents().find("body").append('<div class="compute"></div>');
+                insertSageScript();
+                output.contents().find("head").append($('<script type="text/javascript">').html('sagecell.makeSagecell({inputLocation: ".compute", evalButtonText: "Evaluate", autoeval: true, template: sagecell.templates.minimal, hide: ["evalButton","permalink","editor"]});'));
+
             });
             $('#modal_preview_trigger').leanModal();
 
@@ -145,7 +159,7 @@
                         zoom:
                         {
                             controls: true,
-                            wheel: false
+                            wheel: true
                         }
                     }
             );
@@ -192,7 +206,7 @@
         jQuery(function ($) {
             $('#structure').enhsplitter({
                 invisible: true,
-                position: '90%',
+                position: '100%',
                 onDragEnd: function () {
                     window.Codepreview.resize();
                 }

@@ -56,9 +56,11 @@
             </form>
         </div>
     </div>
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <canvas></canvas>
+    <script type="text/javascript" src="{{URL::asset('js/jquery.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+    <script type="text/javascript" src="{{URL::asset('js/materialize.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/login-background.js')}}"></script>
 
     @foreach ($errors->all() as $error)
         <script>Materialize.toast("{{$error}}",3000)</script>

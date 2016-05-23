@@ -53,15 +53,17 @@ class ScriptCtrl extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $isSage = null)
     {
         $script = Script::find($id);
         if (empty($script)) {
             return Redirect::to('script')->withErrors('Could not find the script');
         }
-        else {
+        if (empty($isSage)){
             return View::make('script.view')->with('script', $script)->with('isView', true);
         }
+
+        return View::make('script.sagemath')->with('script', $script->function);
     }
 
     /**

@@ -60,6 +60,8 @@ Route::get('script/{id}/delete',['middleware' => 'auth','uses' => 'ScriptCtrl@de
 
 Route::get('script/{id}/view',['uses' => 'ScriptCtrl@show']);
 
+Route::get('script/{id}/view/{isSage}',['uses' => 'ScriptCtrl@show']);
+
 //Block
 Route::get('block', ['middleware' => 'auth', function () {
     return view('block.home')->with('hasComment',app('App\Http\Controllers\CommentCtrl')->hasComment(0));

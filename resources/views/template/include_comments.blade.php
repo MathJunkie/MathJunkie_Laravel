@@ -3,12 +3,12 @@
     @if (empty($block))
         url_getNew = "{{Request::root()}}/comment/{{$script->id}}/getNew/1";
         url_sidebar = "{{Request::root()}}/comment/{{$script->id}}/script_list";
-        idScript = {{$script->id}};
+        idScript = "{{$script->id}}";
         isScript = 1;
     @else
         url_getNew = "{{Request::root()}}/comment/{{$block->id}}/getNew/0";
         url_sidebar = "{{Request::root()}}/comment/{{$block->id}}/block_list";
-        idScript = {{$block->id}};
+        idScript = "{{$block->id}}";
         isScript = 0;
     @endif
 

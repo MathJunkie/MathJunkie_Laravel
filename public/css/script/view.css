@@ -2,10 +2,11 @@
     body * {
         visibility: hidden;
     }
-    .compute, .compute * {
+    #sageOutput {
         visibility: visible;
     }
-    .compute {
+    #sageOutput {
+        overflow:hidden;
         position: absolute;
         left: 0;
         top: 0;
