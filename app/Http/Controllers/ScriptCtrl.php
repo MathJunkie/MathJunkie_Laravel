@@ -62,8 +62,10 @@ class ScriptCtrl extends Controller
         if (empty($isSage)){
             return View::make('script.view')->with('script', $script)->with('isView', true);
         }
-
-        return View::make('script.sagemath')->with('script', $script->function);
+        elseif ($isSage === "sage"){
+            return View::make('script.sagemath')->with('script', $script->function);
+        }
+        return View::make('script.sagemath')->with('script', $script->function_temp);
     }
 
     /**
@@ -159,6 +161,17 @@ class ScriptCtrl extends Controller
         else
             return back()->withErrors('You have no privileges to edit anothers script');
         return Redirect::to('script');
+    }
+
+    public function updatePreview(Request $request, $id){
+        $script = Script::find($id);
+        if ($script->user_id == Auth::user()->id){
+            $script->function_temp = $request->function_temp;
+            $script->save();
+        }
+        else
+            return response('You have no privileges to edit anothers script',404);
+        return "";
     }
 
     public function getList(Request $request)
