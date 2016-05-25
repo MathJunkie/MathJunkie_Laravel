@@ -35,7 +35,7 @@ if (!window.requestAnimationFrame) {
                 width: window.innerWidth,
                 height: window.innerHeight,
                 velocity: 0.1,
-                length: 100,
+                length: 200,
                 distance: 120,
                 radius: 150,
                 stars: []
@@ -190,7 +190,7 @@ $('canvas').constellation({
         width: 3
     },
     line: {
-        color: 'rgba(255, 0, 0, .5)'
+        color: 'rgba(255, 62, 0, 0.9)'
     },
     radius: 250
 });

@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <title>Login</title>
 </head>
-<body class="grey darken-4">
+<body>
     <div id="login" class="row">
         <div class="col s12 z-depth-3 card-panel">
             <form class="login-form" method="POST" action="/auth/login">
@@ -54,9 +54,9 @@
             </form>
         </div>
     </div>
-    <canvas></canvas>
+    <canvas class="grey darken-4"></canvas>
     <script type="text/javascript" src="{{URL::asset('js/jquery.min.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+    <script type="text/javascript" src="{{URL::asset('zepto.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/materialize.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/login-background.js')}}"></script>
 
