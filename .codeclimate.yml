@@ -17,6 +17,8 @@ engines:
     checks:
       Naming/ShortVariable:
         enabled: false
+      Naming/ShortMethodName:
+        enabled: false
       CleanCode/StaticAccess:
         enabled: false
       CleanCode/ElseExpression:
