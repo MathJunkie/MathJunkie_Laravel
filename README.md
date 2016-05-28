@@ -7,3 +7,4 @@ Laravel adoptation of our project
 [![Code Climate](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel/badges/gpa.svg)](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel)
 [![Test Coverage](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel/badges/coverage.svg)](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel/coverage)
 [![Issue Count](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel/badges/issue_count.svg)](https://codeclimate.com/github/MathJunkie/MathJunkie_Laravel)
+[![Quality Gate](http://sonarqube.it.dh-karlsruhe.de/api/badges/gate?key=5405)](http://sonarqube.it.dh-karlsruhe.de/overview?id=5405)
