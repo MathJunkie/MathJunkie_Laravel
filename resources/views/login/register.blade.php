@@ -58,7 +58,7 @@
     </div>
     <canvas class="grey darken-4"></canvas>
     <script type="text/javascript" src="{{URL::asset('js/jquery.min.js')}}"></script>
-    <script type="text/javascript" src="{{URL::asset('zepto.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/zepto.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/materialize.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/login-background.js')}}"></script>
 
