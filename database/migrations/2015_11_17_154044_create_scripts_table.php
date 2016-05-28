@@ -18,6 +18,7 @@ class CreateScriptsTable extends Migration
             $table->string('name')->unique();
             $table->string('description')->nullable();
             $table->text('function')->nullable();
+            $table->text('function_temp')->nullable();
             $table->text('structure')->nullable();
             $table->nullableTimestamps();
         });

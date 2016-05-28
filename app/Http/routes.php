@@ -56,9 +56,15 @@ Route::get('script/{id}',['middleware' => 'auth','uses' => 'ScriptCtrl@edit']);
 
 Route::post('script/{id}',['middleware' => 'auth','uses' => 'ScriptCtrl@update']);
 
+Route::get('script/{id}/updatePreview',['middleware' => 'auth','uses' => 'ScriptCtrl@updatePreview']);
+
 Route::get('script/{id}/delete',['middleware' => 'auth','uses' => 'ScriptCtrl@destroy']);
 
+Route::get('script/{id}/{isSage}',['middleware' => 'auth','uses' => 'ScriptCtrl@show']);
+
 Route::get('script/{id}/view',['uses' => 'ScriptCtrl@show']);
+
+Route::get('script/{id}/view/{isSage}',['uses' => 'ScriptCtrl@show']);
 
 //Block
 Route::get('block', ['middleware' => 'auth', function () {

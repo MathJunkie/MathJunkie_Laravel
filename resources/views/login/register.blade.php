@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <title>Register</title>
 </head>
-<body class="grey darken-4">
+<body>
     <div id="login" class="row">
         <div class="col s12 z-depth-3 card-panel">
             <form action="/auth/register" method="POST" class="login-form">
@@ -56,9 +56,11 @@
             </form>
         </div>
     </div>
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <canvas class="grey darken-4"></canvas>
+    <script type="text/javascript" src="{{URL::asset('js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('zepto.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/materialize.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/login-background.js')}}"></script>
 
     @foreach ($errors->all() as $error)
         <script>Materialize.toast("{{$error}}",3000)</script>

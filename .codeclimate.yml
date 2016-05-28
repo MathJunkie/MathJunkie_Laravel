@@ -17,6 +17,8 @@ engines:
     checks:
       Naming/ShortVariable:
         enabled: false
+      Naming/ShortMethodName:
+        enabled: false
       CleanCode/StaticAccess:
         enabled: false
       CleanCode/ElseExpression:
@@ -77,3 +79,5 @@ exclude_paths:
   - public/css/materialize.min.css
   - public/css/splitter.css
   - public/js/jquery.webui-popover.min.js
+  - public/js/zepto.min.js
+  - public/js/login-background.js
