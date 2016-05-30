@@ -82,16 +82,16 @@ Route::get('block/{id}/delete',['middleware' => 'auth','uses' => 'BlockCtrl@dest
 //Kommentare
 Route::get('comment', ['middleware' => 'auth', 'uses' => 'CommentCtrl@store']);
 
-Route::get('comment/{id}', ['middleware' => 'auth', 'uses' => 'CommentCtrl@show']);
+Route::get('comment/{id}', [ 'uses' => 'CommentCtrl@show']);
 
-Route::get('comment/{id}/getNew/{isScript}', ['middleware' => 'auth', 'uses' => 'CommentCtrl@getNew']);
+Route::get('comment/{id}/getNew/{isScript}', ['uses' => 'CommentCtrl@getNew']);
 
 Route::get('comment/{id}/seen', ['middleware' => 'auth', 'uses' => 'CommentCtrl@setSeen']);
 
-Route::get('comment/{id}/block_list', ['middleware' => 'auth', 'uses' => 'CommentCtrl@getBlockSection']);
+Route::get('comment/{id}/block_list', ['uses' => 'CommentCtrl@getBlockSection']);
 
 Route::get('comment/{id}/script_list', ['uses' => 'CommentCtrl@getScriptSection']);
 
-Route::get('comment/{id}/update', ['middleware' => 'auth', 'uses' => 'CommentCtrl@update']);
+Route::get('comment/{id}/update', ['uses' => 'CommentCtrl@update']);
 
 Route::get('comment/{id}/delete', ['middleware' => 'auth', 'uses' => 'CommentCtrl@destroy']);

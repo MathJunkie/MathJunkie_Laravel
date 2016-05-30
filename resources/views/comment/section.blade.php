@@ -9,9 +9,11 @@
                                     @if(($is_scriptowner) && !$comment->seen)
                                         <a class="col s2 mdi-image-remove-red-eye" onclick="seen_script({{$comment->id}})"></a>
                                     @endif
-                                    @if($comment->user_id == Auth::user()->id)
-                                        <a class="col s2 mdi-editor-mode-edit" onclick="edit_script({{$comment->id}})"></a>
-                                        <a class="col s2 mdi-action-delete" onclick="delete_script({{$comment->id}})"></a>
+                                    @if (Auth::check())
+                                        @if($comment->user_id == Auth::user()->id)
+                                            <a class="col s2 mdi-editor-mode-edit" onclick="edit_script({{$comment->id}})"></a>
+                                            <a class="col s2 mdi-action-delete" onclick="delete_script({{$comment->id}})"></a>
+                                        @endif
                                     @endif
                                     <p class="col offset-s2 s4">22.03.2016</p>
                                 </span>
