@@ -60,8 +60,6 @@ Route::get('script/{id}/updatePreview',['middleware' => 'auth','uses' => 'Script
 
 Route::get('script/{id}/delete',['middleware' => 'auth','uses' => 'ScriptCtrl@destroy']);
 
-Route::get('script/{id}/{isSage}',['middleware' => 'auth','uses' => 'ScriptCtrl@show']);
-
 Route::get('script/{id}/view',['uses' => 'ScriptCtrl@show']);
 
 Route::get('script/{id}/view/{isSage}',['uses' => 'ScriptCtrl@show']);

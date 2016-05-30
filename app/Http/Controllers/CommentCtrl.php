@@ -27,13 +27,13 @@ class CommentCtrl extends Controller
             $kommentar->seen = false;
             $kommentar->text = $request->text;
             $kommentar->user_id = Auth::user()->id;
-            if ($request->isScript === true) {
+            if ($request->isScript) {
                 $db = Script::find($request->idScript);
             }
             else {
                 $db = Block::find($request->idScript);
             }
-            if (empty($db) === true) {
+            if (empty($db)) {
                 return "nope";
             }
 
@@ -48,7 +48,7 @@ class CommentCtrl extends Controller
         else
             $db = Block::find($id);
 
-        if (empty($db) === true){
+        if (empty($db)){
             return "0";
         }
 
@@ -66,7 +66,7 @@ class CommentCtrl extends Controller
 
     public function setSeen($id){
         $kommentar = Kommentar::find($id);
-        if (empty($kommentar) === true) {
+        if (empty($kommentar)) {
             return "Nope";
         }
         else{
@@ -123,7 +123,7 @@ class CommentCtrl extends Controller
 
         $countNew = 0;
         foreach ($kommentare as $comment) {
-            if ($comment->seen === false){
+            if (!$comment->seen){
                 $countNew++;
             }
         }
@@ -134,7 +134,7 @@ class CommentCtrl extends Controller
         }
 
         $type = 'block';
-        if ($isScript === true) {
+        if ($isScript) {
             $type = 'script';
         }
         
@@ -174,7 +174,7 @@ class CommentCtrl extends Controller
     public function destroy($id)
     {
         $kommentar = Kommentar::find($id);
-        if ( empty($kommentar) === true)
+        if ( empty($kommentar))
             return 'Nope';
         elseif ($kommentar->user_id == Auth::user()->id ) {
             $kommentar->delete();

@@ -109,7 +109,7 @@
                         "function_temp": window.Codeeditor.getValue()
                     },
                     success: function(result){
-                        var previewUrl = "{{Request::url()."/preview"}}";
+                        var previewUrl = "{{Request::url()."/view/preview"}}";
                         $("#sageOutput").attr('src', previewUrl);
                     }
                 });

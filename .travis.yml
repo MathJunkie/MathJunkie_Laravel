@@ -21,7 +21,6 @@ install:
 
 before_script:
   - echo "sonar.host.url=http://sonarqube.it.dh-karlsruhe.de" >> sonar-scanner-2.6/conf/sonar-scanner.properties
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then sonar-scanner-2.6/bin/sonar-scanner; fi
   - mv .env.behat.travis .env.behat
   - mv .env.travis .env
   - chmod -R 777 storage
@@ -32,9 +31,9 @@ script:
   - vendor/bin/phpunit tests/
   - vendor/bin/phpspec run -v
   - vendor/bin/behat --config behat.yml
+  - sonar-scanner-2.6/bin/sonar-scanner
 
 after_script:
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then sonar-scanner-2.6/bin/sonar-scanner; fi
   - vendor/bin/test-reporter
 
 after_success:
