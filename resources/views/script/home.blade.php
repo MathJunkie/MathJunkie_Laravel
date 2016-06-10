@@ -28,9 +28,7 @@
 <ul id="ownBlock" class="collection">
 </ul>
 
-<script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('js/materialize.min.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('js/jquery.webui-popover.min.js') }}"></script>
+@include('template/script_home_footer')
 <script type="text/javascript">
     $('#search').keypress(function(){
         if ($(this).val().length < 2){
