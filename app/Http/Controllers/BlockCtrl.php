@@ -100,6 +100,6 @@ class BlockCtrl extends Controller
      */
     public function destroy($id)
     {
-        $this->destroyObj("block", $id);
+        return $this->destroyObj("block", $id);
     }
 }
