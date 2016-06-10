@@ -25,4 +25,67 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         //PHPUnit::assertEquals('.env.old.behat', $environmentFileName);
         //PHPUnit::assertEquals('acceptance', $environmentName);
     }
+
+    /**
+     * @Given /^I am on ScriptPage$/
+     */
+    public function iAmOnScriptPage()
+    {
+        $this->visitPath('/script/1/view');
+    }
+
+    /**
+     * @Given /^I filled in "([^"]*)" with "([^"]*)"$/
+     */
+    public function iFilledInWith($arg1, $arg2)
+    {
+        $sagecell = $this->getSession()->getPage()->findById('ergebnis');
+
+        if (null !== $sagecell) {
+            throw new \Exception('Sagecell computing not found');
+        }
+
+        $sagecel = $arg1 + $arg2;
+
+    }
+
+    /**
+     * @When /^I click on "([^"]*)"$/
+     */
+    public function iClickOn($arg1)
+    {
+        $btn = $arg1;
+        $btn = 'dropdown_user';
+
+        $button = $this->getSession()->getPage()->findById($btn);
+
+        if (null !== $button) {
+            throw new \Exception('Button not found');
+        }
+    }
+
+    /**
+     * @Then /^I will see ResultPage$/
+     */
+    public function iWillSeeResultPage()
+    {
+        $error = $this->getSession()->getPage()->findById('ErrorMessage');
+
+        if (null === $error) {
+            return true;
+        }
+
+    }
+
+    /**
+     * @Then /^I will see ErrorPage$/
+     */
+    public function iWillSeeErrorPage()
+    {
+        $result = $this->getSession()->getPage()->findById('ResultMessage');
+
+        if (null === $result) {
+            return true;
+        }
+    }
 }
