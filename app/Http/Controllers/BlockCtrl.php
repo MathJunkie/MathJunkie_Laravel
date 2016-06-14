@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use View;
-use Log;
 
 class BlockCtrl extends Controller
 {
@@ -101,6 +100,6 @@ class BlockCtrl extends Controller
      */
     public function destroy($id)
     {
-        $this->destroyObj("block", $id);
+        return $this->destroyObj("block", $id);
     }
 }

@@ -187,6 +187,6 @@ class ScriptCtrl extends Controller
      */
     public function destroy($id)
     {
-        $this->destroyObj("script", $id);
+        return $this->destroyObj("script", $id);
     }
 }
