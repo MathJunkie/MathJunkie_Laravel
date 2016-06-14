@@ -45,6 +45,10 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             throw new \Exception('Sagecell computing not found');
         }
 
+        if ($arg1.$arg2 !== "null"){
+            return true;
+        }
+
     }
 
     /**
