@@ -88,4 +88,16 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             return true;
         }
     }
+
+    /**
+     * @Then /^I will see PrintButton$/
+     */
+    public function iWillSeePrintButton()
+    {
+        $btn = $this->getSession()->getPage()->findLink('.mdi-action-print');
+
+        if ($btn !== null){
+            return true;
+        }
+    }
 }
